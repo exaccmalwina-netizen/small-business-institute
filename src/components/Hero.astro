@@ -1,0 +1,301 @@
+---
+---
+
+<section class="hero">
+    <div class="hero-bg" style="background-image: url('/assets/images/hero_bg.png')"></div>
+    <div class="hero-overlay"></div>
+    
+    <!-- Hero Main Content -->
+    <div class="hero-content">
+        <div class="container hero-content-inner">
+            <div class="hero-text-block">
+                <!-- Avatar Stack Above Headline -->
+                <div class="hero-proof">
+                    <div class="avatar-stack">
+                        <div class="avatar" style="z-index: 5;"><img src="/assets/images/avatar_1.jpg" alt="Sarah J."></div>
+                        <div class="avatar" style="z-index: 4;"><img src="/assets/images/avatar_2.jpg" alt="Mark H."></div>
+                        <div class="avatar" style="z-index: 3;"><img src="/assets/images/avatar_3.jpg" alt="Emma P."></div>
+                        <div class="avatar" style="z-index: 2;"><img src="/assets/images/avatar_4.jpg" alt="David K."></div>
+                        <div class="avatar" style="z-index: 1;"><img src="/assets/images/avatar_5.jpg" alt="Lisa D."></div>
+                    </div>
+                    <span class="proof-text">Trusted by 200+ Australian Businesses</span>
+                </div>
+                
+                <h1 class="hero-headline" style="font-size: clamp(2.2rem, 5vw, 4rem);">
+                    Small Business Institute:<br>
+                    <span class="text-accent">The Knowledge Foundation</span><br>
+                    <span class="text-navy">for Emerging Enterprises.</span>
+                </h1>
+                
+                <p class="hero-subheadline">
+                    We take your big ideas and turn them into clear, winning strategies. From setting up your company to scaling it worldwide, we're here every step of the way.
+                </p>
+                
+                <button id="hero-template-trigger" class="btn-hero" style="border:none; cursor:pointer;">
+                    Get Template
+                    <span class="btn-hero-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Marquee Footer -->
+    <div class="hero-marquee-wrapper">
+        <div class="stats-marquee-container">
+            <div class="stats-marquee-track">
+                <!-- Group 1 -->
+                <div class="stats-marquee-inner">
+                    <div class="stat-item">
+                        <span class="stat-val">$5M+</span>
+                        <span class="stat-label">IN CLIENT REVENUE GENERATED</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">200+</span>
+                        <span class="stat-label">BUSINESSES LAUNCHED</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">$500K+</span>
+                        <span class="stat-label">SAVED IN OPERATIONAL COSTS</span>
+                    </div>
+                </div>
+                <!-- Group 2 -->
+                <div class="stats-marquee-inner" aria-hidden="true">
+                    <div class="stat-item">
+                        <span class="stat-val">$5M+</span>
+                        <span class="stat-label">IN CLIENT REVENUE GENERATED</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">200+</span>
+                        <span class="stat-label">BUSINESSES LAUNCHED</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">$500K+</span>
+                        <span class="stat-label">SAVED IN OPERATIONAL COSTS</span>
+                    </div>
+                </div>
+                <!-- Group 3 -->
+                <div class="stats-marquee-inner" aria-hidden="true">
+                    <div class="stat-item">
+                        <span class="stat-val">$5M+</span>
+                        <span class="stat-label">IN CLIENT REVENUE GENERATED</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">200+</span>
+                        <span class="stat-label">BUSINESSES LAUNCHED</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">$500K+</span>
+                        <span class="stat-label">SAVED IN OPERATIONAL COSTS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* --- Bright Premium Hero Strict UX/UI --- */
+.hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 68px); /* Exactly fill viewport excluding header */
+    color: var(--navy);
+    overflow: hidden;
+}
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        rgba(255,255,255,0.82) 0%,
+        rgba(255,255,255,0.55) 50%,
+        rgba(255,255,255,0.15) 100%
+    );
+    z-index: 2;
+}
+
+/* Layout strict grid */
+.hero-content {
+    flex: 1; /* Pushes the marquee to the very bottom */
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center; /* Center horizontally */
+    padding: 3rem 0;
+}
+.hero-content-inner {
+    width: 100%;
+}
+.hero-text-block {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Perfect left alignment */
+    gap: 1.5rem;
+}
+
+/* Avatar / Proof section */
+.hero-proof {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.avatar-stack {
+    display: flex;
+    margin-left: 0.75rem; 
+}
+.avatar {
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    background: var(--navy);
+    margin-left: -0.75rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.proof-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Typography components */
+.hero-headline {
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--navy);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0;
+}
+.text-accent { color: var(--accent); }
+.text-navy { color: var(--navy); }
+
+.hero-subheadline {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--navy-mid);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 95%;
+}
+
+/* Button styles */
+.btn-hero {
+    display: inline-flex;
+    align-items: center;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0 0 0 1.5rem;
+    margin-top: 1rem;
+    width: fit-content;
+    transition: all 0.3s ease;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+.btn-hero:hover {
+    background: var(--accent);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+.btn-hero-icon {
+    border-left: 1px solid rgba(255,255,255,0.2);
+    padding: 0.85rem;
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.1);
+}
+
+/* Marquee / Footer of Hero */
+.hero-marquee-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+.stats-marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    padding: 1.25rem 0;
+}
+.stats-marquee-track {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 2rem;
+}
+.stats-marquee-inner {
+    display: flex;
+    min-width: 100%;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-around;
+    gap: 2rem;
+    animation: marquee 40s linear infinite;
+}
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - 2rem)); }
+}
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+}
+.stat-val {
+    font-weight: 800;
+    font-family: monospace;
+    color: var(--accent);
+    font-size: 0.95rem;
+    letter-spacing: 0.025em;
+}
+.stat-label {
+    font-weight: 600;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--navy-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+</style>
+
+<script>
+    const trigger = document.getElementById('hero-template-trigger');
+    const modal = document.getElementById('newsletter-overlay');
+    if(trigger && modal) {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+        });
+    }
+</script>

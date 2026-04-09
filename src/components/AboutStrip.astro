@@ -1,0 +1,213 @@
+---
+---
+
+<section class="about-section">
+    <!-- Decorative background elements -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <div class="container">
+        <div class="about-grid">
+            <!-- Left: Text -->
+            <div class="about-content reveal">
+                <span class="section-label">Who We Are</span>
+                <h2>Australia's small businesses<br><em>deserve better support</em></h2>
+                <p>The Small Business Institute is a not-for-profit organisation dedicated to supporting small business owners and independent contractors across Australia. We advocate, educate, and share what no one else takes the time to explain properly.</p>
+                <a href="/about" class="btn-ghost">Learn more about SBI <span>→</span></a>
+            </div>
+
+            <!-- Right: Stats -->
+            <div class="stats-panel reveal reveal-delay-2">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-num">2.5M+</span>
+                        <span class="stat-label">small businesses<br>in Australia</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num">97%</span>
+                        <span class="stat-label">of all Australian<br>businesses</span>
+                    </div>
+                    <div class="stat-card stat-card-wide">
+                        <span class="stat-num">1 in 3</span>
+                        <span class="stat-label">Australians work for or own a small business</span>
+                    </div>
+                </div>
+                <p class="stat-footnote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    Most run without a support network. We're here to change that.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.about-section {
+    padding: 7rem 0;
+    background: var(--navy);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative blobs */
+.bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+}
+.blob-1 {
+    width: 500px;
+    height: 500px;
+    background: rgba(2, 132, 199, 0.12);
+    top: -150px;
+    right: -100px;
+}
+.blob-2 {
+    width: 300px;
+    height: 300px;
+    background: rgba(124, 58, 237, 0.08);
+    bottom: -80px;
+    left: 5%;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+.about-grid {
+    display: grid;
+    gap: 4rem;
+    align-items: center;
+}
+@media (min-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+    }
+}
+
+/* Label */
+.section-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+/* Content */
+.about-content h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.15;
+}
+.about-content h2 em {
+    font-style: normal;
+    color: var(--accent);
+}
+.about-content p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+}
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.09);
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    padding: 0.8rem 1.75rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+.btn-ghost:hover {
+    background: var(--white);
+    color: var(--navy);
+    border-color: var(--white);
+    text-decoration: none;
+}
+.btn-ghost span {
+    transition: transform 0.25s ease;
+}
+.btn-ghost:hover span {
+    transform: translateX(4px);
+}
+
+/* Stats panel */
+.stats-panel {
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    backdrop-filter: blur(12px);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.stat-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.stat-card-wide {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.stat-num {
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+.stat-card-wide .stat-num {
+    font-size: 2rem;
+    flex-shrink: 0;
+    color: #38bdf8;
+}
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.4;
+}
+
+.stat-footnote {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.82rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+.stat-footnote svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    opacity: 0.6;
+}
+</style>

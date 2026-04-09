@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="About Us | Small Business Institute">
+	<Header />
+	
+	<main>
+		<section class="about-hero">
+			<div class="container text-center">
+				<h1>About the Small Business Institute</h1>
+				<p class="hero-subtitle">A not-for-profit organisation dedicated to supporting small business and independent contractors across Australia.</p>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container about-content-wrapper">
+				<div class="about-content">
+					<h2>Our mission</h2>
+					<p>The Small Business Institute is building something worth reading — check back shortly as we expand our full manifesto and strategic direction.</p>
+
+					<h2>What we do</h2>
+					<p>We share practical, plain-English information on starting and running a business in Australia — covering employment, compliance, tax, insurance, and more. Our goal is to demystify complex legislation and provide actionable advice that directly impacts the bottom line of everyday businesses.</p>
+
+					<h2>Who we are for</h2>
+					<p>Small business owners. Independent contractors. Freelancers. Anyone navigating the reality of running their own business without a corporate support structure behind them.</p>
+
+					<div class="newsletter-inline" style="margin-top:4rem;">
+						<h3>Stay connected</h3>
+						<p>Subscribe to the newsletter for practical updates, guides, and resources — no spam, ever.</p>
+						<button class="btn-primary" id="about-newsletter-trigger">Subscribe to our newsletter</button>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+.about-hero {
+	padding: 5rem 0 4rem;
+	background: var(--navy);
+	color: var(--white);
+	border-bottom: 2px solid var(--accent);
+}
+.about-hero h1 {
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-weight: 800;
+	color: var(--white);
+	margin-bottom: 1rem;
+	letter-spacing: -0.02em;
+}
+.hero-subtitle {
+	font-size: 1.25rem;
+	color: rgba(255,255,255,0.8);
+	max-width: 700px;
+	margin: 0 auto;
+	line-height: 1.6;
+}
+.text-center {
+	text-align: center;
+}
+
+.section {
+	padding: 5rem 0;
+	background: var(--card-bg);
+}
+
+.about-content-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.about-content {
+	max-width: 800px;
+	width: 100%;
+}
+
+.about-content h2 {
+	font-size: 2rem;
+	color: var(--navy);
+	margin-top: 3rem;
+	margin-bottom: 1.25rem;
+	font-weight: 700;
+}
+.about-content h2:first-child {
+	margin-top: 0;
+}
+
+.about-content p {
+	font-size: 1.1rem;
+	line-height: 1.7;
+	color: var(--text);
+	margin-bottom: 1.5rem;
+}
+
+.newsletter-inline {
+	padding: 2.5rem;
+	background: var(--accent-lt);
+	border-radius: var(--radius-lg);
+	border: 1px solid rgba(3, 105, 161, 0.15); /* Accent tint */
+	text-align: center;
+}
+.newsletter-inline h3 {
+	color: var(--accent);
+	font-size: 1.5rem;
+	margin-bottom: 0.75rem;
+	font-weight: 800;
+}
+.newsletter-inline p {
+	color: var(--navy-mid);
+	font-size: 1.05rem;
+	margin-bottom: 1.5rem;
+}
+</style>
+
+<script>
+    const trigger = document.getElementById('about-newsletter-trigger');
+    const modal = document.getElementById('newsletter-overlay');
+    if(trigger && modal) {
+        trigger.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+        });
+    }
+</script>

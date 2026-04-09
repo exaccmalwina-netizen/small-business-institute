@@ -1,0 +1,32 @@
+# SBI — Apache config
+Options -Indexes
+
+# Pretty URLs (optional, if you want /post/slug later)
+# RewriteEngine On
+# RewriteRule ^post/([^/]+)/?$ /post.php?slug=$1 [L,QSA]
+# RewriteRule ^blog/([^/]+)/?$ /blog.php?cat=$1 [L,QSA]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Protect config
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block install script after setup
+# <Files "install.php">
+#     Order allow,deny
+#     Deny from all
+# </Files>
+
+# PHP file execution in uploads — blocked
+<FilesMatch "\.(php|phtml|php3|php4|php5|pl|py|jsp|asp|sh|cgi)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

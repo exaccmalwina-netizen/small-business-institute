@@ -1,0 +1,348 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getPosts } from '../../utils/wp.js';
+import { getCollection } from 'astro:content';
+
+// Try WordPress first, fall back to local markdown
+const wpRaw = await getPosts(100);
+
+type PostItem = {
+    id: string;
+    data: {
+        title: string;
+        category: string;
+        categoryName: string;
+        date: Date;
+        excerpt: string;
+    };
+};
+
+let allPosts: PostItem[] = [];
+
+if (wpRaw.length > 0) {
+    // WordPress mode
+    allPosts = (wpRaw as any[]).map((post) => ({
+        id: post.slug,
+        data: {
+            title: post.title.rendered,
+            category: post._embedded?.['wp:term']?.[0]?.[0]?.slug || 'uncategorized',
+            categoryName: post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized',
+            date: new Date(post.date),
+            excerpt: post.excerpt.rendered.replace(/(<([^>]+)>)/gi, '').substring(0, 160) + '…',
+        },
+    }));
+} else {
+    // Fallback: local markdown (dev mode / WP not yet configured)
+    const mdPosts = await getCollection('blog');
+    allPosts = mdPosts.map(p => ({
+        id: p.id,
+        data: {
+            title: p.data.title,
+            category: p.data.category,
+            categoryName: p.data.categoryName,
+            date: p.data.date,
+            excerpt: p.data.excerpt,
+        },
+    }));
+}
+
+allPosts.sort((a: PostItem, b: PostItem) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categories = [
+    'employment',
+    'business-management',
+    'compliance',
+    'insurance',
+    'new-technologies',
+    'success-stories',
+    'failure-stories',
+];
+
+const categoryNames: Record<string, string> = {
+    'employment':           'Employment',
+    'business-management':  'Business Management',
+    'compliance':           'Compliance',
+    'insurance':            'Insurance',
+    'new-technologies':     'New Technologies',
+    'success-stories':      'Success Stories',
+    'failure-stories':      'Failure Stories',
+};
+
+const categoryColors: Record<string, string> = {
+    'employment':           '#0284c7',
+    'business-management':  '#7c3aed',
+    'compliance':           '#059669',
+    'insurance':            '#1e293b',
+    'new-technologies':     '#7c3aed',
+    'success-stories':      '#f59e0b',
+    'failure-stories':      '#e11d48',
+};
+---
+
+<Layout title="Resources & Articles | Small Business Institute">
+	<Header />
+
+	<main>
+		<div class="blog-header">
+			<div class="container text-center">
+				<h1 id="page-title">Resources & Articles</h1>
+				<p class="hero-subtitle">Plain-English guides for Australian small business owners.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<div class="container">
+				<!-- Category filter pills -->
+				<div class="category-pills" id="category-filters">
+					<button class="pill active" data-filter="all">All</button>
+                    {categories.map(cat => (
+                        <button class="pill" data-filter={cat} style={`--pill-color: ${categoryColors[cat as keyof typeof categoryColors]}`}>
+                            {categoryNames[cat as keyof typeof categoryNames]}
+                        </button>
+                    ))}
+				</div>
+
+                {allPosts.length === 0 ? (
+                    <div class="empty-state">
+                        <p class="empty-title">No articles yet.</p>
+                        <p>Check back soon — content is on its way.</p>
+                    </div>
+                ) : (
+                    <div class="posts-grid" id="posts-grid">
+                        {allPosts.map((post: PostItem) => {
+                            const accentColor = categoryColors[post.data.category as keyof typeof categoryColors] || '#0284c7';
+                            return (
+                                <article
+                                    class="post-card"
+                                    data-category={post.data.category}
+                                    style={`--card-accent: ${accentColor}`}
+                                >
+                                    <div class="card-stripe"></div>
+                                    <div class="post-card-body">
+                                        <div class="post-card-meta">
+                                            <span class="post-cat-badge">{post.data.categoryName}</span>
+                                            <span class="post-date">
+                                                {post.data.date.toLocaleDateString('en-AU', {
+                                                    year: 'numeric', month: 'long', day: 'numeric'
+                                                })}
+                                            </span>
+                                        </div>
+                                        <h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
+                                        <p>{post.data.excerpt}</p>
+                                        <div class="post-card-footer">
+                                            <a href={`/blog/${post.id}`} class="read-more">Read article →</a>
+                                        </div>
+                                    </div>
+                                </article>
+                            );
+                        })}
+                    </div>
+                )}
+			</div>
+		</div>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+.blog-header {
+	padding: 5rem 0 4rem;
+	background: var(--navy);
+	color: var(--white);
+	border-bottom: 2px solid var(--accent);
+}
+.blog-header h1 {
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-weight: 800;
+	color: var(--white);
+	margin-bottom: 1rem;
+	letter-spacing: -0.02em;
+}
+.hero-subtitle {
+	font-size: 1.25rem;
+	color: rgba(255,255,255,0.8);
+	max-width: 700px;
+	margin: 0 auto;
+	line-height: 1.6;
+}
+.text-center { text-align: center; }
+
+.section {
+	padding: 4rem 0 6rem;
+	background: var(--light);
+}
+
+/* Filter pills */
+.category-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+    justify-content: center;
+}
+.pill {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--navy-mid);
+    padding: 0.45rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-body);
+}
+.pill:hover {
+    border-color: var(--pill-color, var(--accent));
+    color: var(--pill-color, var(--accent));
+}
+.pill.active {
+    background: var(--pill-color, var(--navy));
+    color: #fff;
+    border-color: var(--pill-color, var(--navy));
+}
+.pill[data-filter="all"] { --pill-color: var(--navy); }
+
+/* Grid */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.75rem;
+}
+
+/* Card */
+.post-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.25s ease;
+}
+.card-stripe {
+    height: 4px;
+    background: var(--card-accent);
+}
+.post-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+    border-color: transparent;
+}
+.post-card:hover .card-stripe {
+    height: 6px;
+}
+.post-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.post-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+}
+.post-cat-badge {
+    background: color-mix(in srgb, var(--card-accent) 12%, transparent);
+    color: var(--card-accent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.post-date { color: var(--muted); }
+.post-card h3 {
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem;
+    line-height: 1.35;
+    font-family: var(--font-heading);
+}
+.post-card h3 a {
+    color: var(--navy);
+    transition: color 0.2s;
+}
+.post-card:hover h3 a { color: var(--card-accent); }
+.post-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+}
+.post-card-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: auto;
+}
+.read-more {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--card-accent);
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    border: 2px dashed var(--border);
+    color: var(--muted);
+}
+.empty-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+}
+</style>
+
+<script>
+    const filters = document.querySelectorAll('.pill') as NodeListOf<HTMLButtonElement>;
+    const posts = document.querySelectorAll('.post-card') as NodeListOf<HTMLElement>;
+    const title = document.getElementById('page-title');
+
+    const pageTitles: Record<string, string> = {
+        'all':                  'Resources & Articles',
+        'employment':           'Employment Articles',
+        'business-management':  'Business Management Articles',
+        'compliance':           'Compliance Articles',
+        'insurance':            'Insurance Articles',
+        'new-technologies':     'New Technologies Articles',
+        'success-stories':      'Success Stories',
+        'failure-stories':      'Failure Stories',
+    };
+
+    const updateFilter = (filterVal: string) => {
+        filters.forEach(f => {
+            f.classList.toggle('active', f.dataset.filter === filterVal);
+        });
+        posts.forEach(post => {
+            const show = filterVal === 'all' || post.dataset.category === filterVal;
+            post.style.display = show ? 'flex' : 'none';
+        });
+        if (title) title.textContent = pageTitles[filterVal] ?? 'Resources & Articles';
+    };
+
+    // Apply ?cat= from URL on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCat = urlParams.get('cat');
+    if (initialCat) updateFilter(initialCat);
+
+    filters.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const val = btn.dataset.filter ?? 'all';
+            const newUrl = val === 'all' ? '/blog' : `/blog?cat=${val}`;
+            window.history.pushState({}, '', newUrl);
+            updateFilter(val);
+        });
+    });
+</script>

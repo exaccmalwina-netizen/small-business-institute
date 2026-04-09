@@ -1,0 +1,250 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<!-- Newsletter Popup -->
+<div class="newsletter-overlay" id="newsletter-overlay" role="dialog" aria-modal="true" aria-label="Newsletter signup" aria-hidden="true" style="display: none;">
+    <div class="newsletter-modal">
+        <button class="newsletter-close" id="newsletter-close" aria-label="Close">&times;</button>
+        <div class="newsletter-content">
+            <p class="newsletter-eyebrow">Stay informed</p>
+            <h2>Practical insights for small business owners</h2>
+            <p class="newsletter-sub">No fluff. Just useful guides, updates and resources — straight to your inbox.</p>
+            
+            <form class="newsletter-form" onsubmit="return false;">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn-primary">Subscribe</button>
+            </form>
+            <p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem">⚙ Add your Mailchimp form action URL to form action to activate</p>
+            
+            <p class="newsletter-privacy">No spam. Unsubscribe anytime.</p>
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <div class="footer-brand">
+            <a href="/" class="logo">
+                <span class="logo-mark">SBI</span>
+                <span class="logo-text" style="color: var(--white);">Small Business Institute Australia</span>
+            </a>
+            <p>Supporting small business and independent contractors across Australia.</p>
+        </div>
+        <div class="footer-links">
+            <div>
+                <strong>Resources</strong>
+                <a href="/blog?cat=employment">Employment</a>
+                <a href="/blog?cat=business-management">Business Management</a>
+                <a href="/blog?cat=compliance">Compliance</a>
+                <a href="/blog?cat=insurance">Insurance</a>
+                <a href="/blog?cat=new-technologies">New Technologies</a>
+            </div>
+            <div>
+                <strong>Institute</strong>
+                <a href="/about">About Us</a>
+                <a href="/blog">All Articles</a>
+                <a href="#" id="footer-newsletter-trigger">Newsletter</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <p>&copy; {currentYear} Small Business Institute Australia. Not-for-profit organisation.</p>
+            <p>Information on this site is general in nature. Always seek professional advice for your specific situation.</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+.site-footer {
+    background: #0f172a; /* Even darker strictly for the bottom */
+    color: rgba(255, 255, 255, 0.7);
+    padding: 5rem 0 2rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+@media(min-width: 768px) {
+    .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.footer-brand {
+    max-width: 300px;
+}
+.footer-brand p {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.logo-mark {
+    background: var(--accent);
+    color: var(--white);
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    padding: .3rem .5rem;
+    border-radius: 5px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 4rem;
+}
+.footer-links div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.footer-links strong {
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+}
+.footer-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: var(--accent-lt);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+@media(min-width: 768px) {
+    .footer-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* Newsletter Overlay */
+.newsletter-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.newsletter-modal {
+    background: var(--white);
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--radius-lg);
+    position: relative;
+    padding: 3rem 2.5rem;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes modalIn {
+    0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.newsletter-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color var(--transition);
+}
+.newsletter-close:hover { color: var(--navy); }
+
+.newsletter-eyebrow {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+.newsletter-content h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--navy);
+}
+.newsletter-sub {
+    color: var(--navy-mid);
+    margin-bottom: 2rem;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+.newsletter-form input {
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: var(--font-body);
+}
+.newsletter-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-lt);
+}
+
+.newsletter-privacy {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 1.5rem;
+}
+</style>
+
+<script>
+    const modal = document.getElementById('newsletter-overlay');
+    const closeBtn = document.getElementById('newsletter-close');
+    const triggerBtn = document.getElementById('footer-newsletter-trigger');
+
+    if(modal && closeBtn && triggerBtn) {
+        triggerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        });
+
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+            }
+        });
+    }
+</script>

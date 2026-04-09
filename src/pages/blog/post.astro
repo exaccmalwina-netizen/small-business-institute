@@ -1,0 +1,237 @@
+---
+// Dynamic shell — treść posta ładuje się w przeglądarce live z WordPress API
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const WP_API = import.meta.env.WORDPRESS_API_URL || 'https://lightcoral-spoonbill-227230.hostingersite.com/wp-json/wp/v2';
+---
+
+<Layout title="Loading... | Small Business Institute">
+    <Header />
+
+    <main class="article-wrapper">
+        <!-- Loading state -->
+        <div id="post-loading" class="loading-screen">
+            <div class="spinner"></div>
+            <p>Loading article…</p>
+        </div>
+
+        <!-- Error state -->
+        <div id="post-error" class="error-screen" style="display:none">
+            <div class="container text-center">
+                <h1>Article not found</h1>
+                <p>This article may have been moved or removed.</p>
+                <a href="/blog" class="btn-primary">Back to Resources</a>
+            </div>
+        </div>
+
+        <!-- Post content (populated by JS) -->
+        <article id="post-content" class="prose-container" style="display:none">
+            <header class="article-header">
+                <div class="article-meta">
+                    <a id="post-category-link" href="/blog" class="post-cat-badge"></a>
+                    <span id="post-date" class="post-date"></span>
+                </div>
+                <h1 id="post-title"></h1>
+                <p id="post-author" class="article-author"></p>
+            </header>
+
+            <div id="post-body" class="prose"></div>
+
+            <div class="article-footer">
+                <div class="newsletter-inline">
+                    <h3>Was this helpful?</h3>
+                    <p>Subscribe to our newsletter for more no-fluff guides.</p>
+                    <button class="btn-primary" id="article-newsletter-trigger">Subscribe now</button>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+.article-wrapper {
+    background: var(--card-bg);
+    min-height: 60vh;
+    padding: 4rem 0 6rem;
+}
+.loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem;
+    gap: 1.5rem;
+    color: var(--muted);
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-screen {
+    padding: 8rem 2rem;
+    text-align: center;
+}
+.error-screen h1 {
+    font-size: 2rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+}
+.error-screen p {
+    color: var(--muted);
+    margin-bottom: 2rem;
+}
+.text-center { text-align: center; }
+
+.prose-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+.article-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.post-cat-badge {
+    background: var(--accent-lt);
+    color: var(--accent);
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.post-date { color: var(--muted); font-size: 0.95rem; }
+.article-header h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+.article-author { color: var(--navy-mid); font-weight: 600; font-size: 1.05rem; }
+
+.prose { font-size: 1.15rem; line-height: 1.8; color: var(--text); }
+.prose :global(h2) { font-size: 2rem; color: var(--navy); margin: 3rem 0 1.25rem; font-weight: 700; }
+.prose :global(h3) { font-size: 1.5rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 600; }
+.prose :global(p) { margin-bottom: 1.5rem; }
+.prose :global(ul), .prose :global(ol) { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+.prose :global(li) { margin-bottom: 0.5rem; }
+.prose :global(strong) { color: var(--navy); }
+.prose :global(a) { color: var(--accent); text-decoration: underline; }
+.prose :global(blockquote) {
+    border-left: 4px solid var(--accent);
+    padding-left: 1.25rem;
+    color: var(--navy-mid);
+    font-style: italic;
+    margin: 2rem 0;
+}
+.prose :global(img) { max-width: 100%; border-radius: var(--radius); margin: 1.5rem 0; }
+
+.article-footer {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px dashed var(--border);
+}
+.newsletter-inline {
+    padding: 2.5rem;
+    background: var(--off-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    text-align: center;
+}
+.newsletter-inline h3 { color: var(--navy); font-size: 1.5rem; margin-bottom: 0.75rem; font-weight: 800; }
+.newsletter-inline p { color: var(--navy-mid); font-size: 1.05rem; margin-bottom: 1.5rem; }
+</style>
+
+<script define:vars={{ WP_API }}>
+    const categoryColors = {
+        'employment':           '#0284c7',
+        'business-management':  '#7c3aed',
+        'compliance':           '#059669',
+        'insurance':            '#1e293b',
+        'new-technologies':     '#7c3aed',
+        'success-stories':      '#f59e0b',
+        'failure-stories':      '#e11d48',
+    };
+
+    async function loadPost() {
+        // Get slug from URL: /blog/my-post-slug → "my-post-slug"
+        const parts = window.location.pathname.replace(/\/$/, '').split('/');
+        const slug = parts[parts.length - 1];
+
+        if (!slug || slug === 'blog' || slug === 'post') {
+            window.location.href = '/blog';
+            return;
+        }
+
+        try {
+            const res = await fetch(`${WP_API}/posts?_embed&slug=${encodeURIComponent(slug)}&status=publish`);
+            if (!res.ok) throw new Error('API error');
+            const posts = await res.json();
+            if (!posts.length) throw new Error('Not found');
+
+            const post = posts[0];
+            const category = post._embedded?.['wp:term']?.[0]?.[0]?.slug || 'uncategorized';
+            const categoryName = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized';
+            const author = post._embedded?.author?.[0]?.name || 'SBI Editorial Team';
+            const date = new Date(post.date).toLocaleDateString('en-AU', {
+                year: 'numeric', month: 'long', day: 'numeric'
+            });
+            const accentColor = categoryColors[category] || '#0284c7';
+
+            // Update page title
+            document.title = `${post.title.rendered} | Small Business Institute`;
+
+            // Populate content
+            document.getElementById('post-title').innerHTML = post.title.rendered;
+            document.getElementById('post-date').textContent = date;
+            document.getElementById('post-author').textContent = `By ${author}`;
+            document.getElementById('post-body').innerHTML = post.content.rendered;
+
+            const catLink = document.getElementById('post-category-link');
+            catLink.textContent = categoryName;
+            catLink.href = `/blog?cat=${category}`;
+            catLink.style.background = `${accentColor}20`;
+            catLink.style.color = accentColor;
+
+            // Show content, hide loading
+            document.getElementById('post-loading').style.display = 'none';
+            document.getElementById('post-content').style.display = 'block';
+
+        } catch (e) {
+            document.getElementById('post-loading').style.display = 'none';
+            document.getElementById('post-error').style.display = 'block';
+        }
+    }
+
+    loadPost();
+
+    // Newsletter trigger
+    const trigger = document.getElementById('article-newsletter-trigger');
+    const modal = document.getElementById('newsletter-overlay');
+    if (trigger && modal) {
+        trigger.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+        });
+    }
+</script>

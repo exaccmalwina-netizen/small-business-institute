@@ -1,0 +1,114 @@
+---
+---
+
+<header class="site-header">
+    <div class="container header-inner">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="40" height="40" rx="9" fill="#0284c7"/>
+                <text x="20" y="28" text-anchor="middle" font-family="'Sora', 'Inter', sans-serif" font-size="22" font-weight="800" fill="white" letter-spacing="-1">S</text>
+            </svg>
+            <div class="logo-text-wrap">
+                <span class="logo-name">Small Business Institute</span>
+                <span class="logo-sub">Australia</span>
+            </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="site-nav">
+            <a href="/blog">Resources</a>
+            <a href="/about">About Us</a>
+            <button class="btn-primary" id="header-join-trigger" style="font-family:inherit;">Join SBI</button>
+        </nav>
+    </div>
+</header>
+
+<style>
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 8px rgba(15,39,68,.06);
+}
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    text-decoration: none;
+}
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(2, 132, 199, 0.3));
+    transition: filter var(--transition);
+}
+.logo:hover .logo-icon {
+    filter: drop-shadow(0 4px 12px rgba(2, 132, 199, 0.5));
+}
+.logo-text-wrap {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+.logo-name {
+    font-size: .9rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -.02em;
+    font-family: var(--font-heading);
+}
+.logo-sub {
+    font-size: .7rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+}
+.site-nav a:not(.btn-primary) {
+    font-size: .9rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: color var(--transition);
+}
+.site-nav a:not(.btn-primary):hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+.site-nav .btn-primary {
+    box-shadow: 0 4px 14px rgba(3, 105, 161, 0.3);
+    transform: translateY(-1px);
+    color: var(--white);
+}
+.site-nav .btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(3, 105, 161, 0.4);
+    transform: translateY(-2px);
+    color: var(--white);
+}
+</style>
+
+<script>
+    const trigger = document.getElementById('header-join-trigger');
+    const modal = document.getElementById('newsletter-overlay');
+    if(trigger && modal) {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+        });
+    }
+</script>
