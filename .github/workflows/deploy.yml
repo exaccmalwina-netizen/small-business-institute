@@ -1,0 +1,44 @@
+name: Astro Headless WP Deployment
+
+on:
+  push:
+    branches:
+      - main
+  # Trigger manually
+  workflow_dispatch:
+  # Trigger via Webhook from WordPress
+  repository_dispatch:
+    types: 
+      - publish_post
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Create Production Build
+        # Używamy zmiennej z sekretów GitHub, aby API URL było poprawne przy budowaniu na serwerze
+        env:
+          WORDPRESS_API_URL: ${{ secrets.WORDPRESS_API_URL }}
+        run: npm run build
+
+      - name: Sync via FTP to Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./domains/YOUR_DOMAIN/public_html/
+          # Zauważ: będziesz musiał podmienić server-dir na odpowiedni folder Twojej domeny po wdrożeniu na Hostinger (często samo ./ lub ./public_html/)

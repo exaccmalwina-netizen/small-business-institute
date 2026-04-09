@@ -1,5 +1,29 @@
 ---
-const WP_API = import.meta.env.WORDPRESS_API_URL || 'https://lightcoral-spoonbill-227230.hostingersite.com/wp-json/wp/v2';
+import { getPosts } from '../utils/wp.js';
+
+const categoryColors: Record<string, string> = {
+    'employment':           '#0284c7',
+    'business-management':  '#7c3aed',
+    'compliance':           '#059669',
+    'insurance':            '#1e293b',
+    'new-technologies':     '#7c3aed',
+    'success-stories':      '#f59e0b',
+    'failure-stories':      '#e11d48',
+};
+
+const wpRaw = await getPosts(3);
+let recentPosts: any[] = [];
+
+if (wpRaw && wpRaw.length > 0) {
+    recentPosts = (wpRaw as any[]).map((post) => ({
+        id: post.slug,
+        title: post.title.rendered,
+        category: post._embedded?.['wp:term']?.[0]?.[0]?.slug || 'uncategorized',
+        categoryName: post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized',
+        date: new Date(post.date),
+        excerpt: post.excerpt.rendered.replace(/(<([^>]+)>)/gi, '').substring(0, 160) + '…',
+    }));
+}
 ---
 
 <section class="articles-section">
@@ -12,23 +36,43 @@ const WP_API = import.meta.env.WORDPRESS_API_URL || 'https://lightcoral-spoonbil
             <a href="/blog" class="btn-outline">All articles →</a>
         </div>
 
-        <!-- Loading state -->
-        <div id="latest-loading" class="posts-loading">
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-        </div>
-
-        <!-- Posts grid (populated by JS) -->
-        <div id="latest-posts" class="posts-grid" style="display:none"></div>
-
-        <!-- Empty state -->
-        <div id="latest-empty" class="coming-soon" style="display:none">
-            <div class="coming-soon-icon">✍️</div>
-            <p class="coming-soon-title">Articles coming soon</p>
-            <p>Subscribe to be the first to know.</p>
-            <button class="btn-primary mt-4" id="latest-newsletter-trigger">Subscribe free</button>
-        </div>
+        {recentPosts.length === 0 ? (
+            <!-- Empty state -->
+            <div id="latest-empty" class="coming-soon">
+                <div class="coming-soon-icon">✍️</div>
+                <p class="coming-soon-title">Articles coming soon</p>
+                <p>Subscribe to be the first to know.</p>
+                <button class="btn-primary mt-4" id="latest-newsletter-trigger">Subscribe free</button>
+            </div>
+        ) : (
+            <!-- Posts grid -->
+            <div id="latest-posts" class="posts-grid">
+                {recentPosts.map((post, i) => {
+                    const accentColor = categoryColors[post.category] || '#0284c7';
+                    const dateStr = post.date.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+                    return (
+                        <article class="post-card" style={`animation-delay:${i*0.1}s`}>
+                            <div class="card-top-stripe" style={`background:${accentColor}`}></div>
+                            <div class="post-card-body">
+                                <div class="post-card-meta">
+                                    <span class="post-cat-badge" style={`background:${accentColor}20;color:${accentColor}`}>{post.categoryName}</span>
+                                    <span class="post-date">{dateStr}</span>
+                                </div>
+                                <h3><a href={`/blog/${post.id}`}>{post.title}</a></h3>
+                                <p>{post.excerpt}</p>
+                                <div class="post-card-footer">
+                                    <a href={`/blog/${post.id}`} class="read-more" style={`color:${accentColor}`}>
+                                        Read article
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                                    </a>
+                                    <span class="read-time">5 min read</span>
+                                </div>
+                            </div>
+                        </article>
+                    );
+                })}
+            </div>
+        )}
     </div>
 </section>
 
@@ -75,21 +119,6 @@ const WP_API = import.meta.env.WORDPRESS_API_URL || 'https://lightcoral-spoonbil
     white-space: nowrap;
 }
 .btn-outline:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
-
-/* Skeleton loading */
-.posts-loading {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.75rem;
-}
-.skeleton-card {
-    height: 220px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: var(--radius-lg);
-}
-@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 /* Grid */
 .posts-grid {
@@ -158,67 +187,6 @@ const WP_API = import.meta.env.WORDPRESS_API_URL || 'https://lightcoral-spoonbil
 </style>
 
 <script>
-    const WP_API = 'https://lightcoral-spoonbill-227230.hostingersite.com/wp-json/wp/v2';
-    const categoryColors = {
-        'employment':           '#0284c7',
-        'business-management':  '#7c3aed',
-        'compliance':           '#059669',
-        'insurance':            '#1e293b',
-        'new-technologies':     '#7c3aed',
-        'success-stories':      '#f59e0b',
-        'failure-stories':      '#e11d48',
-    };
-
-    async function loadLatestPosts() {
-        try {
-            const res = await fetch(`${WP_API}/posts?_embed&per_page=3&status=publish`);
-            if (!res.ok) throw new Error('API error');
-            const posts = await res.json();
-
-            document.getElementById('latest-loading').style.display = 'none';
-
-            if (!posts.length) {
-                document.getElementById('latest-empty').style.display = 'block';
-                return;
-            }
-
-            const grid = document.getElementById('latest-posts');
-            grid.innerHTML = posts.map((post, i) => {
-                const category = post._embedded?.['wp:term']?.[0]?.[0]?.slug || 'uncategorized';
-                const categoryName = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized';
-                const accentColor = categoryColors[category] || '#0284c7';
-                const date = new Date(post.date).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
-                const excerpt = post.excerpt.rendered.replace(/(<([^>]+)>)/gi, '').substring(0, 160) + '…';
-                return `
-                    <article class="post-card" style="animation-delay:${i*0.1}s">
-                        <div class="card-top-stripe" style="background:${accentColor}"></div>
-                        <div class="post-card-body">
-                            <div class="post-card-meta">
-                                <span class="post-cat-badge" style="background:${accentColor}20;color:${accentColor}">${categoryName}</span>
-                                <span class="post-date">${date}</span>
-                            </div>
-                            <h3><a href="/blog/${post.slug}">${post.title.rendered}</a></h3>
-                            <p>${excerpt}</p>
-                            <div class="post-card-footer">
-                                <a href="/blog/${post.slug}" class="read-more" style="color:${accentColor}">
-                                    Read article
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                                </a>
-                                <span class="read-time">5 min read</span>
-                            </div>
-                        </div>
-                    </article>`;
-            }).join('');
-            grid.style.display = 'grid';
-
-        } catch (e) {
-            document.getElementById('latest-loading').style.display = 'none';
-            document.getElementById('latest-empty').style.display = 'block';
-        }
-    }
-
-    loadLatestPosts();
-
     const trigger = document.getElementById('latest-newsletter-trigger');
     const modal = document.getElementById('newsletter-overlay');
     if (trigger && modal) {
