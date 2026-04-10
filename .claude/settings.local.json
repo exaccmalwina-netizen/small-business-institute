@@ -16,7 +16,11 @@
       "Bash(curl -s \"https://lightcoral-spoonbill-227230.hostingersite.com/wp-json/wp/v2/posts?per_page=1\" -H \"Accept: application/json\")",
       "Bash(curl -s \"https://lightcoral-spoonbill-227230.hostingersite.com/wp-json/wp/v2/posts?per_page=1&nocache=$\\(date +%s\\)\" -H \"Cache-Control: no-cache\" -H \"Pragma: no-cache\")",
       "Bash(curl -s \"https://lightcoral-spoonbill-227230.hostingersite.com/wp-login.php\")",
-      "Bash(curl -s \"https://lightcoral-spoonbill-227230.hostingersite.com/wp-admin/admin-ajax.php\" -d \"action=rest-nonce\")"
+      "Bash(curl -s \"https://lightcoral-spoonbill-227230.hostingersite.com/wp-admin/admin-ajax.php\" -d \"action=rest-nonce\")",
+      "Bash(curl -s \"https://indigo-turkey-747101.hostingersite.com/\")",
+      "Bash(curl -sI \"https://indigo-turkey-747101.hostingersite.com/\")",
+      "Bash(curl -s \"https://indigo-turkey-747101.hostingersite.com/wp-json/wp/v2/posts?per_page=2\")",
+      "Bash(curl -s \"https://indigo-turkey-747101.hostingersite.com/wp-json/wp/v2/posts?per_page=1\")"
     ]
   }
 }

@@ -1,0 +1,17 @@
+DirectoryIndex home.php index.php
+RewriteEngine On
+
+# Route WordPress REST API through wp-index.php (bypasses overwritten index.php)
+RewriteCond %{REQUEST_URI} ^/wp-json/ [NC]
+RewriteRule ^ wp-index.php [L]
+
+# Let WordPress static assets serve directly (wp-content, wp-includes, wp-admin)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# PHP site: /blog/slug → post.php?slug=slug
+RewriteRule ^blog/([^/]+)/?$ post.php?slug=$1 [L,QSA]
+
+# PHP site: remove .php extension
+RewriteRule ^([^/]+)/?$ $1.php [L]
