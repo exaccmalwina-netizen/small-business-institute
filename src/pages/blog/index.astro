@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getPosts } from '../../utils/wp.js';
 import { getCollection } from 'astro:content';
+import { extractKeywords } from '../../utils/tags.js';
 
 // Try WordPress first, fall back to local markdown
 const wpRaw = await getPosts(100);
@@ -16,6 +17,8 @@ type PostItem = {
         categoryName: string;
         date: Date;
         excerpt: string;
+        contentHTML?: string;
+        tags: string[];
     };
 };
 
@@ -31,6 +34,8 @@ if (wpRaw.length > 0) {
             categoryName: post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized',
             date: new Date(post.date),
             excerpt: post.excerpt.rendered.replace(/(<([^>]+)>)/gi, '').substring(0, 160) + '…',
+            contentHTML: post.content.rendered,
+            tags: extractKeywords(post.content.rendered, 3)
         },
     }));
 } else {
@@ -44,6 +49,8 @@ if (wpRaw.length > 0) {
             categoryName: p.data.categoryName,
             date: p.data.date,
             excerpt: p.data.excerpt,
+            contentHTML: p.body || '',
+            tags: extractKeywords(p.body || '', 3)
         },
     }));
 }
@@ -94,6 +101,14 @@ const categoryColors: Record<string, string> = {
 
 		<div class="section">
 			<div class="container">
+                <!-- Search container -->
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="search" id="article-search" placeholder="Search guides, strategies, words..." aria-label="Search articles" autocomplete="off" />
+                    </div>
+                </div>
+
 				<!-- Category filter pills -->
 				<div class="category-pills" id="category-filters">
 					<button class="pill active" data-filter="all">All</button>
@@ -131,6 +146,15 @@ const categoryColors: Record<string, string> = {
                                         </div>
                                         <h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
                                         <p>{post.data.excerpt}</p>
+                                        
+                                        {post.data.tags.length > 0 && (
+                                            <div class="post-tags-meta">
+                                                {post.data.tags.map((tag: string) => (
+                                                    <button class="post-tag-btn" data-tag={tag}>{tag}</button>
+                                                ))}
+                                            </div>
+                                        )}
+
                                         <div class="post-card-footer">
                                             <a href={`/blog/${post.id}`} class="read-more">Read article →</a>
                                         </div>
@@ -213,6 +237,43 @@ const categoryColors: Record<string, string> = {
     gap: 1.75rem;
 }
 
+/* Search */
+.search-container {
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+}
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.search-icon {
+    position: absolute;
+    left: 1.25rem;
+    color: var(--muted);
+    pointer-events: none;
+}
+#article-search {
+    width: 100%;
+    padding: 1.2rem 1.25rem 1.2rem 3.5rem;
+    font-size: 1.05rem;
+    font-family: var(--font-body);
+    border: 2px solid var(--border);
+    border-radius: 50px;
+    background: var(--white);
+    color: var(--navy);
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+#article-search:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
+}
+#article-search::placeholder {
+    color: var(--muted);
+}
+
 /* Card */
 .post-card {
     background: var(--white);
@@ -277,6 +338,28 @@ const categoryColors: Record<string, string> = {
     margin-bottom: 1.25rem;
     flex-grow: 1;
 }
+.post-tags-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+.post-tag-btn {
+    background: var(--light);
+    color: var(--navy-mid);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.post-tag-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
 .post-card-footer {
     border-top: 1px solid var(--border);
     padding-top: 1rem;
@@ -309,6 +392,8 @@ const categoryColors: Record<string, string> = {
     const filters = document.querySelectorAll('.pill') as NodeListOf<HTMLButtonElement>;
     const posts = document.querySelectorAll('.post-card') as NodeListOf<HTMLElement>;
     const title = document.getElementById('page-title');
+    const searchInput = document.getElementById('article-search') as HTMLInputElement;
+    const tagBtns = document.querySelectorAll('.post-tag-btn') as NodeListOf<HTMLButtonElement>;
 
     const pageTitles: Record<string, string> = {
         'all':                  'Resources & Articles',
@@ -321,28 +406,88 @@ const categoryColors: Record<string, string> = {
         'failure-stories':      'Failure Stories',
     };
 
-    const updateFilter = (filterVal: string) => {
-        filters.forEach(f => {
-            f.classList.toggle('active', f.dataset.filter === filterVal);
-        });
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    const executeFilters = () => {
+        const query = searchQuery.toLowerCase().trim();
+        
         posts.forEach(post => {
-            const show = filterVal === 'all' || post.dataset.category === filterVal;
-            post.style.display = show ? 'flex' : 'none';
+            const matchCategory = currentCategory === 'all' || post.dataset.category === currentCategory;
+            
+            // Text matching across header, excerpt, and tags
+            const textContent = post.textContent?.toLowerCase() || '';
+            const matchSearch = query === '' || textContent.includes(query);
+            
+            post.style.display = (matchCategory && matchSearch) ? 'flex' : 'none';
         });
-        if (title) title.textContent = pageTitles[filterVal] ?? 'Resources & Articles';
+
+        // Update titles
+        if (title) {
+            title.textContent = query 
+                ? `Search results for "${searchQuery}"`
+                : (pageTitles[currentCategory] ?? 'Resources & Articles');
+        }
     };
 
-    // Apply ?cat= from URL on load
-    const urlParams = new URLSearchParams(window.location.search);
-    const initialCat = urlParams.get('cat');
-    if (initialCat) updateFilter(initialCat);
+    // Update filters based on Category Pills
+    const updateCategoryFilter = (filterVal: string) => {
+        currentCategory = filterVal;
+        filters.forEach(f => f.classList.toggle('active', f.dataset.filter === filterVal));
+        executeFilters();
+    };
 
+    // Listen to pills
     filters.forEach(btn => {
         btn.addEventListener('click', () => {
             const val = btn.dataset.filter ?? 'all';
             const newUrl = val === 'all' ? '/blog' : `/blog?cat=${val}`;
             window.history.pushState({}, '', newUrl);
-            updateFilter(val);
+            updateCategoryFilter(val);
         });
     });
+
+    // Listen to Search Bar
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = (e.target as HTMLInputElement).value;
+            executeFilters();
+            
+            // Sync URL params for sharing
+            const currentUrl = new URL(window.location.href);
+            if (searchQuery) currentUrl.searchParams.set('search', searchQuery);
+            else currentUrl.searchParams.delete('search');
+            window.history.replaceState({}, '', currentUrl.toString());
+        });
+    }
+
+    // Listen to Tag clicks on cards
+    tagBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation(); // prevent card click
+            const val = btn.dataset.tag || '';
+            if (searchInput) {
+                searchInput.value = val;
+                // Dispatch input event to trigger the main search listener
+                searchInput.dispatchEvent(new Event('input'));
+            }
+        });
+    });
+
+    // Initialize from URL on load (Category and Search)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialSearch = urlParams.get('search');
+    if (initialSearch && searchInput) {
+        searchInput.value = initialSearch;
+        searchQuery = initialSearch;
+    }
+    const initialCat = urlParams.get('cat');
+    if (initialCat) {
+        currentCategory = initialCat;
+        filters.forEach(f => f.classList.toggle('active', f.dataset.filter === initialCat));
+    }
+    
+    // Execute default
+    executeFilters();
 </script>

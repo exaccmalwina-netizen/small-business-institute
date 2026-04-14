@@ -1,6 +1,7 @@
 ---
 import { getPosts } from '../../utils/wp.js';
 import { getCollection, render } from 'astro:content';
+import { extractKeywords } from '../../utils/tags.js';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -33,6 +34,7 @@ let articleDate = new Date();
 let author = 'SBI Editorial Team';
 let contentHTML = '';
 let MdContent: any = null;
+let tags: string[] = [];
 
 if (source === 'wp') {
     articleTitle  = post.title.rendered;
@@ -41,6 +43,7 @@ if (source === 'wp') {
     articleDate   = new Date(post.date);
     author        = post._embedded?.author?.[0]?.name ?? 'SBI Editorial Team';
     contentHTML   = post.content.rendered;
+    tags          = extractKeywords(post.content.rendered, 3);
 } else if (entry) {
     articleTitle  = entry.data.title;
     category      = entry.data.category;
@@ -49,6 +52,7 @@ if (source === 'wp') {
     author        = entry.data.author ?? 'SBI Editorial Team';
     const rendered = await render(entry);
     MdContent = rendered.Content;
+    tags          = extractKeywords(entry.body || '', 3);
 }
 ---
 
@@ -76,6 +80,17 @@ if (source === 'wp') {
                     : MdContent && <MdContent />
                 }
             </div>
+
+            {tags.length > 0 && (
+                <div class="article-tags-wrapper">
+                    <h3>Related Topics</h3>
+                    <div class="article-tags">
+                        {tags.map((tag: string) => (
+                            <a href={`/blog/?search=${tag}`} class="article-tag-pill">{tag}</a>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             <div class="article-footer">
                 <div class="newsletter-inline">
@@ -180,8 +195,41 @@ if (source === 'wp') {
     margin: 2rem 0;
 }
 
+.article-tags-wrapper {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--border);
+}
+.article-tags-wrapper h3 {
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+}
+.article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+.article-tag-pill {
+    background: var(--light);
+    color: var(--navy-mid);
+    border: 1px solid var(--border);
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.article-tag-pill:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    text-decoration: none;
+}
+
 .article-footer {
-    margin-top: 4rem;
+    margin-top: 3rem;
     padding-top: 3rem;
     border-top: 1px dashed var(--border);
 }
