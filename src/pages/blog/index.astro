@@ -389,12 +389,6 @@ const categoryColors: Record<string, string> = {
 </style>
 
 <script>
-    const filters = document.querySelectorAll('.pill') as NodeListOf<HTMLButtonElement>;
-    const posts = document.querySelectorAll('.post-card') as NodeListOf<HTMLElement>;
-    const title = document.getElementById('page-title');
-    const searchInput = document.getElementById('article-search') as HTMLInputElement;
-    const tagBtns = document.querySelectorAll('.post-tag-btn') as NodeListOf<HTMLButtonElement>;
-
     const pageTitles: Record<string, string> = {
         'all':                  'Resources & Articles',
         'employment':           'Employment Articles',
@@ -406,88 +400,97 @@ const categoryColors: Record<string, string> = {
         'failure-stories':      'Failure Stories',
     };
 
-    let currentCategory = 'all';
-    let searchQuery = '';
+    function init() {
+        const filters    = document.querySelectorAll('.pill') as NodeListOf<HTMLButtonElement>;
+        const posts      = document.querySelectorAll('.post-card') as NodeListOf<HTMLElement>;
+        const title      = document.getElementById('page-title');
+        const searchInput = document.getElementById('article-search') as HTMLInputElement | null;
+        const tagBtns    = document.querySelectorAll('.post-tag-btn') as NodeListOf<HTMLButtonElement>;
 
-    const executeFilters = () => {
-        const query = searchQuery.toLowerCase().trim();
-        
-        posts.forEach(post => {
-            const matchCategory = currentCategory === 'all' || post.dataset.category === currentCategory;
-            
-            // Text matching across header, excerpt, and tags
-            const textContent = post.textContent?.toLowerCase() || '';
-            const matchSearch = query === '' || textContent.includes(query);
-            
-            post.style.display = (matchCategory && matchSearch) ? 'flex' : 'none';
-        });
+        // Bail out if not on the blog index page
+        if (!filters.length && !posts.length) return;
 
-        // Update titles
-        if (title) {
-            title.textContent = query 
-                ? `Search results for "${searchQuery}"`
-                : (pageTitles[currentCategory] ?? 'Resources & Articles');
-        }
-    };
+        let currentCategory = 'all';
+        let searchQuery = '';
 
-    // Update filters based on Category Pills
-    const updateCategoryFilter = (filterVal: string) => {
-        currentCategory = filterVal;
-        filters.forEach(f => f.classList.toggle('active', f.dataset.filter === filterVal));
-        executeFilters();
-    };
+        const executeFilters = () => {
+            const query = searchQuery.toLowerCase().trim();
 
-    // Listen to pills
-    filters.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const val = btn.dataset.filter ?? 'all';
-            const newUrl = val === 'all' ? '/blog' : `/blog?cat=${val}`;
-            window.history.pushState({}, '', newUrl);
-            updateCategoryFilter(val);
-        });
-    });
+            posts.forEach(post => {
+                const matchCategory = currentCategory === 'all' || post.dataset.category === currentCategory;
+                const textContent = post.textContent?.toLowerCase() || '';
+                const matchSearch = query === '' || textContent.includes(query);
+                post.style.display = (matchCategory && matchSearch) ? 'flex' : 'none';
+            });
 
-    // Listen to Search Bar
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = (e.target as HTMLInputElement).value;
-            executeFilters();
-            
-            // Sync URL params for sharing
-            const currentUrl = new URL(window.location.href);
-            if (searchQuery) currentUrl.searchParams.set('search', searchQuery);
-            else currentUrl.searchParams.delete('search');
-            window.history.replaceState({}, '', currentUrl.toString());
-        });
-    }
-
-    // Listen to Tag clicks on cards
-    tagBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation(); // prevent card click
-            const val = btn.dataset.tag || '';
-            if (searchInput) {
-                searchInput.value = val;
-                // Dispatch input event to trigger the main search listener
-                searchInput.dispatchEvent(new Event('input'));
+            if (title) {
+                title.textContent = query
+                    ? `Search results for "${searchQuery}"`
+                    : (pageTitles[currentCategory] ?? 'Resources & Articles');
             }
-        });
-    });
+        };
 
-    // Initialize from URL on load (Category and Search)
-    const urlParams = new URLSearchParams(window.location.search);
-    const initialSearch = urlParams.get('search');
-    if (initialSearch && searchInput) {
-        searchInput.value = initialSearch;
+        const updateCategoryFilter = (filterVal: string) => {
+            currentCategory = filterVal;
+            filters.forEach(f => f.classList.toggle('active', f.dataset.filter === filterVal));
+            executeFilters();
+        };
+
+        // Category pills
+        filters.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const val = btn.dataset.filter ?? 'all';
+                const newUrl = val === 'all' ? '/blog' : `/blog?cat=${val}`;
+                window.history.pushState({}, '', newUrl);
+                updateCategoryFilter(val);
+            });
+        });
+
+        // Search input
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = (e.target as HTMLInputElement).value;
+                executeFilters();
+                const currentUrl = new URL(window.location.href);
+                if (searchQuery) currentUrl.searchParams.set('search', searchQuery);
+                else currentUrl.searchParams.delete('search');
+                window.history.replaceState({}, '', currentUrl.toString());
+            });
+        }
+
+        // Tag buttons on cards
+        tagBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const val = btn.dataset.tag || '';
+                if (searchInput) {
+                    searchInput.value = val;
+                    searchInput.dispatchEvent(new Event('input'));
+                }
+            });
+        });
+
+        // Browser back/forward restores URL state
+        window.addEventListener('popstate', () => {
+            const params = new URLSearchParams(window.location.search);
+            const cat = params.get('cat') ?? 'all';
+            const search = params.get('search') ?? '';
+            if (searchInput) searchInput.value = search;
+            searchQuery = search;
+            updateCategoryFilter(cat);
+        });
+
+        // Read initial state from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialSearch = urlParams.get('search') ?? '';
+        const initialCat    = urlParams.get('cat')    ?? 'all';
+        if (searchInput) searchInput.value = initialSearch;
         searchQuery = initialSearch;
+        updateCategoryFilter(initialCat);
     }
-    const initialCat = urlParams.get('cat');
-    if (initialCat) {
-        currentCategory = initialCat;
-        filters.forEach(f => f.classList.toggle('active', f.dataset.filter === initialCat));
-    }
-    
-    // Execute default
-    executeFilters();
+
+    // Re-run on every Astro View Transition navigation
+    document.addEventListener('astro:page-load', init);
+    init();
 </script>

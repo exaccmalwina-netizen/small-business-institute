@@ -101,14 +101,3 @@
 }
 </style>
 
-<script>
-    const trigger = document.getElementById('header-join-trigger');
-    const modal = document.getElementById('newsletter-overlay');
-    if(trigger && modal) {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden', 'false');
-        });
-    }
-</script>

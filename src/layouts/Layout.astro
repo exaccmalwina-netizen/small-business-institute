@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
+import NewsletterModal from '../components/NewsletterModal.astro';
 
 interface Props {
 	title: string;
@@ -24,5 +25,6 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<slot />
+		<NewsletterModal />
 	</body>
 </html>
