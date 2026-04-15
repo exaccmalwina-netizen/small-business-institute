@@ -89,9 +89,8 @@ import MailchimpSignupForm from './MailchimpSignupForm.jsx';
     overlay.style.display = 'flex';
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    // focus the email input if available
     const emailInput = overlay.querySelector('input[type="email"]');
-    if (emailInput) setTimeout(() => (emailInput as HTMLInputElement).focus(), 50);
+    if (emailInput) setTimeout(() => (emailInput as HTMLInputElement).focus(), 80);
   }
 
   function closeModal() {
@@ -102,40 +101,25 @@ import MailchimpSignupForm from './MailchimpSignupForm.jsx';
     document.body.style.overflow = '';
   }
 
-  function init() {
-    // Close button
-    document.getElementById('modal-close')?.addEventListener('click', closeModal);
-
-    // Backdrop click
-    document.getElementById('modal-backdrop')?.addEventListener('click', closeModal);
-
-    // Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // Header "Join SBI" button
-    document.getElementById('header-join-trigger')?.addEventListener('click', (e) => {
+  // Single delegated click listener on document — works regardless of
+  // when elements are added to the DOM and survives View Transitions.
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const trigger = target.closest(
+      '#header-join-trigger, #hero-template-trigger, [data-newsletter-trigger]'
+    );
+    if (trigger) {
       e.preventDefault();
       openModal();
-    });
+      return;
+    }
+    if (target.closest('#modal-close') || target.id === 'modal-backdrop') {
+      closeModal();
+    }
+  });
 
-    // Hero "Get Template" button
-    document.getElementById('hero-template-trigger')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal();
-    });
-
-    // Any element with data-newsletter-trigger attribute
-    document.querySelectorAll('[data-newsletter-trigger]').forEach((el) => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-      });
-    });
-  }
-
-  // Works with Astro View Transitions
-  document.addEventListener('astro:page-load', init);
-  init();
+  // Escape key — registered once, never duplicated
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
 </script>
