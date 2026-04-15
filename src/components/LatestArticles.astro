@@ -38,11 +38,11 @@ if (wpRaw && wpRaw.length > 0) {
 
         {recentPosts.length === 0 ? (
             <!-- Empty state -->
-            <div id="latest-empty" class="coming-soon">
-                <div class="coming-soon-icon">✍️</div>
-                <p class="coming-soon-title">Articles coming soon</p>
-                <p>Subscribe to be the first to know.</p>
-                <button class="btn-primary mt-4" id="latest-newsletter-trigger">Subscribe free</button>
+            <div style="text-align:center">
+                <div id="latest-empty" class="coming-soon">
+                    <p class="coming-soon-title">More articles coming soon...</p>
+                    <button class="btn-subscribe" id="latest-newsletter-trigger" data-newsletter-trigger>Subscribe free</button>
+                </div>
             </div>
         ) : (
             <!-- Posts grid -->
@@ -174,16 +174,35 @@ if (wpRaw && wpRaw.length > 0) {
 
 /* Coming soon */
 .coming-soon {
-    text-align: center;
-    padding: 5rem 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.75rem 1.25rem 0.75rem 1rem;
     background: var(--white);
-    border-radius: var(--radius-xl);
-    border: 2px dashed var(--border);
+    border-radius: 50px;
+    border: 1.5px solid var(--border);
 }
-.coming-soon-icon { font-size: 3rem; margin-bottom: 1.25rem; }
-.coming-soon-title { font-size: 1.35rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
-.coming-soon p { color: var(--muted); margin-bottom: 1.75rem; }
-.mt-4 { margin-top: 1.5rem; }
+.coming-soon-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy-mid);
+    margin: 0;
+}
+.btn-subscribe {
+    height: 34px;
+    padding: 0 1rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+}
+.btn-subscribe:hover { background: var(--navy); }
 </style>
 
 <script>
