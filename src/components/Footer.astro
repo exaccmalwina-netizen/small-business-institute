@@ -2,25 +2,6 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<!-- Newsletter Popup -->
-<div class="newsletter-overlay" id="newsletter-overlay" role="dialog" aria-modal="true" aria-label="Newsletter signup" aria-hidden="true" style="display: none;">
-    <div class="newsletter-modal">
-        <button class="newsletter-close" id="newsletter-close" aria-label="Close">&times;</button>
-        <div class="newsletter-content">
-            <p class="newsletter-eyebrow">Stay informed</p>
-            <h2>Practical insights for small business owners</h2>
-            <p class="newsletter-sub">No fluff. Just useful guides, updates and resources — straight to your inbox.</p>
-            
-            <form class="newsletter-form" onsubmit="return false;">
-                <input type="email" placeholder="Your email address" required>
-                <button type="submit" class="btn-primary">Subscribe</button>
-            </form>
-            <p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem">⚙ Add your Mailchimp form action URL to form action to activate</p>
-            
-            <p class="newsletter-privacy">No spam. Unsubscribe anytime.</p>
-        </div>
-    </div>
-</div>
 
 <footer class="site-footer">
     <div class="container footer-inner">
@@ -44,7 +25,7 @@ const currentYear = new Date().getFullYear();
                 <strong>Institute</strong>
                 <a href="/about">About Us</a>
                 <a href="/blog">All Articles</a>
-                <a href="#" id="footer-newsletter-trigger">Newsletter</a>
+                <a href="#" data-newsletter-trigger>Newsletter</a>
             </div>
         </div>
     </div>
@@ -137,114 +118,5 @@ const currentYear = new Date().getFullYear();
     }
 }
 
-/* Newsletter Overlay */
-.newsletter-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-}
-.newsletter-modal {
-    background: var(--white);
-    width: 100%;
-    max-width: 500px;
-    border-radius: var(--radius-lg);
-    position: relative;
-    padding: 3rem 2.5rem;
-    box-shadow: var(--shadow-md);
-    text-align: center;
-    animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-@keyframes modalIn {
-    0% { opacity: 0; transform: translateY(20px) scale(0.95); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-.newsletter-close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: transparent;
-    border: none;
-    font-size: 2rem;
-    line-height: 1;
-    color: var(--muted);
-    cursor: pointer;
-    transition: color var(--transition);
-}
-.newsletter-close:hover { color: var(--navy); }
-
-.newsletter-eyebrow {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-}
-.newsletter-content h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    color: var(--navy);
-}
-.newsletter-sub {
-    color: var(--navy-mid);
-    margin-bottom: 2rem;
-}
-
-.newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-}
-.newsletter-form input {
-    padding: 0.875rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 1rem;
-    font-family: var(--font-body);
-}
-.newsletter-form input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-lt);
-}
-
-.newsletter-privacy {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-top: 1.5rem;
-}
 </style>
 
-<script>
-    const modal = document.getElementById('newsletter-overlay');
-    const closeBtn = document.getElementById('newsletter-close');
-    const triggerBtn = document.getElementById('footer-newsletter-trigger');
-
-    if(modal && closeBtn && triggerBtn) {
-        triggerBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden', 'false');
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-            modal.setAttribute('aria-hidden', 'true');
-        });
-
-        // Close on outside click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                modal.setAttribute('aria-hidden', 'true');
-            }
-        });
-    }
-</script>
