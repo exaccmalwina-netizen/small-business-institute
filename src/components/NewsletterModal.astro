@@ -58,9 +58,9 @@ import MailchimpSignupForm from './MailchimpSignupForm.astro';
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  border: 1px solid #e2ddd5;
-  background: #fff;
-  color: #625d54;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--muted);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -68,8 +68,8 @@ import MailchimpSignupForm from './MailchimpSignupForm.astro';
   transition: background .15s, color .15s;
 }
 .modal-close:hover {
-  background: #f0ece6;
-  color: #1c1b18;
+  background: var(--light);
+  color: var(--navy);
 }
 
 @keyframes modal-fade-in {
