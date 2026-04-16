@@ -404,14 +404,10 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
     }
 
     try {
-      const response = await fetch('https://dev2v-api.exx.au/api/en-au/website/signup-to-newsletter', {
+      const response = await fetch('/api/subscribe.php', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'olivs-api-computer-name': 'EC2AMAZ-QF1CQAD',
-          'olivs-api-real-ip': '31.42.0.186',
-          'olivs-root-password': 'OlivsWillBeBetterThanBTMSoft!',
-          'session-id': '123456789'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
       });
