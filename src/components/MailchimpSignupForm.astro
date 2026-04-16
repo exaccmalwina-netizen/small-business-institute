@@ -22,7 +22,13 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
     <h2 class="sbi-h">Stay <em>in the know.</em></h2>
     <p class="sbi-sub">Practical guides, compliance updates and real business insights — straight to your inbox.</p>
 
-    <form id="sbi-mc-form" novalidate>
+    <form
+      id="sbi-mc-form"
+      action="https://btmh.us20.list-manage.com/subscribe/post?u=acd1587c085debbcd1ae3cb1d&amp;id=4d0c650865&amp;f_id=0061caf1f0"
+      method="post"
+      target="_blank"
+      novalidate
+    >
       <!-- Mailchimp honeypot — bot protection -->
       <div style="position:absolute;left:-5000px" aria-hidden="true">
         <input type="text" name={BOT_FIELD_NAME} tabindex="-1" value="" autocomplete="off" />
@@ -260,84 +266,27 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
 </style>
 
 <script>
-  const MC_URL = "https://btmh.us20.list-manage.com/subscribe/post-json?u=acd1587c085debbcd1ae3cb1d&id=4d0c650865&f_id=0061caf1f0";
-  const BTN_DEFAULT = 'Subscribe free <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 7.5h10M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-  function resetForm(
-    email: HTMLInputElement,
-    fname: HTMLInputElement | null,
-    lname: HTMLInputElement | null,
-    btn: HTMLButtonElement
-  ) {
-    btn.disabled = false;
-    email.disabled = false;
-    if (fname) fname.disabled = false;
-    if (lname) lname.disabled = false;
-    btn.innerHTML = BTN_DEFAULT;
-  }
-
-  function initForm() {
-    const form = document.getElementById('sbi-mc-form') as HTMLFormElement | null;
-    if (!form || form.dataset.mcBound) return;
-    form.dataset.mcBound = '1';
+  // On form submit: validate email, then let the native POST go through
+  // (form action points to Mailchimp, target="_blank" opens in new tab).
+  // Immediately show the success state in the modal.
+  document.addEventListener('submit', (e) => {
+    const form = e.target as HTMLFormElement;
+    if (form.id !== 'sbi-mc-form') return;
 
     const emailInput = document.getElementById('sbi-email-input') as HTMLInputElement | null;
-    const fnameInput = document.getElementById('sbi-fname-input') as HTMLInputElement | null;
-    const lnameInput = document.getElementById('sbi-lname-input') as HTMLInputElement | null;
-    const submitBtn  = document.getElementById('sbi-submit-btn')  as HTMLButtonElement | null;
     const errorEl    = document.getElementById('sbi-error')       as HTMLElement | null;
     const successEl  = document.getElementById('sbi-success')     as HTMLElement | null;
     const formView   = document.querySelector('.sbi-form-view')   as HTMLElement | null;
 
-    if (!emailInput || !submitBtn) return;
-
-    form.addEventListener('submit', (e) => {
+    const email = emailInput?.value.trim() ?? '';
+    if (!email) {
       e.preventDefault();
-      const email = emailInput.value.trim();
-      if (!email) {
-        if (errorEl) { errorEl.textContent = 'Please enter your email address.'; errorEl.style.display = 'block'; }
-        return;
-      }
+      if (errorEl) { errorEl.textContent = 'Please enter your email address.'; errorEl.style.display = 'block'; }
+      return;
+    }
 
-      submitBtn.disabled = true;
-      emailInput.disabled = true;
-      if (fnameInput) fnameInput.disabled = true;
-      if (lnameInput) lnameInput.disabled = true;
-      submitBtn.innerHTML = '<span class="sbi-spinner"></span>';
-      if (errorEl) errorEl.style.display = 'none';
-
-      const fname = fnameInput ? encodeURIComponent(fnameInput.value.trim()) : '';
-      const lname = lnameInput ? encodeURIComponent(lnameInput.value.trim()) : '';
-      const cbName = 'sbi_mc_' + Date.now();
-
-      const url = `${MC_URL}&EMAIL=${encodeURIComponent(email)}&FNAME=${fname}&LNAME=${lname}&c=${cbName}`;
-      const script = document.createElement('script');
-
-      (window as unknown as Record<string, unknown>)[cbName] = (data: { result: string; msg?: string }) => {
-        delete (window as unknown as Record<string, unknown>)[cbName];
-        script.parentNode?.removeChild(script);
-        if (data.result === 'success') {
-          if (formView) formView.style.display = 'none';
-          if (successEl) successEl.style.display = 'flex';
-        } else {
-          const msg = (data.msg ?? '').replace(/<[^>]*>/g, '').trim();
-          if (errorEl) { errorEl.textContent = msg || 'Something went wrong. Please try again.'; errorEl.style.display = 'block'; }
-          resetForm(emailInput, fnameInput, lnameInput, submitBtn);
-        }
-      };
-
-      script.onerror = () => {
-        delete (window as unknown as Record<string, unknown>)[cbName];
-        script.parentNode?.removeChild(script);
-        if (errorEl) { errorEl.textContent = 'Something went wrong. Please try again.'; errorEl.style.display = 'block'; }
-        resetForm(emailInput, fnameInput, lnameInput, submitBtn);
-      };
-
-      script.src = url;
-      document.body.appendChild(script);
-    });
-  }
-
-  document.addEventListener('astro:page-load', initForm);
-  initForm();
+    // Let the form POST go to Mailchimp in a new tab, show success inline
+    if (formView) formView.style.display = 'none';
+    if (successEl) successEl.style.display = 'flex';
+  });
 </script>
