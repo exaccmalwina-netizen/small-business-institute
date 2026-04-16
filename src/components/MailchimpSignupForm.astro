@@ -24,6 +24,7 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
 
     <form
       id="sbi-mc-form"
+      onsubmit="event.preventDefault(); return false;"
       novalidate
     >
       <!-- Mailchimp honeypot — bot protection -->
@@ -371,16 +372,16 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
 
 <script>
   document.addEventListener('submit', async (e) => {
-    const form = e.target as HTMLFormElement;
-    if (form.id !== 'sbi-mc-form') return;
+    const form = e.target;
+    if (!form || form.id !== 'sbi-mc-form') return;
     
     e.preventDefault(); // Stop native submission
 
-    const emailInput = document.getElementById('sbi-email-input') as HTMLInputElement | null;
-    const errorEl    = document.getElementById('sbi-error')       as HTMLElement | null;
-    const successEl  = document.getElementById('sbi-success')     as HTMLElement | null;
-    const formView   = document.querySelector('.sbi-form-view')   as HTMLElement | null;
-    const submitBtn  = document.getElementById('sbi-submit-btn')  as HTMLButtonElement | null;
+    const emailInput = document.getElementById('sbi-email-input');
+    const errorEl    = document.getElementById('sbi-error');
+    const successEl  = document.getElementById('sbi-success');
+    const formView   = document.querySelector('.sbi-form-view');
+    const submitBtn  = document.getElementById('sbi-submit-btn');
 
     if (errorEl) errorEl.style.display = 'none';
 
