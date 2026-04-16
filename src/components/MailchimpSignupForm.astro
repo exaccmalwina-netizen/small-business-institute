@@ -13,9 +13,9 @@
  */
 
 const MAILCHIMP_ACTION_URL =
-  "https://YOUR_DOMAIN.us21.list-manage.com/subscribe/post-json?u=XXXXXXXXXXXXXXXXXXXXXXXX&id=XXXXXXXXXX";
+  "https://btmh.us20.list-manage.com/subscribe/post-json?u=acd1587c085debbcd1ae3cb1d&id=4d0c650865&f_id=0061caf1f0";
 
-const BOT_FIELD_NAME = "b_XXXXXXXXXXXXXXXXXXXXXXXX_XXXXXXXXXX";
+const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
 ---
 
 <section class="sbi-wrap" aria-label="Newsletter signup">
@@ -29,6 +29,27 @@ const BOT_FIELD_NAME = "b_XXXXXXXXXXXXXXXXXXXXXXXX_XXXXXXXXXX";
       <!-- Mailchimp honeypot — bot protection -->
       <div style="position:absolute;left:-5000px" aria-hidden="true">
         <input type="text" name={BOT_FIELD_NAME} tabindex="-1" value="" autocomplete="off" />
+      </div>
+
+      <div class="sbi-name-row">
+        <input
+          class="sbi-field"
+          id="sbi-fname-input"
+          type="text"
+          name="FNAME"
+          placeholder="First name"
+          aria-label="First name"
+          autocomplete="given-name"
+        />
+        <input
+          class="sbi-field"
+          id="sbi-lname-input"
+          type="text"
+          name="LNAME"
+          placeholder="Last name"
+          aria-label="Last name"
+          autocomplete="family-name"
+        />
       </div>
 
       <div class="sbi-row">
@@ -121,10 +142,37 @@ const BOT_FIELD_NAME = "b_XXXXXXXXXXXXXXXXXXXXXXXX_XXXXXXXXXX";
   margin: 0 0 28px;
 }
 
+.sbi-name-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
 .sbi-row {
   display: flex;
   gap: 8px;
 }
+
+.sbi-field {
+  flex: 1;
+  height: 46px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #1c1b18;
+  background: #fff;
+  border: 1px solid #d5d0c6;
+  border-radius: 11px;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  min-width: 0;
+}
+.sbi-field::placeholder { color: #b5aea3; }
+.sbi-field:focus {
+  border-color: #bf5120;
+  box-shadow: 0 0 0 3px rgba(191,81,32,.13);
+}
+.sbi-field:disabled { opacity: .55; }
 
 .sbi-email {
   flex: 1;
@@ -215,8 +263,10 @@ const BOT_FIELD_NAME = "b_XXXXXXXXXXXXXXXXXXXXXXXX_XXXXXXXXXX";
 </style>
 
 <script define:vars={{ MAILCHIMP_ACTION_URL }}>
-  const form      = document.getElementById('sbi-mc-form');
+  const form       = document.getElementById('sbi-mc-form');
   const emailInput = document.getElementById('sbi-email-input');
+  const fnameInput = document.getElementById('sbi-fname-input');
+  const lnameInput = document.getElementById('sbi-lname-input');
   const submitBtn  = document.getElementById('sbi-submit-btn');
   const errorEl    = document.getElementById('sbi-error');
   const successEl  = document.getElementById('sbi-success');
@@ -231,11 +281,20 @@ const BOT_FIELD_NAME = "b_XXXXXXXXXXXXXXXXXXXXXXXX_XXXXXXXXXX";
       // Loading state
       submitBtn.disabled = true;
       emailInput.disabled = true;
+      if (fnameInput) fnameInput.disabled = true;
+      if (lnameInput) lnameInput.disabled = true;
       submitBtn.innerHTML = '<span class="sbi-spinner"></span>';
       errorEl.style.display = 'none';
 
+      const fname = fnameInput ? encodeURIComponent(fnameInput.value.trim()) : '';
+      const lname = lnameInput ? encodeURIComponent(lnameInput.value.trim()) : '';
+
       const cbName = 'sbi_mc_' + Date.now();
-      const url = MAILCHIMP_ACTION_URL + '&EMAIL=' + encodeURIComponent(email) + '&c=' + cbName;
+      const url = MAILCHIMP_ACTION_URL
+        + '&EMAIL=' + encodeURIComponent(email)
+        + '&FNAME=' + fname
+        + '&LNAME=' + lname
+        + '&c=' + cbName;
       const script = document.createElement('script');
 
       window[cbName] = (data) => {
@@ -250,6 +309,8 @@ const BOT_FIELD_NAME = "b_XXXXXXXXXXXXXXXXXXXXXXXX_XXXXXXXXXX";
           errorEl.style.display = 'block';
           submitBtn.disabled = false;
           emailInput.disabled = false;
+          if (fnameInput) fnameInput.disabled = false;
+          if (lnameInput) lnameInput.disabled = false;
           submitBtn.innerHTML = 'Subscribe free <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 7.5h10M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         }
       };
@@ -261,6 +322,8 @@ const BOT_FIELD_NAME = "b_XXXXXXXXXXXXXXXXXXXXXXXX_XXXXXXXXXX";
         errorEl.style.display = 'block';
         submitBtn.disabled = false;
         emailInput.disabled = false;
+        if (fnameInput) fnameInput.disabled = false;
+        if (lnameInput) lnameInput.disabled = false;
         submitBtn.innerHTML = 'Subscribe free';
       };
 
