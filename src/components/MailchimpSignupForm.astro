@@ -1,0 +1,271 @@
+---
+/**
+ * MailchimpSignupForm — SBI Australia (Astro + vanilla JS, no React)
+ *
+ * ─── HOW TO CONNECT TO MAILCHIMP ──────────────────────────────────────────
+ * 1. Log in to Mailchimp → Audience → Signup Forms → Embedded Forms
+ * 2. Copy the "form action" URL, e.g.:
+ *      https://yourdomain.us21.list-manage.com/subscribe/post?u=XXXX&id=XXXX
+ * 3. Paste it below as MAILCHIMP_ACTION_URL
+ *    IMPORTANT: change "/post?" to "/post-json?" so the browser gets JSON back
+ * 4. Copy the honeypot field name (b_XXXX_XXXX) and paste as BOT_FIELD_NAME
+ * ──────────────────────────────────────────────────────────────────────────
+ */
+
+const MAILCHIMP_ACTION_URL =
+  "https://YOUR_DOMAIN.us21.list-manage.com/subscribe/post-json?u=XXXXXXXXXXXXXXXXXXXXXXXX&id=XXXXXXXXXX";
+
+const BOT_FIELD_NAME = "b_XXXXXXXXXXXXXXXXXXXXXXXX_XXXXXXXXXX";
+---
+
+<section class="sbi-wrap" aria-label="Newsletter signup">
+  <!-- idle / error state -->
+  <div class="sbi-form-view">
+    <span class="sbi-eyebrow">SBI Newsletter</span>
+    <h2 class="sbi-h">Stay <em>in the know.</em></h2>
+    <p class="sbi-sub">Practical guides, compliance updates and real business insights — straight to your inbox.</p>
+
+    <form id="sbi-mc-form" novalidate>
+      <!-- Mailchimp honeypot — bot protection -->
+      <div style="position:absolute;left:-5000px" aria-hidden="true">
+        <input type="text" name={BOT_FIELD_NAME} tabindex="-1" value="" autocomplete="off" />
+      </div>
+
+      <div class="sbi-row">
+        <input
+          class="sbi-email"
+          id="sbi-email-input"
+          type="email"
+          name="EMAIL"
+          placeholder="Your email address"
+          required
+          aria-label="Email address"
+          autocomplete="email"
+        />
+        <button class="sbi-btn" id="sbi-submit-btn" type="submit">
+          Subscribe free
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <path d="M2.5 7.5h10M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <p class="sbi-error" id="sbi-error" role="alert" style="display:none"></p>
+
+      <p class="sbi-privacy">
+        <span class="sbi-privacy-dot"></span>
+        No spam. Unsubscribe anytime.
+      </p>
+    </form>
+  </div>
+
+  <!-- success state (hidden by default) -->
+  <div class="sbi-ok" id="sbi-success" style="display:none" aria-live="polite">
+    <span class="sbi-ok-icon">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <circle cx="11" cy="11" r="10" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M7 11.5l2.8 2.8 5-5.6" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <div>
+      <h3>You're in!</h3>
+      <p>Welcome to the SBI community. Your first issue is on its way.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap');
+
+@keyframes sbi-spin   { to { transform: rotate(360deg); } }
+@keyframes sbi-appear { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.sbi-wrap {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #f8f6f2;
+  border: 1px solid #e2ddd5;
+  border-radius: 18px;
+  padding: 44px 44px 36px;
+  max-width: 500px;
+  width: 100%;
+  animation: sbi-appear .3s ease both;
+  box-sizing: border-box;
+}
+
+.sbi-eyebrow {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #9e917e;
+  margin-bottom: 12px;
+}
+
+.sbi-h {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #1c1b18;
+  margin: 0 0 10px;
+}
+.sbi-h em { font-style: italic; color: #bf5120; }
+
+.sbi-sub {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #625d54;
+  margin: 0 0 28px;
+}
+
+.sbi-row {
+  display: flex;
+  gap: 8px;
+}
+
+.sbi-email {
+  flex: 1;
+  height: 46px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #1c1b18;
+  background: #fff;
+  border: 1px solid #d5d0c6;
+  border-radius: 11px;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.sbi-email::placeholder { color: #b5aea3; }
+.sbi-email:focus {
+  border-color: #bf5120;
+  box-shadow: 0 0 0 3px rgba(191,81,32,.13);
+}
+.sbi-email:disabled { opacity: .55; }
+
+.sbi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 46px;
+  padding: 0 22px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #fff;
+  background: #bf5120;
+  border: none;
+  border-radius: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, transform .1s;
+}
+.sbi-btn:hover  { background: #a4431a; }
+.sbi-btn:active { transform: scale(.97); }
+.sbi-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+.sbi-spinner {
+  width: 17px; height: 17px;
+  border: 2px solid rgba(255,255,255,.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: sbi-spin .75s linear infinite;
+}
+
+.sbi-error {
+  margin-top: 9px;
+  font-size: 12.5px;
+  color: #bf5120;
+  animation: sbi-appear .2s ease;
+}
+
+.sbi-privacy {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  font-size: 11.5px;
+  color: #a09a90;
+}
+.sbi-privacy-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #c8c2b9;
+  flex-shrink: 0;
+}
+
+.sbi-ok {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  animation: sbi-appear .3s ease;
+}
+.sbi-ok-icon { color: #bf5120; margin-top: 1px; flex-shrink: 0; }
+.sbi-ok h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #1c1b18;
+  margin: 0 0 5px;
+}
+.sbi-ok p { font-size: 13.5px; color: #625d54; margin: 0; line-height: 1.6; }
+</style>
+
+<script define:vars={{ MAILCHIMP_ACTION_URL }}>
+  const form      = document.getElementById('sbi-mc-form');
+  const emailInput = document.getElementById('sbi-email-input');
+  const submitBtn  = document.getElementById('sbi-submit-btn');
+  const errorEl    = document.getElementById('sbi-error');
+  const successEl  = document.getElementById('sbi-success');
+  const formView   = document.querySelector('.sbi-form-view');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if (!email) return;
+
+      // Loading state
+      submitBtn.disabled = true;
+      emailInput.disabled = true;
+      submitBtn.innerHTML = '<span class="sbi-spinner"></span>';
+      errorEl.style.display = 'none';
+
+      const cbName = 'sbi_mc_' + Date.now();
+      const url = MAILCHIMP_ACTION_URL + '&EMAIL=' + encodeURIComponent(email) + '&c=' + cbName;
+      const script = document.createElement('script');
+
+      window[cbName] = (data) => {
+        delete window[cbName];
+        document.body.removeChild(script);
+        if (data.result === 'success') {
+          formView.style.display = 'none';
+          successEl.style.display = 'flex';
+        } else {
+          const msg = (data.msg || '').replace(/<[^>]*>/g, '').trim();
+          errorEl.textContent = msg || 'Something went wrong. Please try again.';
+          errorEl.style.display = 'block';
+          submitBtn.disabled = false;
+          emailInput.disabled = false;
+          submitBtn.innerHTML = 'Subscribe free <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 7.5h10M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        }
+      };
+
+      script.onerror = () => {
+        delete window[cbName];
+        document.body.removeChild(script);
+        errorEl.textContent = 'Something went wrong. Please try again.';
+        errorEl.style.display = 'block';
+        submitBtn.disabled = false;
+        emailInput.disabled = false;
+        submitBtn.innerHTML = 'Subscribe free';
+      };
+
+      script.src = url;
+      document.body.appendChild(script);
+    });
+  }
+</script>
