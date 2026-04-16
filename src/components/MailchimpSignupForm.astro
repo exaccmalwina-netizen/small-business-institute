@@ -101,47 +101,64 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
 </section>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap');
-
 @keyframes sbi-spin   { to { transform: rotate(360deg); } }
 @keyframes sbi-appear { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
 .sbi-wrap {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  background: #f8f6f2;
-  border: 1px solid #e2ddd5;
-  border-radius: 18px;
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  background: var(--white, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-lg, 20px);
   padding: 44px 44px 36px;
   max-width: 500px;
   width: 100%;
   animation: sbi-appear .3s ease both;
   box-sizing: border-box;
+  box-shadow: var(--shadow-md);
 }
 
 .sbi-eyebrow {
-  display: inline-block;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: .1em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: #9e917e;
-  margin-bottom: 12px;
+  color: var(--accent, #0284c7);
+  margin-bottom: 14px;
+}
+.sbi-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, #0284c7);
+  opacity: .7;
 }
 
 .sbi-h {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 1.2;
-  color: #1c1b18;
+  font-family: var(--font-heading, 'Sora', 'Inter', system-ui, sans-serif);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--navy, #0f172a);
   margin: 0 0 10px;
+  letter-spacing: -0.02em;
 }
-.sbi-h em { font-style: italic; color: #bf5120; }
+.sbi-h em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent, #0284c7), #0369a1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 .sbi-sub {
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.65;
-  color: #625d54;
+  color: var(--muted, #64748b);
   margin: 0 0 28px;
 }
 
@@ -160,20 +177,21 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
   flex: 1;
   height: 46px;
   padding: 0 16px;
-  font-family: inherit;
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
   font-size: 14px;
-  color: #1c1b18;
-  background: #fff;
-  border: 1px solid #d5d0c6;
-  border-radius: 11px;
+  color: var(--navy, #0f172a);
+  background: var(--off-white, #f8fafc);
+  border: 1.5px solid var(--border, #e2e8f0);
+  border-radius: var(--radius, 10px);
   outline: none;
-  transition: border-color .15s, box-shadow .15s;
+  transition: border-color .15s, box-shadow .15s, background .15s;
   min-width: 0;
 }
-.sbi-field::placeholder { color: #b5aea3; }
+.sbi-field::placeholder { color: var(--muted, #64748b); opacity: 0.6; }
 .sbi-field:focus {
-  border-color: #bf5120;
-  box-shadow: 0 0 0 3px rgba(191,81,32,.13);
+  border-color: var(--accent, #0284c7);
+  background: var(--white, #fff);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
 }
 .sbi-field:disabled { opacity: .55; }
 
@@ -181,19 +199,20 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
   flex: 1;
   height: 46px;
   padding: 0 16px;
-  font-family: inherit;
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
   font-size: 14px;
-  color: #1c1b18;
-  background: #fff;
-  border: 1px solid #d5d0c6;
-  border-radius: 11px;
+  color: var(--navy, #0f172a);
+  background: var(--off-white, #f8fafc);
+  border: 1.5px solid var(--border, #e2e8f0);
+  border-radius: var(--radius, 10px);
   outline: none;
-  transition: border-color .15s, box-shadow .15s;
+  transition: border-color .15s, box-shadow .15s, background .15s;
 }
-.sbi-email::placeholder { color: #b5aea3; }
+.sbi-email::placeholder { color: var(--muted, #64748b); opacity: 0.6; }
 .sbi-email:focus {
-  border-color: #bf5120;
-  box-shadow: 0 0 0 3px rgba(191,81,32,.13);
+  border-color: var(--accent, #0284c7);
+  background: var(--white, #fff);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
 }
 .sbi-email:disabled { opacity: .55; }
 
@@ -203,18 +222,24 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
   gap: 6px;
   height: 46px;
   padding: 0 22px;
-  font-family: inherit;
-  font-size: 13.5px;
-  font-weight: 500;
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
   color: #fff;
-  background: #bf5120;
+  background: var(--accent, #0284c7);
   border: none;
-  border-radius: 11px;
+  border-radius: var(--radius, 10px);
   cursor: pointer;
   white-space: nowrap;
-  transition: background .15s, transform .1s;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+  transition: background .15s, transform .1s, box-shadow .15s;
+  letter-spacing: 0.01em;
 }
-.sbi-btn:hover  { background: #a4431a; }
+.sbi-btn:hover  {
+  background: var(--accent-dark, #0369a1);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+  transform: translateY(-1px);
+}
 .sbi-btn:active { transform: scale(.97); }
 .sbi-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
@@ -229,7 +254,7 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
 .sbi-error {
   margin-top: 9px;
   font-size: 12.5px;
-  color: #bf5120;
+  color: var(--rose, #e11d48);
   animation: sbi-appear .2s ease;
 }
 
@@ -238,31 +263,40 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
   align-items: center;
   gap: 7px;
   margin-top: 14px;
-  font-size: 11.5px;
-  color: #a09a90;
+  font-size: 12px;
+  color: var(--muted, #64748b);
 }
 .sbi-privacy-dot {
   width: 5px; height: 5px;
   border-radius: 50%;
-  background: #c8c2b9;
+  background: var(--accent, #0284c7);
   flex-shrink: 0;
+  opacity: 0.5;
 }
 
 .sbi-ok {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   align-items: flex-start;
   animation: sbi-appear .3s ease;
 }
-.sbi-ok-icon { color: #bf5120; margin-top: 1px; flex-shrink: 0; }
-.sbi-ok h3 {
-  font-family: 'Instrument Serif', serif;
-  font-size: 24px;
-  font-weight: 400;
-  color: #1c1b18;
-  margin: 0 0 5px;
+.sbi-ok-icon {
+  color: var(--emerald, #059669);
+  margin-top: 2px;
+  flex-shrink: 0;
+  background: rgba(5, 150, 105, 0.1);
+  border-radius: 50%;
+  padding: 4px;
 }
-.sbi-ok p { font-size: 13.5px; color: #625d54; margin: 0; line-height: 1.6; }
+.sbi-ok h3 {
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy, #0f172a);
+  margin: 0 0 5px;
+  letter-spacing: -0.02em;
+}
+.sbi-ok p { font-size: 14px; color: var(--muted, #64748b); margin: 0; line-height: 1.6; }
 </style>
 
 <script>
