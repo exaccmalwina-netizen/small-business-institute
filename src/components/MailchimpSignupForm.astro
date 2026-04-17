@@ -19,8 +19,8 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
   <!-- idle / error state -->
   <div class="sbi-form-view">
     <span class="sbi-eyebrow">SBI Newsletter</span>
-    <h2 class="sbi-h">Stay <em>in the know.</em></h2>
-    <p class="sbi-sub">Practical guides, compliance updates and real business insights — straight to your inbox.</p>
+    <h2 class="sbi-h">Stay <em>in the loop.</em></h2>
+    <p class="sbi-sub">Only e-mail is required. Provide more details so we pick relevant news for you.</p>
 
     <form
       id="sbi-mc-form"
@@ -33,6 +33,21 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
       </div>
       <input type="hidden" name="tags" value="4236977" />
 
+      <!-- 1. EMAIL (FIRST) -->
+      <div class="sbi-row">
+        <input
+          class="sbi-email"
+          id="sbi-email-input"
+          type="email"
+          name="EMAIL"
+          placeholder="Your email address *"
+          required
+          aria-label="Email address"
+          autocomplete="email"
+        />
+      </div>
+
+      <!-- 2. NAME -->
       <div class="sbi-name-row">
         <input
           class="sbi-field"
@@ -54,6 +69,18 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
         />
       </div>
 
+      <!-- 3. BUSINESS STATUS -->
+      <div class="sbi-row">
+        <select class="sbi-field sbi-select" name="BUSINESS_STATUS" aria-label="Your Business Status">
+          <option value="" disabled selected>Your Business Status</option>
+          <option value="Planning to start">Planning to start</option>
+          <option value="Growing / planning expansion">Growing / planning expansion</option>
+          <option value="Overcoming challenges">Overcoming challenges</option>
+          <option value="Steady rolling">Steady rolling</option>
+        </select>
+      </div>
+
+      <!-- 4. POSTCODE & EMPLOYEES -->
       <div class="sbi-name-row">
         <input
           class="sbi-field"
@@ -73,6 +100,7 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
         />
       </div>
 
+      <!-- 5. SUBCONTRACTORS -->
       <div class="sbi-radio-group">
         <span class="sbi-radio-label">Do you use subcontractors?</span>
         <div class="sbi-radio-options">
@@ -82,7 +110,8 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
         </div>
       </div>
 
-      <div class="sbi-row" style="margin-bottom:8px">
+      <!-- 6. INDUSTRY -->
+      <div class="sbi-row">
         <input
           class="sbi-field"
           id="sbi-industry-input"
@@ -93,18 +122,9 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
         />
       </div>
 
+      <!-- 7. SUBMIT BUTTON -->
       <div class="sbi-row">
-        <input
-          class="sbi-email"
-          id="sbi-email-input"
-          type="email"
-          name="EMAIL"
-          placeholder="Your email address"
-          required
-          aria-label="Email address"
-          autocomplete="email"
-        />
-        <button class="sbi-btn" id="sbi-submit-btn" type="submit">
+        <button class="sbi-btn sbi-btn-full" id="sbi-submit-btn" type="submit">
           Subscribe free
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
             <path d="M2.5 7.5h10M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.5"
@@ -117,7 +137,7 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
 
       <p class="sbi-privacy">
         <span class="sbi-privacy-dot"></span>
-        No spam. Unsubscribe anytime.
+        No spam. Maintained in Australia. Unsubscribe anytime.
       </p>
     </form>
   </div>
@@ -194,28 +214,29 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
 }
 
 .sbi-sub {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--muted, #64748b);
-  margin: 0 0 28px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--navy-mid, #475569);
+  margin: 0 0 24px;
 }
 
 .sbi-name-row {
   display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .sbi-row {
   display: flex;
-  gap: 8px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .sbi-radio-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 16px;
   text-align: left;
 }
 .sbi-radio-label {
@@ -246,46 +267,56 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
 
 .sbi-field {
   flex: 1;
-  height: 46px;
+  height: 48px;
   padding: 0 16px;
   font-family: var(--font-body, 'Inter', system-ui, sans-serif);
   font-size: 14px;
   color: var(--navy, #0f172a);
-  background: var(--off-white, #f8fafc);
-  border: 1.5px solid var(--border, #e2e8f0);
+  background: var(--white, #fff); /* Force white so it doesn't look disabled */
+  border: 1px solid var(--border, #cbd5e1);
   border-radius: var(--radius, 10px);
   outline: none;
-  transition: border-color .15s, box-shadow .15s, background .15s;
+  transition: border-color .15s, box-shadow .15s;
   min-width: 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
 }
-.sbi-field::placeholder { color: var(--muted, #64748b); opacity: 0.6; }
+.sbi-field::placeholder { color: var(--muted, #64748b); opacity: 0.8; }
 .sbi-field:focus {
   border-color: var(--accent, #0284c7);
-  background: var(--white, #fff);
   box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
 }
-.sbi-field:disabled { opacity: .55; }
+.sbi-field:disabled { opacity: .55; background: #f1f5f9; }
+
+.sbi-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+.sbi-select:invalid { color: var(--muted); }
 
 .sbi-email {
   flex: 1;
-  height: 46px;
+  height: 48px;
   padding: 0 16px;
   font-family: var(--font-body, 'Inter', system-ui, sans-serif);
-  font-size: 14px;
+  font-size: 14.5px;
   color: var(--navy, #0f172a);
-  background: var(--off-white, #f8fafc);
-  border: 1.5px solid var(--border, #e2e8f0);
+  background: var(--white, #fff);
+  border: 1px solid var(--border, #cbd5e1);
   border-radius: var(--radius, 10px);
   outline: none;
-  transition: border-color .15s, box-shadow .15s, background .15s;
+  transition: border-color .15s, box-shadow .15s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
 }
-.sbi-email::placeholder { color: var(--muted, #64748b); opacity: 0.6; }
+.sbi-email::placeholder { color: var(--muted, #64748b); opacity: 0.8; }
 .sbi-email:focus {
   border-color: var(--accent, #0284c7);
-  background: var(--white, #fff);
   box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
 }
-.sbi-email:disabled { opacity: .55; }
+.sbi-email:disabled { opacity: .55; background: #f1f5f9; }
 
 .sbi-btn {
   display: inline-flex;
@@ -305,6 +336,11 @@ const BOT_FIELD_NAME = "b_acd1587c085debbcd1ae3cb1d_4d0c650865";
   box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
   transition: background .15s, transform .1s, box-shadow .15s;
   letter-spacing: 0.01em;
+}
+.sbi-btn-full {
+  width: 100%;
+  justify-content: center;
+  height: 50px;
 }
 .sbi-btn:hover  {
   background: var(--accent-dark, #0369a1);

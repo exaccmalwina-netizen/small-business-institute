@@ -3,38 +3,41 @@
 
 <section class="safe-space-section section">
     <div class="container">
-        <div class="safe-space-content reveal">
-            <span class="section-label">Your Safe Space</span>
-            <h2>Thinking about starting a business?<br><em>The right knowledge is your foundation.</em></h2>
-            
-            <p class="lead-text">
-                Whether you're just starting out or looking to scale, you need a safe space to find reliable answers. We don't just offer theoretical advice; we share real, practical business experiences. 
-            </p>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <h4>Accounting & Compliance</h4>
-                    <p>Substantive accounting support to safely guide you through regulations and taxes without the jargon.</p>
-                </div>
+        <div class="safe-space-grid">
+            <!-- Left Side: Text Content -->
+            <div class="safe-space-content reveal">
+                <span class="section-label">Your Business, Our Knowledge</span>
+                <h2>Thinking about starting a business?<br><em>The right knowledge is your foundation.</em></h2>
+                
+                <p class="lead-text">
+                    Sharing knowledge to support better Small Business decisions: planning and strategy, employing, contracts, dealing with red tape, and everyday management. Our contributors are small business owners, accountants, lawyers, brokers and consultants.
+                </p>
+                <p class="lead-text">
+                    Growing to become a voice to support and advocate for all Small Businesses in Australia.
+                </p>
+                <a href="/about" class="btn-ghost-dark" style="margin-top: 1rem;">Learn more about SBI <span>→</span></a>
+            </div>
 
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <!-- Right Side: Stats Panel (moved from Who We Are) -->
+            <div class="stats-panel reveal reveal-delay-2">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-num">2.5M+</span>
+                        <span class="stat-label">small businesses<br>in Australia</span>
                     </div>
-                    <h4>Branding Strategy</h4>
-                    <p>Help in developing a strong brand identity that resonates and sets you apart in the market.</p>
-                </div>
-
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    <div class="stat-card">
+                        <span class="stat-num">97%</span>
+                        <span class="stat-label">of all Australian<br>businesses</span>
                     </div>
-                    <h4>Actionable Checklists</h4>
-                    <p>Practical, step-by-step checklists to keep your business organized, compliant, and growing.</p>
+                    <div class="stat-card stat-card-wide">
+                        <span class="stat-num">1 in 3</span>
+                        <span class="stat-label">Australians work for or own a small business</span>
+                    </div>
                 </div>
+                <p class="stat-footnote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    Most run without a support network. We're here to change that.
+                </p>
             </div>
         </div>
     </div>
@@ -45,6 +48,23 @@
     padding: 6rem 0;
     background: #f8fafc; /* light gray/blue tint */
     border-bottom: 1px solid var(--border);
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+.safe-space-grid {
+    display: grid;
+    gap: 4rem;
+    align-items: center;
+}
+@media (min-width: 900px) {
+    .safe-space-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+    }
 }
 
 .section-label {
@@ -61,7 +81,7 @@
 }
 
 .safe-space-content h2 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-size: clamp(2.2rem, 4vw, 2.75rem);
     font-weight: 800;
     color: var(--navy);
     margin-bottom: 1.25rem;
@@ -77,58 +97,98 @@
     font-size: 1.15rem;
     color: var(--navy-mid);
     line-height: 1.6;
-    max-width: 800px;
-    margin-bottom: 3.5rem;
+    margin-bottom: 1.2rem;
 }
 
-.benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.benefit-card {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 4px 20px rgba(15,39,68,.05);
-    border: 1px solid rgba(0,0,0,0.03);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.benefit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(15,39,68,.08);
-}
-
-.benefit-icon {
-    width: 3.5rem;
-    height: 3.5rem;
-    background: #f0f9ff;
-    color: var(--accent);
-    display: flex;
+.btn-ghost-dark {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-}
-
-.benefit-icon svg {
-    width: 28px;
-    height: 28px;
-}
-
-.benefit-card h4 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+    background: transparent;
     color: var(--navy);
+    border: 1.5px solid var(--navy);
+    padding: 0.8rem 1.75rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+.btn-ghost-dark:hover {
+    background: var(--navy);
+    color: var(--white);
+    text-decoration: none;
+}
+.btn-ghost-dark span {
+    transition: transform 0.25s ease;
+}
+.btn-ghost-dark:hover span {
+    transform: translateX(4px);
 }
 
-.benefit-card p {
-    font-size: 0.95rem;
+/* Stats panel adapted for light theme */
+.stats-panel {
+    background: var(--white);
+    border: 1.5px solid rgba(0,0,0,0.05);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(15,39,68,.05);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.stat-card {
+    background: #f8fafc;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.stat-card-wide {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.stat-num {
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    color: var(--navy);
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+.stat-card-wide .stat-num {
+    font-size: 2rem;
+    flex-shrink: 0;
+    color: var(--accent);
+}
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--navy-mid);
+    line-height: 1.4;
+}
+
+.stat-footnote {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
     color: var(--muted);
-    line-height: 1.5;
-    margin: 0;
+    font-size: 0.82rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+}
+.stat-footnote svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    opacity: 0.8;
 }
 </style>

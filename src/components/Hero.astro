@@ -21,18 +21,18 @@
                     <span class="proof-text">Trusted by 200+ Australian Businesses</span>
                 </div>
                 
-                <h1 class="hero-headline" style="font-size: clamp(2.2rem, 5vw, 4rem);">
-                    Small Business Institute:<br>
-                    <span class="text-accent">The Knowledge Foundation</span><br>
-                    <span class="text-navy">for Emerging Enterprises.</span>
+                <h1 class="hero-headline" style="font-size: clamp(2.2rem, 4vw, 3.5rem);">
+                    Supporting Small Business community to<br>
+                    <span class="text-accent">grow stronger and thrive.</span><br>
+                    <span class="text-navy" style="font-size: 0.6em; line-height: 1.2;">The Knowledge Base for Small Business decision makers.</span>
                 </h1>
                 
                 <p class="hero-subheadline">
-                    We take your big ideas and turn them into clear, winning strategies. From setting up your company to scaling it worldwide, we're here every step of the way.
+                    We gather news, insights, analyses and stories, and share them with all small business decision makers.
                 </p>
                 
-                <button id="hero-template-trigger" class="btn-hero" style="border:none; cursor:pointer;" aria-label="Join the Newsletter">
-                    Join the Newsletter
+                <button id="hero-template-trigger" class="btn-hero" style="border:none; cursor:pointer;" aria-label="Join the Community">
+                    Join the Community
                     <span class="btn-hero-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                     </span>
@@ -41,57 +41,6 @@
         </div>
     </div>
 
-    <!-- Stats Marquee Footer -->
-    <div class="hero-marquee-wrapper">
-        <div class="stats-marquee-container">
-            <div class="stats-marquee-track">
-                <!-- Group 1 -->
-                <div class="stats-marquee-inner">
-                    <div class="stat-item">
-                        <span class="stat-val">$5M+</span>
-                        <span class="stat-label">IN CLIENT REVENUE GENERATED</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-val">200+</span>
-                        <span class="stat-label">BUSINESSES LAUNCHED</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-val">$500K+</span>
-                        <span class="stat-label">SAVED IN OPERATIONAL COSTS</span>
-                    </div>
-                </div>
-                <!-- Group 2 -->
-                <div class="stats-marquee-inner" aria-hidden="true">
-                    <div class="stat-item">
-                        <span class="stat-val">$5M+</span>
-                        <span class="stat-label">IN CLIENT REVENUE GENERATED</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-val">200+</span>
-                        <span class="stat-label">BUSINESSES LAUNCHED</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-val">$500K+</span>
-                        <span class="stat-label">SAVED IN OPERATIONAL COSTS</span>
-                    </div>
-                </div>
-                <!-- Group 3 -->
-                <div class="stats-marquee-inner" aria-hidden="true">
-                    <div class="stat-item">
-                        <span class="stat-val">$5M+</span>
-                        <span class="stat-label">IN CLIENT REVENUE GENERATED</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-val">200+</span>
-                        <span class="stat-label">BUSINESSES LAUNCHED</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-val">$500K+</span>
-                        <span class="stat-label">SAVED IN OPERATIONAL COSTS</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -231,60 +180,6 @@
     background: rgba(0,0,0,0.1);
 }
 
-/* Marquee / Footer of Hero */
-.hero-marquee-wrapper {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-}
-.stats-marquee-container {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    padding: 1.25rem 0;
-}
-.stats-marquee-track {
-    display: flex;
-    overflow: hidden;
-    user-select: none;
-    gap: 2rem;
-}
-.stats-marquee-inner {
-    display: flex;
-    min-width: 100%;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: space-around;
-    gap: 2rem;
-    animation: marquee 40s linear infinite;
-}
-@keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(calc(-100% - 2rem)); }
-}
-.stat-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    white-space: nowrap;
-}
-.stat-val {
-    font-weight: 800;
-    font-family: monospace;
-    color: var(--accent);
-    font-size: 0.95rem;
-    letter-spacing: 0.025em;
-}
-.stat-label {
-    font-weight: 600;
-    font-family: monospace;
-    font-size: 0.85rem;
-    color: var(--navy-mid);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
+
 </style>
 

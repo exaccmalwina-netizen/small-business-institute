@@ -38,6 +38,7 @@ $postcode = $data['POSTCODE'] ?? '';
 $emp_no = $data['EMP_NO'] ?? null; // Can be null if empty
 $subcontractors = $data['MMERGE7'] ?? ''; // Frequently, Sometimes, Never
 $industry = $data['INDUSTRY'] ?? '';
+$business_status = $data['BUSINESS_STATUS'] ?? '';
 
 // Basic validation
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -64,9 +65,9 @@ try {
     // Prepare SQL Statement (Prevents SQL Injection securely)
     $stmt = $pdo->prepare("
         INSERT INTO newsletter_subscribers (
-            email, first_name, last_name, postcode, employees, subcontractors, industry, created_at
+            email, first_name, last_name, postcode, employees, subcontractors, industry, business_status, created_at
         ) VALUES (
-            ?, ?, ?, ?, ?, ?, ?, NOW()
+            ?, ?, ?, ?, ?, ?, ?, ?, NOW()
         )
     ");
     
@@ -78,7 +79,8 @@ try {
         $postcode,
         $emp_no,
         $subcontractors,
-        $industry
+        $industry,
+        $business_status
     ]);
 
     // Setup success response
