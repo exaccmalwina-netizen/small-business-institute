@@ -253,6 +253,7 @@
   vertical-align: middle;
 }
 
+/* ---- Text Rotator ---- */
 .rotate-wrapper {
   display: inline-flex;
   align-items: center;
@@ -260,36 +261,42 @@
   overflow: hidden;
   vertical-align: middle;
   position: relative;
-  /* Ultra-rigid height */
-  height: 1.2em; 
+  /* Hyper-rigid height in pixels to stop ANY vertical jitter from emojis */
+  height: 80px; 
+  line-height: 80px !important;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
+  contain: layout paint;
 }
 
 .rotate-track {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 80px;
   display: block;
 }
 
 .rotate-word {
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%) !important;
-  color: var(--accent);
-  white-space: nowrap;
+  top: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
+  color: var(--accent);
+  white-space: nowrap;
+  height: 80px;
+  line-height: 80px !important;
 }
 
 /* character-level spans set by JS */
 .rotate-char {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  height: 80px;
+  line-height: 80px !important;
   will-change: opacity;
-  transform: translateY(0) !important;
-  vertical-align: middle;
+  transform: none !important;
 }
 
 /* ---- Subheadline ---- */
@@ -398,8 +405,9 @@
       const depth = parseFloat(el.dataset.depth) || 1;
       
       // INVERTED direction (opposite to mouse)
-      const tx = -mouse.x * depth * 55;
-      const ty = -mouse.y * depth * 45;
+      // REDUCED sensitivity for a calmer effect
+      const tx = -mouse.x * depth * 22;
+      const ty = -mouse.y * depth * 18;
 
       // Inertia per element
       positions[i].x += (tx - positions[i].x) * 0.07;
