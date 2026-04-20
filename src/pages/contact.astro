@@ -1,0 +1,252 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Formspree link placeholder - to be updated by user or in next step
+const FORMSPREE_ACTION = "#"; 
+---
+
+<Layout title="Contact Us | Small Business Institute">
+	<Header />
+	
+	<main>
+		<section class="contact-hero">
+			<div class="container text-center">
+				<h1>Get in touch</h1>
+				<p class="hero-subtitle">Have a question? We're here to help Australian small businesses thrive. Send us a message and we'll get back to you shortly.</p>
+			</div>
+		</section>
+
+		<section class="contact-section">
+			<div class="container">
+				<div class="contact-grid">
+					<!-- Form Column -->
+					<div class="contact-form-card">
+						<form action={FORMSPREE_ACTION} method="POST">
+							<div class="form-row">
+								<div class="form-group">
+									<label for="full-name">Full Name</label>
+									<input type="text" id="full-name" name="name" placeholder="John Doe" required />
+								</div>
+								<div class="form-group">
+									<label for="email">Email Address</label>
+									<input type="email" id="email" name="email" placeholder="john@example.com" required />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="subject">Subject</label>
+								<select id="subject" name="subject">
+									<option value="general">General Inquiry</option>
+									<option value="newsletter">Newsletter Question</option>
+									<option value="business-support">Business Support</option>
+									<option value="other">Other</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="message">Your Message</label>
+								<textarea id="message" name="message" rows="6" placeholder="How can we help you?" required></textarea>
+							</div>
+
+							<button type="submit" class="btn-primary btn-block">Send Message</button>
+						</form>
+					</div>
+
+					<!-- Info Column -->
+					<div class="contact-info">
+						<div class="info-item">
+							<div class="info-icon">📍</div>
+							<div>
+								<h4>Location</h4>
+								<p>Based in Australia, serving small businesses nationwide.</p>
+							</div>
+						</div>
+						<div class="info-item">
+							<div class="info-icon">✉️</div>
+							<div>
+								<h4>Email</h4>
+								<p>contact@smallbusinessinstitute.au</p>
+							</div>
+						</div>
+						<div class="info-item">
+							<div class="info-icon">🤝</div>
+							<div>
+								<h4>Our Promise</h4>
+								<p>Practical, plain-English advice delivered directly to your inbox.</p>
+							</div>
+						</div>
+
+						<div class="newsletter-highlight">
+							<h3>Stay Informed</h3>
+							<p>Join our community for the latest resources and guides.</p>
+							<button class="btn-primary" id="contact-newsletter-trigger">Join SBI Community</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+/* Hero Styles */
+.contact-hero {
+	padding: 5rem 0 4rem;
+	background: var(--navy);
+	color: var(--white);
+	border-bottom: 2px solid var(--accent);
+}
+.contact-hero h1 {
+	font-size: clamp(2.5rem, 6vw, 4rem);
+	font-weight: 800;
+	color: var(--white);
+	margin-bottom: 1rem;
+	letter-spacing: -0.03em;
+}
+.hero-subtitle {
+	font-size: 1.25rem;
+	color: rgba(255,255,255,0.8);
+	max-width: 600px;
+	margin: 0 auto;
+	line-height: 1.6;
+}
+.text-center { text-align: center; }
+
+/* Section & Grid */
+.contact-section {
+	padding: 6rem 0;
+	background: var(--off-white);
+}
+.contact-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 4rem;
+	align-items: start;
+}
+@media (min-width: 1024px) {
+	.contact-grid {
+		grid-template-columns: 1.5fr 1fr;
+	}
+}
+
+/* Form Styles */
+.contact-form-card {
+	background: var(--white);
+	padding: 3rem;
+	border-radius: var(--radius-xl);
+	box-shadow: var(--shadow-lg);
+	border: 1px solid var(--border);
+}
+.form-row {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+@media (min-width: 640px) {
+	.form-row {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+.form-group {
+	margin-bottom: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.form-group label {
+	font-weight: 700;
+	font-size: 0.9rem;
+	color: var(--navy);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+	padding: 0.85rem 1rem;
+	border: 2px solid #e2e8f0;
+	border-radius: var(--radius);
+	font-family: inherit;
+	font-size: 1rem;
+	transition: all 0.2s ease;
+	background: #f8fafc;
+}
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+	outline: none;
+	border-color: var(--accent);
+	background: var(--white);
+	box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+}
+.btn-block {
+	width: 100%;
+	justify-content: center;
+	padding: 1rem;
+	font-size: 1.1rem;
+	margin-top: 1rem;
+}
+
+/* Info Styles */
+.contact-info {
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+}
+.info-item {
+	display: flex;
+	gap: 1.25rem;
+}
+.info-icon {
+	font-size: 1.75rem;
+	flex-shrink: 0;
+}
+.info-item h4 {
+	font-size: 1.15rem;
+	margin-bottom: 0.25rem;
+	color: var(--navy);
+}
+.info-item p {
+	color: var(--muted);
+	line-height: 1.5;
+}
+
+.newsletter-highlight {
+	margin-top: 2rem;
+	padding: 2.5rem;
+	background: var(--accent-lt);
+	border-radius: var(--radius-lg);
+	border: 1px solid rgba(2, 132, 199, 0.1);
+}
+.newsletter-highlight h3 {
+	color: var(--accent);
+	font-weight: 800;
+	margin-bottom: 0.5rem;
+}
+.newsletter-highlight p {
+	margin-bottom: 1.5rem;
+	color: var(--navy-mid);
+}
+
+@media (max-width: 640px) {
+	.contact-form-card {
+		padding: 1.5rem;
+	}
+}
+</style>
+
+<script>
+    const trigger = document.getElementById('contact-newsletter-trigger');
+    const modal = document.getElementById('newsletter-overlay');
+    if(trigger && modal) {
+        trigger.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+        });
+    }
+</script>
