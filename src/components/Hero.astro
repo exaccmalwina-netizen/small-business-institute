@@ -1,208 +1,521 @@
 ---
 ---
 
-<section class="hero">
-    <!-- Photo collage grid background -->
-    <div class="hero-collage" aria-hidden="true">
-        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&auto=format&fit=crop')"></div>
-        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop')"></div>
-        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80&auto=format&fit=crop')"></div>
-        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&auto=format&fit=crop')"></div>
-        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80&auto=format&fit=crop')"></div>
-        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=600&q=80&auto=format&fit=crop')"></div>
-    </div>
-    <div class="hero-overlay"></div>
-    
-    <!-- Hero Main Content -->
-    <div class="hero-content">
-        <div class="container hero-content-inner">
-            <div class="hero-text-block">
-                <!-- Avatar Stack Above Headline -->
-                <div class="hero-proof">
-                    <div class="avatar-stack">
-                        <div class="avatar" style="z-index: 5;"><img src="/assets/images/avatar_1.jpg" alt="Sarah J."></div>
-                        <div class="avatar" style="z-index: 4;"><img src="/assets/images/avatar_2.jpg" alt="Mark H."></div>
-                        <div class="avatar" style="z-index: 3;"><img src="/assets/images/avatar_3.jpg" alt="Emma P."></div>
-                        <div class="avatar" style="z-index: 2;"><img src="/assets/images/avatar_4.jpg" alt="David K."></div>
-                        <div class="avatar" style="z-index: 1;"><img src="/assets/images/avatar_5.jpg" alt="Lisa D."></div>
-                    </div>
-                    <span class="proof-text">Trusted by 200+ Australian Businesses</span>
-                </div>
-                
-                <h1 class="hero-headline" style="font-size: clamp(2.2rem, 4vw, 3.5rem);">
-                    Supporting Small Business community to<br>
-                    <span class="text-accent">grow stronger and thrive.</span><br>
-                    <span class="text-navy" style="font-size: 0.6em; line-height: 1.2;">The Knowledge Base for Small Business decision makers.</span>
-                </h1>
-                
-                <p class="hero-subheadline">
-                    We gather news, insights, analyses and stories, and share them with all small business decision makers.
-                </p>
-                
-                <button id="hero-template-trigger" class="btn-hero" style="border:none; cursor:pointer;" aria-label="Join the Community">
-                    Join the Community
-                    <span class="btn-hero-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                    </span>
-                </button>
-            </div>
-        </div>
+<section class="hero-section" id="hero">
+  <!-- Floating profession images (parallax layer) -->
+  <div class="floating-images" id="floating-container" aria-hidden="true">
+
+    <!-- Left side images -->
+    <div class="float-el" data-depth="0.7" style="top: 18%; left: 2%;">
+      <img
+        src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=320&q=80&auto=format&fit=crop"
+        alt="Electrician at work"
+        class="float-img float-img--sm float-img--tilt-neg animate-float-1"
+      />
     </div>
 
+    <div class="float-el" data-depth="1.8" style="top: 2%; left: 10%;">
+      <img
+        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=420&q=80&auto=format&fit=crop"
+        alt="Construction worker on site"
+        class="float-img float-img--md float-img--tilt-neg-lg animate-float-2"
+      />
     </div>
+
+    <div class="float-el" data-depth="3.5" style="top: 72%; left: 5%;">
+      <img
+        src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=380&q=80&auto=format&fit=crop"
+        alt="Chef cooking in kitchen"
+        class="float-img float-img--lg float-img--tilt-neg-sm animate-float-3"
+      />
+    </div>
+
+    <!-- Right side images -->
+    <div class="float-el" data-depth="1.2" style="top: 1%; left: 82%;">
+      <img
+        src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&q=80&auto=format&fit=crop"
+        alt="Hairdresser styling hair"
+        class="float-img float-img--md float-img--tilt-pos animate-float-2"
+      />
+    </div>
+
+    <div class="float-el" data-depth="2.5" style="top: 68%; left: 80%;">
+      <img
+        src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80&auto=format&fit=crop"
+        alt="Plumber fixing pipes"
+        class="float-img float-img--lg float-img--tilt-pos-lg animate-float-1"
+      />
+    </div>
+
+    <div class="float-el" data-depth="0.9" style="top: 40%; left: 88%;">
+      <img
+        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&q=80&auto=format&fit=crop"
+        alt="Accountant working at desk"
+        class="float-img float-img--sm float-img--tilt-neg-sm animate-float-3"
+      />
+    </div>
+
+  </div>
+
+  <!-- Hero Content -->
+  <div class="hero-body">
+    <!-- Proof bar -->
+    <div class="hero-proof reveal reveal-delay-1">
+      <div class="avatar-stack">
+        <div class="avatar"><img src="/assets/images/avatar_1.jpg" alt="Member" /></div>
+        <div class="avatar"><img src="/assets/images/avatar_2.jpg" alt="Member" /></div>
+        <div class="avatar"><img src="/assets/images/avatar_3.jpg" alt="Member" /></div>
+        <div class="avatar"><img src="/assets/images/avatar_4.jpg" alt="Member" /></div>
+        <div class="avatar"><img src="/assets/images/avatar_5.jpg" alt="Member" /></div>
+      </div>
+      <span class="proof-text">Trusted by 200+ Australian Businesses</span>
+    </div>
+
+    <!-- Headline with rotating word -->
+    <h1 class="hero-headline reveal reveal-delay-2">
+      <span>Supporting Small</span>
+      <span>Business to</span>
+      <span class="headline-row">
+        <span class="inline-text">become</span>
+        <span class="rotate-wrapper" aria-live="polite">
+          <span class="rotate-track" id="rotate-track">
+            <!-- Words injected by JS -->
+          </span>
+        </span>
+      </span>
+    </h1>
+
+    <p class="hero-sub reveal reveal-delay-3">
+      We gather news, insights, analyses and stories, and share them with all small business decision makers.
+    </p>
+
+    <button
+      id="hero-template-trigger"
+      class="btn-hero reveal reveal-delay-4"
+      aria-label="Join the Community"
+    >
+      Join the Community
+      <span class="btn-hero-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </span>
+    </button>
+
+    <p class="hero-tagline reveal reveal-delay-5">
+      The Knowledge Base for Small Business decision makers.
+    </p>
+  </div>
 </section>
 
 <style>
-/* --- Bright Premium Hero Strict UX/UI --- */
-.hero {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-height: calc(100vh - 68px);
-    color: var(--navy);
-    overflow: hidden;
+/* ======================================
+   HERO SECTION — floating images + text rotate
+   ====================================== */
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - 68px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--off-white);
 }
 
-/* Collage grid background */
-.hero-collage {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    z-index: 1;
-}
-.collage-photo {
-    background-size: cover;
-    background-position: center;
-    transition: transform 8s ease;
-}
-/* Subtle Ken Burns effect on load */
-.collage-photo:nth-child(odd) { animation: slow-zoom-in 12s ease-in-out infinite alternate; }
-.collage-photo:nth-child(even) { animation: slow-zoom-out 14s ease-in-out infinite alternate; }
-@keyframes slow-zoom-in  { from { transform: scale(1); } to { transform: scale(1.06); } }
-@keyframes slow-zoom-out { from { transform: scale(1.06); } to { transform: scale(1); } }
-
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        105deg,
-        rgba(255,255,255,0.95) 0%,
-        rgba(255,255,255,0.82) 40%,
-        rgba(255,255,255,0.30) 70%,
-        rgba(255,255,255,0.08) 100%
-    );
-    z-index: 2;
+/* ---- Floating image layer ---- */
+.floating-images {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Layout strict grid */
-.hero-content {
-    flex: 1; /* Pushes the marquee to the very bottom */
-    position: relative;
-    z-index: 10;
-    display: flex;
-    align-items: center; /* Center horizontally */
-    padding: 3rem 0;
-}
-.hero-content-inner {
-    width: 100%;
-}
-.hero-text-block {
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Perfect left alignment */
-    gap: 1.5rem;
+.float-el {
+  position: absolute;
+  will-change: transform;
 }
 
-/* Avatar / Proof section */
+.float-img {
+  display: block;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18), 0 6px 20px rgba(0,0,0,0.10);
+  transition: transform 0.2s ease;
+}
+.float-img:hover { transform: scale(1.04); }
+
+/* --- Idle Floating Animations --- */
+.animate-float-1 { animation: float-bob 6s ease-in-out infinite; }
+.animate-float-2 { animation: float-bob 8s ease-in-out infinite reverse; }
+.animate-float-3 { animation: float-bob 7s ease-in-out infinite 1s; }
+
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+/* Sizes */
+.float-img--sm  { width: 120px;  height: 90px;  }
+.float-img--md  { width: 200px;  height: 150px; }
+.float-img--lg  { width: 230px;  height: 230px; }
+
+@media (min-width: 768px) {
+  .float-img--sm  { width: 150px;  height: 110px;  }
+  .float-img--md  { width: 240px;  height: 180px; }
+  .float-img--lg  { width: 280px;  height: 280px; }
+}
+
+/* Tilts (applied via margin to not conflict with animation) */
+.float-img--tilt-neg     { margin-top: 0; }
+.float-img--tilt-neg-sm  { margin-top: 0; }
+.float-img--tilt-neg-lg  { margin-top: 0; }
+.float-img--tilt-pos     { margin-top: 0; }
+.float-img--tilt-pos-lg  { margin-top: 0; }
+
+/* Fade-in animation on load */
+.float-el { opacity: 0; animation: floatFadeIn 0.6s ease forwards; }
+.float-el:nth-child(1) { animation-delay: 0.5s; }
+.float-el:nth-child(2) { animation-delay: 0.7s; }
+.float-el:nth-child(3) { animation-delay: 0.9s; }
+.float-el:nth-child(4) { animation-delay: 1.1s; }
+.float-el:nth-child(5) { animation-delay: 1.3s; }
+.float-el:nth-child(6) { animation-delay: 1.5s; }
+
+@keyframes floatFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Hero body (centered) ---- */
+.hero-body {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 680px;
+  padding: 3rem 1.5rem;
+}
+
+/* Proof bar */
 .hero-proof {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.avatar-stack {
-    display: flex;
-    margin-left: 0.75rem; 
-}
+.avatar-stack { display: flex; margin-left: 0.5rem; }
 .avatar {
-    width: 3.25rem;
-    height: 3.25rem;
-    border-radius: 50%;
-    border: 2px solid var(--white);
-    background: var(--navy);
-    margin-left: -0.75rem;
-    overflow: hidden;
-    box-shadow: var(--shadow);
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  margin-left: -0.65rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
 }
-.avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
 .proof-text {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--navy-mid);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
-/* Typography components */
+/* ---- Headline ---- */
 .hero-headline {
-    font-weight: 800;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    color: var(--navy);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin: 0;
-}
-.text-accent { color: var(--accent); }
-.text-navy { color: var(--navy); }
-
-.hero-subheadline {
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-    color: var(--navy-mid);
-    line-height: 1.6;
-    margin: 0;
-    max-width: 95%;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  color: var(--navy);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15em;
 }
 
-/* Button styles */
+/* Row with inline text + rotating word */
+.headline-row {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.inline-text { display: inline-block; }
+
+/* ---- Text Rotator ---- */
+.rotate-wrapper {
+  display: inline-block;
+  overflow: hidden;
+  /* Height = 1 line of the headline */
+  height: 1.12em;
+  vertical-align: bottom;
+  min-width: 8ch; /* prevents layout jump */
+}
+
+.rotate-track {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.rotate-word {
+  display: block;
+  color: var(--accent);
+  line-height: 1.12;
+  white-space: nowrap;
+  /* Each word occupies exactly 1 line-height slot */
+  height: 1.12em;
+  overflow: hidden;
+}
+
+/* character-level spans set by JS */
+.rotate-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* ---- Subheadline ---- */
+.hero-sub {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 540px;
+  margin: 0;
+}
+
+/* ---- CTA Button ---- */
 .btn-hero {
-    display: inline-flex;
-    align-items: center;
-    background: var(--navy);
-    color: var(--white);
-    font-size: 1.125rem;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 0 0 0 1.5rem;
-    margin-top: 1rem;
-    width: fit-content;
-    transition: all 0.3s ease;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
+  display: inline-flex;
+  align-items: center;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  border: none;
+  padding: 0 0 0 1.5rem;
+  cursor: pointer;
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: background 0.25s ease, transform 0.2s ease;
 }
 .btn-hero:hover {
-    background: var(--accent);
-    color: var(--white);
-    transform: translateY(-2px);
+  background: var(--accent);
+  transform: translateY(-2px);
 }
 .btn-hero-icon {
-    border-left: 1px solid rgba(255,255,255,0.2);
-    padding: 0.85rem;
-    margin-left: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1rem;
+  margin-left: 1.25rem;
+  border-left: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.12);
 }
 
+/* ---- Tagline ---- */
+.hero-tagline {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+}
 
+/* --- Mobile: hide side images on very small screens --- */
+@media (max-width: 639px) {
+  .float-el:nth-child(1),
+  .float-el:nth-child(2),
+  .float-el:nth-child(3),
+  .float-el:nth-child(4),
+  .float-el:nth-child(5),
+  .float-el:nth-child(6) {
+    display: none;
+  }
+  .hero-body { padding: 4rem 1rem; }
+}
+@media (max-width: 900px) {
+  .float-img--lg { width: 180px; height: 180px; }
+  .float-img--md { width: 150px; height: 110px; }
+  .float-img--sm { width: 100px; height: 75px; }
+}
+
+/* reveal helper (from global.css) */
+.reveal { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+.reveal-delay-1 { animation-delay: 0.2s; }
+.reveal-delay-2 { animation-delay: 0.35s; }
+.reveal-delay-3 { animation-delay: 0.5s; }
+.reveal-delay-4 { animation-delay: 0.65s; }
+.reveal-delay-5 { animation-delay: 0.8s; }
 </style>
 
+<script type="module">
+/* =============================================
+   HERO INTERACTIONS
+   1. Parallax floating images (mouse-follow)
+   2. Animated text rotator (character-level)
+   ============================================= */
+
+/* ---- 1. PARALLAX ---- */
+(function initParallax() {
+  const container = document.getElementById('floating-container');
+  if (!container) return;
+
+  const els = Array.from(container.querySelectorAll('.float-el'));
+  const positions = els.map(() => ({ x: 0, y: 0 }));
+  let mouse = { x: 0, y: 0 };
+  let targetMouse = { x: 0, y: 0 };
+
+  window.addEventListener('mousemove', (e) => {
+    // Normalized position from -1 to 1 based on window size
+    targetMouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
+    targetMouse.y = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  function tick() {
+    // Much lazier smoothing for that "liquid" feel
+    mouse.x += (targetMouse.x - mouse.x) * 0.05;
+    mouse.y += (targetMouse.y - mouse.y) * 0.05;
+
+    els.forEach((el, i) => {
+      const depth = parseFloat(el.dataset.depth) || 1;
+      
+      // Increased strength significantly
+      const tx = mouse.x * depth * 60;
+      const ty = mouse.y * depth * 60;
+
+      // Inertia per element
+      positions[i].x += (tx - positions[i].x) * 0.1;
+      positions[i].y += (ty - positions[i].y) * 0.1;
+
+      // Apply transform directly
+      el.style.transform = `translate3d(${positions[i].x}px, ${positions[i].y}px, 0)`;
+    });
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+
+/* ---- 2. TEXT ROTATOR ---- */
+(function initRotator() {
+  const words = [
+    "stronger 💪",
+    "smarter 🧠",
+    "resilient 🛡️",
+    "connected 🤝",
+    "confident ✨",
+    "profitable 💰",
+    "informed 📚",
+    "unstoppable 🚀",
+    "heard 📣",
+    "thriving 🌱",
+    "funky 🪩",
+  ];
+
+  const track = document.getElementById('rotate-track');
+  if (!track) return;
+
+  const ROTATION_INTERVAL = 3000; // ms between word changes
+  const STAGGER_DELAY     = 0.03; // seconds between chars (exit)
+  const STAGGER_ENTER     = 0.02; // seconds between chars (enter)
+
+  let currentIndex = 0;
+
+  // Split word into <span class="rotate-char"> spans
+  function buildWord(text) {
+    const span = document.createElement('span');
+    span.className = 'rotate-word';
+
+    // Use Intl.Segmenter for proper emoji handling if available
+    const chars = typeof Intl !== 'undefined' && 'Segmenter' in Intl
+      ? Array.from(new Intl.Segmenter('en', { granularity: 'grapheme' }).segment(text), s => s.segment)
+      : Array.from(text);
+
+    chars.forEach(ch => {
+      const c = document.createElement('span');
+      c.className = 'rotate-char';
+      c.textContent = ch;
+      span.appendChild(c);
+    });
+    return span;
+  }
+
+  // Animate characters in (from below)
+  function animateIn(wordEl, delay0 = 0) {
+    const chars = wordEl.querySelectorAll('.rotate-char');
+    chars.forEach((c, i) => {
+      c.style.opacity   = '0';
+      c.style.transform = 'translateY(100%)';
+      c.style.transition = `transform 0.38s cubic-bezier(.22,1,.36,1) ${delay0 + i * STAGGER_ENTER}s,
+                             opacity   0.3s ease ${delay0 + i * STAGGER_ENTER}s`;
+      // Kick animation on next frame
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        c.style.opacity   = '1';
+        c.style.transform = 'translateY(0)';
+      }));
+    });
+  }
+
+  // Animate characters out (upward)
+  function animateOut(wordEl, onDone) {
+    const chars = wordEl.querySelectorAll('.rotate-char');
+    const lastDelay = (chars.length - 1) * STAGGER_DELAY;
+
+    chars.forEach((c, i) => {
+      // stagger from last → first
+      const d = (chars.length - 1 - i) * STAGGER_DELAY;
+      c.style.transition = `transform 0.32s cubic-bezier(.55,0,1,.45) ${d}s,
+                             opacity   0.28s ease ${d}s`;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        c.style.opacity   = '0';
+        c.style.transform = 'translateY(-120%)';
+      }));
+    });
+
+    const totalDuration = (lastDelay + 0.35) * 1000;
+    setTimeout(onDone, totalDuration);
+  }
+
+  // --- Initial render ---
+  const firstWord = buildWord(words[0]);
+  track.appendChild(firstWord);
+  animateIn(firstWord, 0.9); // slight delay after page load
+
+  // --- Rotation loop ---
+  setInterval(() => {
+    const nextIndex = (currentIndex + 1) % words.length;
+    const outWord   = track.querySelector('.rotate-word');
+    const inWord    = buildWord(words[nextIndex]);
+
+    // Append new word (invisible, below)
+    inWord.querySelectorAll('.rotate-char').forEach(c => {
+      c.style.opacity   = '0';
+      c.style.transform = 'translateY(100%)';
+    });
+    track.appendChild(inWord);
+
+    // Exit current, then remove it
+    animateOut(outWord, () => {
+      outWord.remove();
+    });
+
+    // Enter new word almost immediately for overlap-free feel
+    animateIn(inWord, 0.08);
+
+    currentIndex = nextIndex;
+  }, ROTATION_INTERVAL);
+
+})();
+</script>
