@@ -2,7 +2,15 @@
 ---
 
 <section class="hero">
-    <div class="hero-bg" style="background-image: url('/assets/images/hero_bg.png')"></div>
+    <!-- Photo collage grid background -->
+    <div class="hero-collage" aria-hidden="true">
+        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&auto=format&fit=crop')"></div>
+        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop')"></div>
+        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80&auto=format&fit=crop')"></div>
+        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&auto=format&fit=crop')"></div>
+        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80&auto=format&fit=crop')"></div>
+        <div class="collage-photo" style="background-image: url('https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=600&q=80&auto=format&fit=crop')"></div>
+    </div>
     <div class="hero-overlay"></div>
     
     <!-- Hero Main Content -->
@@ -50,26 +58,40 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 68px); /* Exactly fill viewport excluding header */
+    min-height: calc(100vh - 68px);
     color: var(--navy);
     overflow: hidden;
 }
-.hero-bg {
+
+/* Collage grid background */
+.hero-collage {
     position: absolute;
     inset: 0;
-    background-size: cover;
-    background-position: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     z-index: 1;
 }
+.collage-photo {
+    background-size: cover;
+    background-position: center;
+    transition: transform 8s ease;
+}
+/* Subtle Ken Burns effect on load */
+.collage-photo:nth-child(odd) { animation: slow-zoom-in 12s ease-in-out infinite alternate; }
+.collage-photo:nth-child(even) { animation: slow-zoom-out 14s ease-in-out infinite alternate; }
+@keyframes slow-zoom-in  { from { transform: scale(1); } to { transform: scale(1.06); } }
+@keyframes slow-zoom-out { from { transform: scale(1.06); } to { transform: scale(1); } }
+
 .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
         105deg,
-        rgba(255,255,255,0.93) 0%,
-        rgba(255,255,255,0.75) 45%,
-        rgba(255,255,255,0.20) 75%,
-        rgba(255,255,255,0.05) 100%
+        rgba(255,255,255,0.95) 0%,
+        rgba(255,255,255,0.82) 40%,
+        rgba(255,255,255,0.30) 70%,
+        rgba(255,255,255,0.08) 100%
     );
     z-index: 2;
 }
