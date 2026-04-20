@@ -257,8 +257,8 @@
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
-  /* Transitional property for the layout shift */
-  transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  /* Smoother 'Easy Ease' curve */
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
 }
 
@@ -438,12 +438,19 @@
   measurementSpan.style.visibility = 'hidden';
   measurementSpan.style.position = 'absolute';
   measurementSpan.style.whiteSpace = 'nowrap';
-  measurementSpan.className = 'rotate-word'; // Copy styles for accurate measure
+  measurementSpan.style.pointerEvents = 'none';
+  // Ensure it inherits the exact font styles from the headline
+  measurementSpan.style.font = 'inherit';
+  measurementSpan.style.letterSpacing = 'inherit';
+  measurementSpan.style.textTransform = 'inherit';
+  
+  measurementSpan.className = 'rotate-word'; 
   track.parentElement.appendChild(measurementSpan);
 
   function updateWrapperWidth(text) {
     measurementSpan.textContent = text;
-    const width = measurementSpan.offsetWidth;
+    // Use getBoundingClientRect for sub-pixel precision
+    const width = measurementSpan.getBoundingClientRect().width;
     const wrapper = track.parentElement;
     wrapper.style.width = `${width}px`;
   }
