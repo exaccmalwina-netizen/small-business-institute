@@ -264,7 +264,8 @@
   /* Hyper-rigid height in pixels to stop ANY vertical jitter from emojis */
   height: 80px; 
   line-height: 80px !important;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Faster glide for 'to become' to open space for the new word */
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
   contain: layout paint;
 }
@@ -502,8 +503,8 @@
   updateWrapperWidth(firstWordText);
   track.appendChild(firstWord);
   // Cache buster / version log
-  console.log('Rotator Version: FINAL-FIX-1.2');
-  animateIn(firstWord, 0.9);
+  console.log('Rotator Version: Unified-Fade-1.3');
+  animateIn(firstWord, 0.5);
 
   // --- Rotation loop ---
   setInterval(() => {
@@ -519,7 +520,8 @@
     track.appendChild(inWord);
 
     animateOut(outWord, () => outWord.remove());
-    animateIn(inWord, 0.1);
+    // Delay fade-in slightly so width transition is mostly complete (avoids clipping)
+    animateIn(inWord, 0.2);
 
     currentIndex = nextIndex;
   }, ROTATION_INTERVAL);
