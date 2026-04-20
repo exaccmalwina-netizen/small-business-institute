@@ -256,10 +256,10 @@
 .rotate-wrapper {
   display: inline-block;
   overflow: hidden;
-  /* Height = 1 line of the headline */
-  height: 1.12em;
   vertical-align: bottom;
-  min-width: 8ch; /* prevents layout jump */
+  /* Transitional property for the layout shift */
+  transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  will-change: width;
 }
 
 .rotate-track {
@@ -383,22 +383,22 @@
   });
 
   function tick() {
-    // Much lazier smoothing for that "liquid" feel
-    mouse.x += (targetMouse.x - mouse.x) * 0.05;
-    mouse.y += (targetMouse.y - mouse.y) * 0.05;
+    // Smoother liquid feel
+    mouse.x += (targetMouse.x - mouse.x) * 0.04;
+    mouse.y += (targetMouse.y - mouse.y) * 0.04;
 
     els.forEach((el, i) => {
       const depth = parseFloat(el.dataset.depth) || 1;
       
-      // Increased strength significantly
-      const tx = mouse.x * depth * 60;
-      const ty = mouse.y * depth * 60;
+      // INVERTED direction (opposite to mouse)
+      const tx = -mouse.x * depth * 55;
+      const ty = -mouse.y * depth * 45;
 
       // Inertia per element
-      positions[i].x += (tx - positions[i].x) * 0.1;
-      positions[i].y += (ty - positions[i].y) * 0.1;
+      positions[i].x += (tx - positions[i].x) * 0.07;
+      positions[i].y += (ty - positions[i].y) * 0.07;
 
-      // Apply transform directly
+      // Apply transform + subtle tilt based on velocity if desired
       el.style.transform = `translate3d(${positions[i].x}px, ${positions[i].y}px, 0)`;
     });
 
@@ -433,12 +433,26 @@
 
   let currentIndex = 0;
 
+  // Helper to measure word width accurately
+  const measurementSpan = document.createElement('span');
+  measurementSpan.style.visibility = 'hidden';
+  measurementSpan.style.position = 'absolute';
+  measurementSpan.style.whiteSpace = 'nowrap';
+  measurementSpan.className = 'rotate-word'; // Copy styles for accurate measure
+  track.parentElement.appendChild(measurementSpan);
+
+  function updateWrapperWidth(text) {
+    measurementSpan.textContent = text;
+    const width = measurementSpan.offsetWidth;
+    const wrapper = track.parentElement;
+    wrapper.style.width = `${width}px`;
+  }
+
   // Split word into <span class="rotate-char"> spans
   function buildWord(text) {
     const span = document.createElement('span');
     span.className = 'rotate-word';
 
-    // Use Intl.Segmenter for proper emoji handling if available
     const chars = typeof Intl !== 'undefined' && 'Segmenter' in Intl
       ? Array.from(new Intl.Segmenter('en', { granularity: 'grapheme' }).segment(text), s => s.segment)
       : Array.from(text);
@@ -452,15 +466,13 @@
     return span;
   }
 
-  // Animate characters in (from below)
   function animateIn(wordEl, delay0 = 0) {
     const chars = wordEl.querySelectorAll('.rotate-char');
     chars.forEach((c, i) => {
       c.style.opacity   = '0';
       c.style.transform = 'translateY(100%)';
-      c.style.transition = `transform 0.38s cubic-bezier(.22,1,.36,1) ${delay0 + i * STAGGER_ENTER}s,
+      c.style.transition = `transform 0.4s cubic-bezier(.22,1,.36,1) ${delay0 + i * STAGGER_ENTER}s,
                              opacity   0.3s ease ${delay0 + i * STAGGER_ENTER}s`;
-      // Kick animation on next frame
       requestAnimationFrame(() => requestAnimationFrame(() => {
         c.style.opacity   = '1';
         c.style.transform = 'translateY(0)';
@@ -468,51 +480,48 @@
     });
   }
 
-  // Animate characters out (upward)
   function animateOut(wordEl, onDone) {
     const chars = wordEl.querySelectorAll('.rotate-char');
     const lastDelay = (chars.length - 1) * STAGGER_DELAY;
 
     chars.forEach((c, i) => {
-      // stagger from last → first
       const d = (chars.length - 1 - i) * STAGGER_DELAY;
-      c.style.transition = `transform 0.32s cubic-bezier(.55,0,1,.45) ${d}s,
-                             opacity   0.28s ease ${d}s`;
+      c.style.transition = `transform 0.35s cubic-bezier(.55,0,1,.45) ${d}s,
+                             opacity   0.3s ease ${d}s`;
       requestAnimationFrame(() => requestAnimationFrame(() => {
         c.style.opacity   = '0';
         c.style.transform = 'translateY(-120%)';
       }));
     });
 
-    const totalDuration = (lastDelay + 0.35) * 1000;
-    setTimeout(onDone, totalDuration);
+    setTimeout(onDone, (lastDelay + 0.4) * 1000);
   }
 
   // --- Initial render ---
-  const firstWord = buildWord(words[0]);
+  const firstWordText = words[0];
+  const firstWord = buildWord(firstWordText);
+  updateWrapperWidth(firstWordText);
   track.appendChild(firstWord);
-  animateIn(firstWord, 0.9); // slight delay after page load
+  animateIn(firstWord, 0.9);
 
   // --- Rotation loop ---
   setInterval(() => {
     const nextIndex = (currentIndex + 1) % words.length;
+    const nextWordText = words[nextIndex];
     const outWord   = track.querySelector('.rotate-word');
-    const inWord    = buildWord(words[nextIndex]);
+    const inWord    = buildWord(nextWordText);
 
-    // Append new word (invisible, below)
+    // Dynamic width update triggers the layout reflow (smooth glide for "become")
+    updateWrapperWidth(nextWordText);
+
     inWord.querySelectorAll('.rotate-char').forEach(c => {
       c.style.opacity   = '0';
       c.style.transform = 'translateY(100%)';
     });
     track.appendChild(inWord);
 
-    // Exit current, then remove it
-    animateOut(outWord, () => {
-      outWord.remove();
-    });
-
-    // Enter new word almost immediately for overlap-free feel
-    animateIn(inWord, 0.08);
+    animateOut(outWord, () => outWord.remove());
+    animateIn(inWord, 0.1);
 
     currentIndex = nextIndex;
   }, ROTATION_INTERVAL);
