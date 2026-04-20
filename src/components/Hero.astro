@@ -287,6 +287,7 @@
   white-space: nowrap;
   height: 80px;
   line-height: 80px !important;
+  letter-spacing: 0.02em; /* Visual cue that the new version is active */
 }
 
 /* character-level spans set by JS */
@@ -501,7 +502,7 @@
   updateWrapperWidth(firstWordText);
   track.appendChild(firstWord);
   // Cache buster / version log
-  console.log('Rotator Version: Simple-Whole-Word-1.1');
+  console.log('Rotator Version: FINAL-FIX-1.2');
   animateIn(firstWord, 0.9);
 
   // --- Rotation loop ---
