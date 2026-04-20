@@ -470,46 +470,28 @@
     wrapper.style.width = `${width}px`;
   }
 
-  // Split word into <span class="rotate-char"> spans
+  // Create simple word container (no more character splitting)
   function buildWord(text) {
     const span = document.createElement('span');
     span.className = 'rotate-word';
-
-    const chars = typeof Intl !== 'undefined' && 'Segmenter' in Intl
-      ? Array.from(new Intl.Segmenter('en', { granularity: 'grapheme' }).segment(text), s => s.segment)
-      : Array.from(text);
-
-    chars.forEach(ch => {
-      const c = document.createElement('span');
-      c.className = 'rotate-char';
-      c.textContent = ch;
-      span.appendChild(c);
-    });
+    span.textContent = text;
     return span;
   }
 
   function animateIn(wordEl, delay0 = 0) {
-    const chars = wordEl.querySelectorAll('.rotate-char');
-    chars.forEach((c) => {
-      c.style.opacity   = '0';
-      // Fade whole word at once (no stagger)
-      c.style.transition = `opacity 0.8s ease-in-out ${delay0}s`;
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        c.style.opacity   = '1';
-      }));
-    });
+    wordEl.style.opacity   = '0';
+    // Smooth fade for the entire word at once
+    wordEl.style.transition = `opacity 0.8s ease-in-out ${delay0}s`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      wordEl.style.opacity   = '1';
+    }));
   }
 
   function animateOut(wordEl, onDone) {
-    const chars = wordEl.querySelectorAll('.rotate-char');
-    chars.forEach((c) => {
-      // Fade whole word out at once
-      c.style.transition = `opacity 0.6s ease-in-out`;
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        c.style.opacity   = '0';
-      }));
-    });
-
+    wordEl.style.transition = `opacity 0.6s ease-in-out`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      wordEl.style.opacity   = '0';
+    }));
     setTimeout(onDone, 700);
   }
 
@@ -519,7 +501,7 @@
   updateWrapperWidth(firstWordText);
   track.appendChild(firstWord);
   // Cache buster / version log
-  console.log('Rotator Version: Static-Absolute-1.0');
+  console.log('Rotator Version: Simple-Whole-Word-1.1');
   animateIn(firstWord, 0.9);
 
   // --- Rotation loop ---
@@ -532,9 +514,7 @@
     // Dynamic width update triggers the layout reflow (smooth glide for "become")
     updateWrapperWidth(nextWordText);
 
-    inWord.querySelectorAll('.rotate-char').forEach(c => {
-      c.style.opacity   = '0';
-    });
+    inWord.style.opacity = '0';
     track.appendChild(inWord);
 
     animateOut(outWord, () => outWord.remove());
