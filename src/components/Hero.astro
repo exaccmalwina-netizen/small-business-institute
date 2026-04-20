@@ -72,7 +72,7 @@
     </div>
 
     <!-- Headline with rotating word -->
-    <h1 class="hero-headline reveal reveal-delay-2">
+    <h1 class="hero-headline">
       <span>Supporting Small</span>
       <span>Business to</span>
       <span class="headline-row">
@@ -236,12 +236,12 @@
   line-height: 1.1;
   letter-spacing: -0.03em;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15em;
-  /* Prevent any vertical jumping of the whole headline */
+  /* Prevent any vertical jumping */
   white-space: nowrap;
+  /* Use pure fade-in instead of fade-up */
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.35s;
+  opacity: 0;
 }
 
 /* Row with inline text + rotating word */
@@ -288,7 +288,8 @@
 /* character-level spans set by JS */
 .rotate-char {
   display: inline-block;
-  will-change: transform, opacity;
+  will-change: opacity;
+  transform: none !important;
 }
 
 /* ---- Subheadline ---- */
