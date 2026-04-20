@@ -443,8 +443,8 @@
   if (!track) return;
 
   const ROTATION_INTERVAL = 3000; // ms between word changes
-  const STAGGER_DELAY     = 0.03; // seconds between chars (exit)
-  const STAGGER_ENTER     = 0.02; // seconds between chars (enter)
+  const STAGGER_DELAY     = 0.02; // seconds between chars (exit)
+  const STAGGER_ENTER     = 0.015; // seconds between chars (enter)
 
   let currentIndex = 0;
 
@@ -492,7 +492,8 @@
     const chars = wordEl.querySelectorAll('.rotate-char');
     chars.forEach((c, i) => {
       c.style.opacity   = '0';
-      c.style.transition = `opacity 0.45s ease ${delay0 + i * STAGGER_ENTER}s`;
+      // Longer, gentler ease-in-out
+      c.style.transition = `opacity 0.8s ease-in-out ${delay0 + i * STAGGER_ENTER}s`;
       requestAnimationFrame(() => requestAnimationFrame(() => {
         c.style.opacity   = '1';
       }));
@@ -505,13 +506,13 @@
 
     chars.forEach((c, i) => {
       const d = (chars.length - 1 - i) * STAGGER_DELAY;
-      c.style.transition = `opacity 0.35s ease ${d}s`;
+      c.style.transition = `opacity 0.6s ease-in-out ${d}s`;
       requestAnimationFrame(() => requestAnimationFrame(() => {
         c.style.opacity   = '0';
       }));
     });
 
-    setTimeout(onDone, (lastDelay + 0.4) * 1000);
+    setTimeout(onDone, (lastDelay + 0.7) * 1000);
   }
 
   // --- Initial render ---
