@@ -145,14 +145,9 @@
 }
 .float-img:hover { transform: scale(1.04); }
 
-/* --- Idle Floating Animations --- */
-.animate-float-1 { animation: float-bob 6s ease-in-out infinite; }
-.animate-float-2 { animation: float-bob 8s ease-in-out infinite reverse; }
-.animate-float-3 { animation: float-bob 7s ease-in-out infinite 1s; }
-
-@keyframes float-bob {
-  0%, 100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-15px) rotate(2deg); }
+/* Removing bobbing animation to ensure total vertical stability */
+@keyframes placeholder-bob {
+  0%, 100% { opacity: 1; }
 }
 
 /* Sizes */
@@ -183,8 +178,8 @@
 .float-el:nth-child(6) { animation-delay: 1.5s; }
 
 @keyframes floatFadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* ---- Hero body (centered) ---- */
@@ -236,9 +231,10 @@
   line-height: 1.1;
   letter-spacing: -0.03em;
   margin: 0;
-  /* Prevent any vertical jumping */
+  /* Force static line height and prevent any vertical jumping */
+  line-height: 1.2;
+  height: auto;
   white-space: nowrap;
-  /* Use pure fade-in instead of fade-up */
   animation: fadeIn 0.8s ease forwards;
   animation-delay: 0.35s;
   opacity: 0;
@@ -260,9 +256,8 @@
   align-items: center;
   overflow: hidden;
   vertical-align: bottom;
-  /* Ensure height is rock-solid during width transition */
-  height: 1.1em;
-  /* Smoother 'Easy Ease' curve */
+  /* Fixed height in px to ensure no vertical shift during reflow */
+  height: 80px; 
   transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
 }
@@ -320,7 +315,6 @@
 }
 .btn-hero:hover {
   background: var(--accent);
-  transform: translateY(-2px);
 }
 .btn-hero-icon {
   display: flex;
