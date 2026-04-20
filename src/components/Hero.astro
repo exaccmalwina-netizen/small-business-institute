@@ -73,10 +73,9 @@
 
     <!-- Headline with rotating word -->
     <h1 class="hero-headline">
-      <span>Supporting Small</span>
-      <span>Business to</span>
+      <span>Supporting Small Business</span>
       <span class="headline-row">
-        <span class="inline-text">become</span>
+        <span class="inline-text">to become</span>
         <span class="rotate-wrapper" aria-live="polite">
           <span class="rotate-track" id="rotate-track">
             <!-- Words injected by JS -->
@@ -249,14 +248,18 @@
   flex-wrap: nowrap;
   white-space: nowrap;
 }
-.inline-text { display: inline-block; }
+.inline-text { 
+  display: inline-block;
+  vertical-align: middle;
+}
 
 /* ---- Text Rotator ---- */
 .rotate-wrapper {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
-  vertical-align: bottom;
+  vertical-align: middle;
   /* Fixed height in px to ensure no vertical shift during reflow */
   height: 80px; 
   transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
@@ -285,7 +288,8 @@
 .rotate-char {
   display: inline-block;
   will-change: opacity;
-  transform: none !important;
+  transform: translateY(0) !important;
+  vertical-align: middle;
 }
 
 /* ---- Subheadline ---- */
