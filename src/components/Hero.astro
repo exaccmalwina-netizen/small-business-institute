@@ -268,18 +268,20 @@
 }
 
 .rotate-track {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   will-change: transform;
 }
 
 .rotate-word {
-  display: block;
+  grid-area: 1 / 1;
   color: var(--accent);
   line-height: 1.12;
   white-space: nowrap;
-  /* Each word occupies exactly 1 line-height slot */
-  height: 1.12em;
+  /* Ensure words are vertically centered in their grid cell */
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
 
