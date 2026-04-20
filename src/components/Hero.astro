@@ -482,12 +482,9 @@
     const chars = wordEl.querySelectorAll('.rotate-char');
     chars.forEach((c, i) => {
       c.style.opacity   = '0';
-      c.style.transform = 'translateY(100%)';
-      c.style.transition = `transform 0.4s cubic-bezier(.22,1,.36,1) ${delay0 + i * STAGGER_ENTER}s,
-                             opacity   0.3s ease ${delay0 + i * STAGGER_ENTER}s`;
+      c.style.transition = `opacity 0.45s ease ${delay0 + i * STAGGER_ENTER}s`;
       requestAnimationFrame(() => requestAnimationFrame(() => {
         c.style.opacity   = '1';
-        c.style.transform = 'translateY(0)';
       }));
     });
   }
@@ -498,11 +495,9 @@
 
     chars.forEach((c, i) => {
       const d = (chars.length - 1 - i) * STAGGER_DELAY;
-      c.style.transition = `transform 0.35s cubic-bezier(.55,0,1,.45) ${d}s,
-                             opacity   0.3s ease ${d}s`;
+      c.style.transition = `opacity 0.35s ease ${d}s`;
       requestAnimationFrame(() => requestAnimationFrame(() => {
         c.style.opacity   = '0';
-        c.style.transform = 'translateY(-120%)';
       }));
     });
 
