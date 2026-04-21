@@ -40,6 +40,8 @@
     --transition: 0.25s ease;
 
     --container: 1180px;
+    --section-padding: 6rem;
+    --section-padding-mobile: 4rem;
 }
 
 html { scroll-behavior: smooth; }
@@ -61,7 +63,10 @@ a:hover { text-decoration: none; }
     width: 100%;
     max-width: var(--container);
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 1.25rem;
+}
+@media (min-width: 640px) {
+    .container { padding: 0 2rem; }
 }
 
 /* Base Headings */

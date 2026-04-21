@@ -234,7 +234,7 @@
   /* Force static line height and prevent any vertical jumping */
   line-height: 1.2;
   height: auto;
-  white-space: nowrap;
+  white-space: normal; /* Changed from nowrap to allow wrapping on mobile */
   animation: fadeIn 0.8s ease forwards;
   animation-delay: 0.35s;
   opacity: 0;
@@ -242,11 +242,10 @@
 
 /* Row with inline text + rotating word */
 .headline-row {
-  display: flex;
+  display: inline-flex; /* Use inline-flex to group become + rotator */
   align-items: center;
   gap: 0.28em;
-  flex-wrap: nowrap;
-  white-space: nowrap;
+  flex-wrap: wrap; /* Allow wrapping between become' and the rotator if space is tight */
 }
 .inline-text { 
   display: inline-block;
@@ -260,10 +259,13 @@
   justify-content: flex-start;
   overflow: hidden;
   vertical-align: middle;
-  position: relative;
-  /* Hyper-rigid height in pixels to stop ANY vertical jitter from emojis */
-  height: 80px; 
-  line-height: 80px !important;
+  /* Responsive height: smaller on mobile */
+  height: 54px; 
+  line-height: 54px !important;
+  @media (min-width: 768px) {
+    height: 80px;
+    line-height: 80px !important;
+  }
   /* Faster glide for 'to become' to open space for the new word */
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
@@ -273,7 +275,7 @@
 .rotate-track {
   position: relative;
   width: 100%;
-  height: 80px;
+  height: 100%;
   display: block;
 }
 
@@ -286,9 +288,10 @@
   align-items: center;
   color: var(--accent);
   white-space: nowrap;
-  height: 80px;
-  line-height: 80px !important;
-  letter-spacing: 0.02em; /* Visual cue that the new version is active */
+  /* Height inherits from wrapper */
+  height: 100%;
+  line-height: inherit;
+  letter-spacing: 0.02em; 
 }
 
 /* character-level spans set by JS */

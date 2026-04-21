@@ -95,7 +95,10 @@ const FORMSPREE_ACTION = "https://formspree.io/f/xkokvwpv";
 <style>
 /* Hero Styles */
 .contact-hero {
-	padding: 5rem 0 4rem;
+	padding: var(--section-padding-mobile) 0;
+	@media (min-width: 768px) {
+		padding: 5rem 0 4rem;
+	}
 	background: var(--navy);
 	color: var(--white);
 	border-bottom: 2px solid var(--accent);
@@ -118,8 +121,11 @@ const FORMSPREE_ACTION = "https://formspree.io/f/xkokvwpv";
 
 /* Section & Grid */
 .contact-section {
-	padding: 6rem 0;
+	padding: var(--section-padding-mobile) 0;
 	background: var(--off-white);
+	@media (min-width: 768px) {
+		padding: 6rem 0;
+	}
 }
 .contact-grid {
 	display: grid;

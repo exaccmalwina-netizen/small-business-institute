@@ -42,7 +42,10 @@ import Footer from '../components/Footer.astro';
 
 <style>
 .about-hero {
-	padding: 5rem 0 4rem;
+	padding: var(--section-padding-mobile) 0;
+	@media (min-width: 768px) {
+		padding: 5rem 0 4rem;
+	}
 	background: var(--navy);
 	color: var(--white);
 	border-bottom: 2px solid var(--accent);
@@ -66,8 +69,11 @@ import Footer from '../components/Footer.astro';
 }
 
 .section {
-	padding: 5rem 0;
+	padding: var(--section-padding-mobile) 0;
 	background: var(--card-bg);
+	@media (min-width: 768px) {
+		padding: var(--section-padding) 0;
+	}
 }
 
 .about-content-wrapper {
