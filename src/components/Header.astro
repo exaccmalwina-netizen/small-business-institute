@@ -5,10 +5,12 @@
     <div class="container header-inner">
         <!-- Logo -->
         <a href="/" class="logo" aria-label="Small Business Institute Home">
-            <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="9" fill="#0284c7"/>
-                <text x="20" y="28" text-anchor="middle" font-family="'Sora', 'Inter', sans-serif" font-size="22" font-weight="800" fill="white" letter-spacing="-1">S</text>
-            </svg>
+            <div class="logo-icon-box">
+                <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="9" fill="#0284c7"/>
+                    <text x="20" y="28" text-anchor="middle" font-family="'Sora', 'Inter', sans-serif" font-size="22" font-weight="800" fill="white" letter-spacing="-1">S</text>
+                </svg>
+            </div>
             <div class="logo-text-wrap">
                 <span class="logo-name">Small Business Institute <span class="logo-name-desktop">of Australia</span></span>
             </div>
@@ -75,12 +77,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 100%; /* Force full height for vertical centering */
 }
 .logo {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    height: 100%;
     z-index: 1001;
+}
+.logo-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .logo-icon { width: 36px; height: 36px; }
 .logo-name {

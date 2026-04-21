@@ -246,10 +246,15 @@
 
 /* Row with inline text + rotating word */
 .headline-row {
-  display: inline-flex; /* Use inline-flex to group become + rotator */
-  align-items: center;
-  gap: 0.28em;
-  flex-wrap: wrap; /* Allow wrapping between become' and the rotator if space is tight */
+  display: block; /* Stack on mobile for better centering/symmetry */
+  margin-top: 0.2rem;
+}
+@media (min-width: 768px) {
+  .headline-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+  }
 }
 .inline-text { 
   display: inline-block;
