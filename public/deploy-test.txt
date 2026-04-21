@@ -1,0 +1,3 @@
+DEPLOY TEST: 2026-04-21 06:15
+Jeśli widzisz ten plik, to znaczy, że GitHub poprawnie wysyła pliki na Twój serwer przez FTP.
+Problem prawdopodobnie leży w tym, że stary plik index.php na serwerze blokuje nowy index.html.
