@@ -1,4 +1,5 @@
 # SBI — Apache config
+DirectoryIndex index.html index.php
 Options -Indexes
 
 # Pretty URLs (optional, if you want /post/slug later)
