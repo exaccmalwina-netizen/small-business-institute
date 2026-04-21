@@ -32,6 +32,6 @@ jobs:
           protocol: ftp
           port: 21
           local-dir: ./dist/
-          server-dir: /
+          server-dir: domains/smallbusinessinstitute.au/public_html/
           timeout: 600000
           state-name: .ftp-deploy-sync-state.json
