@@ -256,26 +256,23 @@
 .inline-text { 
   display: inline-block;
   white-space: nowrap;
+  line-height: 1;
 }
 
-/* ---- Text Rotator ---- */
+/* ---- Text Rotator v8 ---- */
 /*
-  ARCHITECTURE:
-  - .rotate-wrapper  = inline-block, fixed height, only WIDTH changes (horizontal)
-  - .rotate-track    = fills wrapper, position: relative
-  - .rotate-word     = position: absolute, top:50%, translateY(-50%)
-                       → ALWAYS vertically centered, NEVER moves vertically
-                       → ONLY opacity changes (fade in/out)
+  FINAL ARCHITECTURE:
+  - .rotate-wrapper: width & height set ONCE by JS to fit the LONGEST word.
+                     Never changes again. No CSS transition. No layout reflow.
+  - .rotate-word:    position: absolute; top:50%; transform:translateY(-50%)
+                     ONLY opacity changes. Zero vertical movement ever.
 */
 .rotate-wrapper {
   display: inline-block;
   position: relative;
   vertical-align: middle;
-  /* Height matches the font line-height of the headline */
-  height: 1.15em;
   overflow: visible;
-  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 10px;
+  /* NO transition — dimensions frozen by JS at startup */
 }
 
 .rotate-track {
@@ -284,19 +281,17 @@
 }
 
 .rotate-word {
-  /* ALWAYS at vertical center — never moves vertically */
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  /* Horizontal only */
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   color: var(--accent);
   letter-spacing: 0.02em;
   line-height: 1;
-  /* Only opacity is animated by JS — no transform animation */
+  /* JS only ever changes opacity */
 }
 
 /* ---- Subheadline ---- */
@@ -442,50 +437,57 @@
   const track = document.getElementById('rotate-track');
   if (!track) return;
 
-  const ROTATION_INTERVAL = 3000; // ms between word changes
-  const STAGGER_DELAY     = 0.02; // seconds between chars (exit)
-  const STAGGER_ENTER     = 0.015; // seconds between chars (enter)
-
+  const ROTATION_INTERVAL = 3000;
   let currentIndex = 0;
+  const wrapper = track.parentElement;
 
-  // Helper to measure word width accurately
+  // Measurement span — invisible, exact same styles as the rotating words
   const measurementSpan = document.createElement('span');
-  measurementSpan.style.visibility = 'hidden';
-  measurementSpan.style.position = 'absolute';
-  measurementSpan.style.whiteSpace = 'nowrap';
-  measurementSpan.style.pointerEvents = 'none';
-  measurementSpan.className = 'rotate-word'; 
-  
-  // Cross-browser style cloning for accurate measurement
-  const headlineStyles = window.getComputedStyle(track.parentElement.closest('.hero-headline'));
-  measurementSpan.style.fontFamily     = headlineStyles.fontFamily;
-  measurementSpan.style.fontWeight     = headlineStyles.fontWeight;
-  measurementSpan.style.fontSize       = headlineStyles.fontSize;
-  measurementSpan.style.letterSpacing  = headlineStyles.letterSpacing;
-  measurementSpan.style.textTransform  = headlineStyles.textTransform;
+  measurementSpan.style.cssText = 'visibility:hidden;position:absolute;top:0;left:-9999px;white-space:nowrap;pointer-events:none;';
+  measurementSpan.className = 'rotate-word';
+  wrapper.appendChild(measurementSpan);
 
-  track.parentElement.appendChild(measurementSpan);
-
-  function updateWrapperWidth(text) {
-    measurementSpan.textContent = text;
-    // Use getBoundingClientRect for sub-pixel precision
-    const width = measurementSpan.getBoundingClientRect().width;
-    const wrapper = track.parentElement;
-    
-    // Add a 20px buffer to prevent emoji clipping in Safari/Firefox
-    wrapper.style.width = `${Math.ceil(width) + 20}px`;
+  // Clone font styles from the headline for accurate cross-browser measurement
+  const headlineEl = track.closest('.hero-headline');
+  if (headlineEl) {
+    const cs = window.getComputedStyle(headlineEl);
+    measurementSpan.style.fontFamily    = cs.fontFamily;
+    measurementSpan.style.fontWeight    = cs.fontWeight;
+    measurementSpan.style.fontSize      = cs.fontSize;
+    measurementSpan.style.letterSpacing = cs.letterSpacing;
   }
 
-  // Create simple word container (no more character splitting)
+  // --- MEASURE ALL WORDS UP FRONT → SET FIXED DIMENSIONS ONCE ---
+  let maxWidth = 0;
+  let wrapperHeight = 0;
+  words.forEach(text => {
+    measurementSpan.textContent = text;
+    const rect = measurementSpan.getBoundingClientRect();
+    if (rect.width  > maxWidth)     maxWidth     = rect.width;
+    if (rect.height > wrapperHeight) wrapperHeight = rect.height;
+  });
+
+  // Buffer for emoji rendering variance across browsers
+  maxWidth = Math.ceil(maxWidth) + 24;
+  wrapperHeight = Math.ceil(wrapperHeight);
+
+  // FREEZE dimensions — never change again, no reflow, no layout shift
+  wrapper.style.width  = maxWidth + 'px';
+  wrapper.style.height = wrapperHeight + 'px';
+
+  // Remove the measurement span — no longer needed
+  measurementSpan.remove();
+
+  // --- Word builder ---
   function buildWord(text) {
     const span = document.createElement('span');
     span.className = 'rotate-word';
     span.textContent = text;
-    // Start invisible — CSS keeps it at top:50% translateY(-50%) always
     span.style.opacity = '0';
     return span;
   }
 
+  // Fade in: ONLY opacity changes
   function fadeIn(el, delayS = 0) {
     el.style.transition = `opacity 0.6s ease-in-out ${delayS}s`;
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -493,37 +495,30 @@
     }));
   }
 
+  // Fade out: ONLY opacity changes
   function fadeOut(el, onDone) {
     el.style.transition = 'opacity 0.5s ease-in-out';
     requestAnimationFrame(() => requestAnimationFrame(() => {
       el.style.opacity = '0';
     }));
-    setTimeout(onDone, 550);
+    setTimeout(onDone, 560);
   }
 
-  // --- Initial render ---
+  // --- Initial word ---
   const firstWord = buildWord(words[0]);
-  updateWrapperWidth(words[0]);
   track.appendChild(firstWord);
-  console.log('Rotator v7: absolute-center, opacity-only, no vertical movement');
-  fadeIn(firstWord, 0.6);
+  console.log('Rotator v8: fixed-dimensions, opacity-only, zero layout shift');
+  fadeIn(firstWord, 0.5);
 
-  // --- Rotation loop ---
+  // --- Rotation: ONLY opacity changes, dimensions are permanently frozen ---
   setInterval(() => {
     currentIndex = (currentIndex + 1) % words.length;
-    const nextText = words[currentIndex];
-    const outWord  = track.querySelector('.rotate-word');
+    const outWord = track.querySelector('.rotate-word');
     if (!outWord) return;
 
-    const inWord = buildWord(nextText);
+    const inWord = buildWord(words[currentIndex]);
+    track.appendChild(inWord); // already at correct position (absolute top:50%)
 
-    // Add new word FIRST (invisible, at correct absolute position)
-    track.appendChild(inWord);
-
-    // Update wrapper width — horizontal animation only
-    updateWrapperWidth(nextText);
-
-    // Crossfade simultaneously: out fades away, in fades in
     fadeOut(outWord, () => outWord.remove());
     fadeIn(inWord, 0.1);
 
