@@ -249,14 +249,13 @@
   align-items: center;
   justify-content: center;
   gap: 0.35em;
-  white-space: nowrap; /* FORCE ONE LINE */
-  flex-wrap: nowrap;   /* PREVENT BREAKING */
+  flex-wrap: nowrap;
   margin-top: 0.25rem;
   width: 100%;
 }
 .inline-text { 
   display: inline-block;
-  vertical-align: middle;
+  white-space: nowrap;
 }
 
 /* ---- Text Rotator ---- */
@@ -264,26 +263,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  overflow: hidden;
+  overflow: visible; /* MUST be visible so emoji are not clipped */
   vertical-align: middle;
-  /* Responsive height: smaller on mobile */
-  height: 48px; 
-  line-height: 48px !important;
-  @media (min-width: 480px) {
-    height: 54px;
-    line-height: 54px !important;
-  }
-  @media (min-width: 768px) {
-    height: 80px;
-    line-height: 80px !important;
-  }
-  /* Increased buffer and removed hidden overflow during transition */
+  /* Responsive height */
+  height: 1.3em;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
-  contain: layout paint;
-  /* Safari/Firefox stability */
   min-width: 20px;
-  overflow: visible; /* Prevent emoji clipping */
+  position: relative;
 }
 
 .rotate-track {
