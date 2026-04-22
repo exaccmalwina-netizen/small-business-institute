@@ -244,19 +244,13 @@
   opacity: 0;
 }
 
-/* Row with inline text + rotating word */
 .headline-row {
-  display: block; /* Stack on mobile for better centering/symmetry */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28em;
+  flex-wrap: nowrap; /* Keep 'to become' and word on the same line */
   margin-top: 0.2rem;
-}
-@media (min-width: 768px) {
-  .headline-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.28em;
-    flex-wrap: nowrap;
-  }
 }
 .inline-text { 
   display: inline-block;
