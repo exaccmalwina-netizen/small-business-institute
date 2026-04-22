@@ -248,9 +248,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.28em;
-  flex-wrap: nowrap; /* Keep 'to become' and word on the same line */
-  margin-top: 0.2rem;
+  gap: 0.35em;
+  white-space: nowrap; /* FORCE ONE LINE */
+  flex-wrap: nowrap;   /* PREVENT BREAKING */
+  margin-top: 0.25rem;
+  width: 100%;
 }
 .inline-text { 
   display: inline-block;
@@ -275,12 +277,13 @@
     height: 80px;
     line-height: 80px !important;
   }
-  /* Faster glide for 'to become' to open space for the new word */
+  /* Increased buffer and removed hidden overflow during transition */
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
   contain: layout paint;
   /* Safari/Firefox stability */
-  min-width: 10px;
+  min-width: 20px;
+  overflow: visible; /* Prevent emoji clipping */
 }
 
 .rotate-track {
@@ -488,8 +491,8 @@
     const width = measurementSpan.getBoundingClientRect().width;
     const wrapper = track.parentElement;
     
-    // Add a 8px buffer to prevent emoji clipping in Safari/Firefox
-    wrapper.style.width = `${Math.ceil(width) + 8}px`;
+    // Add a 20px buffer to prevent emoji clipping in Safari/Firefox
+    wrapper.style.width = `${Math.ceil(width) + 20}px`;
   }
 
   // Create simple word container (no more character splitting)
@@ -523,7 +526,7 @@
   updateWrapperWidth(firstWordText);
   track.appendChild(firstWord);
   // Cache buster / version log
-  console.log('Rotator Version: Unified-Fade-1.3 (DEPLOYED: 2026-04-21 06:40)');
+  console.log('Rotator Version: UI-RESILIENT-4.0 (FIXED LINE + EMOJI BUFFER)');
   animateIn(firstWord, 0.5);
 
   // --- Rotation loop ---
