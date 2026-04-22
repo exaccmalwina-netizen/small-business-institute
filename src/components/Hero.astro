@@ -254,32 +254,12 @@ import { HeroRotator } from './HeroRotator.tsx';
   display: inline-block;
   white-space: nowrap;
   line-height: 1;
+  /* Align inline-text baseline with the rotator */
+  vertical-align: middle;
 }
 
-/* ---- Text Rotator (React/motion) ---- */
-/* The .hero-rotator-wrapper keeps the React component inline and aligned */
-.hero-rotator-wrapper {
-  display: inline-flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* Applied to the motion.span wrapper from TextRotate */
-.hero-rotate-text {
-  color: var(--accent);
-  display: inline-flex !important;
-  align-items: center !important;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  overflow: hidden;
-  max-height: 1.4em;
-}
-
-/* Each character/word element */
-.hero-rotate-char {
-  display: inline-block;
-  line-height: 1;
-}
+/* The HeroRotator span inherits font from the h1 automatically.
+   No extra styles needed — all layout handled inline in the React component. */
 
 /* ---- Subheadline ---- */
 .hero-sub {
