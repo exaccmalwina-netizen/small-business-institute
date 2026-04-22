@@ -17,71 +17,85 @@ const words = [
 
 export function HeroRotator() {
   const [index, setIndex] = useState(0);
-  const [maxWidth, setMaxWidth] = useState<number | null>(null);
+  const [dims, setDims] = useState<{ width: number; height: number } | null>(null);
   const measureRef = useRef<HTMLSpanElement>(null);
 
-  // After mount: measure all words and lock container to the widest
+  // Measure all words once fonts are ready, set fixed container size
   useEffect(() => {
-    if (!measureRef.current) return;
-    let max = 0;
-    words.forEach((word) => {
-      measureRef.current!.textContent = word;
-      const w = measureRef.current!.getBoundingClientRect().width;
-      if (w > max) max = w;
-    });
-    // Small buffer for emoji cross-browser differences
-    setMaxWidth(Math.ceil(max) + 16);
+    const measure = () => {
+      if (!measureRef.current) return;
+      let maxW = 0;
+      let maxH = 0;
+      words.forEach((word) => {
+        measureRef.current!.textContent = word;
+        const rect = measureRef.current!.getBoundingClientRect();
+        if (rect.width > maxW) maxW = rect.width;
+        if (rect.height > maxH) maxH = rect.height;
+      });
+      // +24px buffer for emoji cross-browser differences
+      setDims({ width: Math.ceil(maxW) + 24, height: Math.ceil(maxH) });
+    };
+
+    // Wait for fonts to load for accurate rects
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(measure);
+    } else {
+      measure();
+    }
   }, []);
 
-  // Rotation timer
+  // Rotation loop
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % words.length);
-    }, 3000);
-    return () => clearInterval(timer);
+    const t = setInterval(() => setIndex((i) => (i + 1) % words.length), 3000);
+    return () => clearInterval(t);
   }, []);
 
   return (
     <span
       style={{
+        // Fixed size set once — never changes, zero layout reflow
         display: "inline-block",
         position: "relative",
-        // Width is locked to widest word — never changes, zero layout shift
-        width: maxWidth != null ? `${maxWidth}px` : "auto",
+        width: dims ? `${dims.width}px` : "4em",
+        height: dims ? `${dims.height}px` : "1em",
         verticalAlign: "middle",
-        // Overflow visible so emoji on edges aren't clipped
         overflow: "visible",
       }}
     >
-      {/* Invisible measurement span — cloned font from parent via CSS class */}
+      {/* Hidden span inherits h1 font for accurate measurement */}
       <span
         ref={measureRef}
         aria-hidden="true"
         style={{
           visibility: "hidden",
           position: "absolute",
-          top: 0,
-          left: 0,
           whiteSpace: "nowrap",
           pointerEvents: "none",
+          top: 0,
+          left: 0,
         }}
       />
 
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={index}
-          // ONLY opacity — zero vertical or horizontal movement
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.45, ease: "easeInOut" }}
+          // position:absolute → words OVERLAP in same spot, never push each other
           style={{
-            display: "inline-block",
+            position: "absolute",
+            top: "50%",
+            left: 0,
+            transform: "translateY(-50%)",
             whiteSpace: "nowrap",
+            display: "inline-block",
             color: "var(--accent)",
             letterSpacing: "0.02em",
             lineHeight: 1,
           }}
+          // ONLY opacity — zero position change
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
         >
           {words[index]}
         </motion.span>
