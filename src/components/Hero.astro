@@ -1,4 +1,5 @@
 ---
+import { HeroRotator } from './HeroRotator.tsx';
 ---
 
 <section class="hero-section" id="hero">
@@ -76,11 +77,7 @@
       <span>Supporting Small Business</span>
       <span class="headline-row">
         <span class="inline-text">to become</span>
-        <span class="rotate-wrapper" aria-live="polite">
-          <span class="rotate-track" id="rotate-track">
-            <!-- Words injected by JS -->
-          </span>
-        </span>
+        <HeroRotator client:load />
       </span>
     </h1>
 
@@ -259,39 +256,29 @@
   line-height: 1;
 }
 
-/* ---- Text Rotator v8 ---- */
-/*
-  FINAL ARCHITECTURE:
-  - .rotate-wrapper: width & height set ONCE by JS to fit the LONGEST word.
-                     Never changes again. No CSS transition. No layout reflow.
-  - .rotate-word:    position: absolute; top:50%; transform:translateY(-50%)
-                     ONLY opacity changes. Zero vertical movement ever.
-*/
-.rotate-wrapper {
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-  overflow: visible;
-  /* NO transition — dimensions frozen by JS at startup */
-}
-
-.rotate-track {
-  position: absolute;
-  inset: 0;
-}
-
-.rotate-word {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  white-space: nowrap;
+/* ---- Text Rotator (React/motion) ---- */
+/* The .hero-rotator-wrapper keeps the React component inline and aligned */
+.hero-rotator-wrapper {
   display: inline-flex;
   align-items: center;
+  overflow: hidden;
+}
+
+/* Applied to the motion.span wrapper from TextRotate */
+.hero-rotate-text {
   color: var(--accent);
+  display: inline-flex !important;
+  align-items: center !important;
   letter-spacing: 0.02em;
   line-height: 1;
-  /* JS only ever changes opacity */
+  overflow: hidden;
+  max-height: 1.4em;
+}
+
+/* Each character/word element */
+.hero-rotate-char {
+  display: inline-block;
+  line-height: 1;
 }
 
 /* ---- Subheadline ---- */
@@ -417,112 +404,4 @@
   tick();
 })();
 
-
-/* ---- 2. TEXT ROTATOR ---- */
-(function initRotator() {
-  const words = [
-    "stronger 💪",
-    "smarter 🧠",
-    "resilient 🛡️",
-    "connected 🤝",
-    "confident ✨",
-    "profitable 💰",
-    "informed 📚",
-    "unstoppable 🚀",
-    "heard 📣",
-    "thriving 🌱",
-    "funky 🪩",
-  ];
-
-  const track = document.getElementById('rotate-track');
-  if (!track) return;
-
-  const ROTATION_INTERVAL = 3000;
-  let currentIndex = 0;
-  const wrapper = track.parentElement;
-
-  // Measurement span — invisible, exact same styles as the rotating words
-  const measurementSpan = document.createElement('span');
-  measurementSpan.style.cssText = 'visibility:hidden;position:absolute;top:0;left:-9999px;white-space:nowrap;pointer-events:none;';
-  measurementSpan.className = 'rotate-word';
-  wrapper.appendChild(measurementSpan);
-
-  // Clone font styles from the headline for accurate cross-browser measurement
-  const headlineEl = track.closest('.hero-headline');
-  if (headlineEl) {
-    const cs = window.getComputedStyle(headlineEl);
-    measurementSpan.style.fontFamily    = cs.fontFamily;
-    measurementSpan.style.fontWeight    = cs.fontWeight;
-    measurementSpan.style.fontSize      = cs.fontSize;
-    measurementSpan.style.letterSpacing = cs.letterSpacing;
-  }
-
-  // --- MEASURE ALL WORDS UP FRONT → SET FIXED DIMENSIONS ONCE ---
-  let maxWidth = 0;
-  let wrapperHeight = 0;
-  words.forEach(text => {
-    measurementSpan.textContent = text;
-    const rect = measurementSpan.getBoundingClientRect();
-    if (rect.width  > maxWidth)     maxWidth     = rect.width;
-    if (rect.height > wrapperHeight) wrapperHeight = rect.height;
-  });
-
-  // Buffer for emoji rendering variance across browsers
-  maxWidth = Math.ceil(maxWidth) + 24;
-  wrapperHeight = Math.ceil(wrapperHeight);
-
-  // FREEZE dimensions — never change again, no reflow, no layout shift
-  wrapper.style.width  = maxWidth + 'px';
-  wrapper.style.height = wrapperHeight + 'px';
-
-  // Remove the measurement span — no longer needed
-  measurementSpan.remove();
-
-  // --- Word builder ---
-  function buildWord(text) {
-    const span = document.createElement('span');
-    span.className = 'rotate-word';
-    span.textContent = text;
-    span.style.opacity = '0';
-    return span;
-  }
-
-  // Fade in: ONLY opacity changes
-  function fadeIn(el, delayS = 0) {
-    el.style.transition = `opacity 0.6s ease-in-out ${delayS}s`;
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      el.style.opacity = '1';
-    }));
-  }
-
-  // Fade out: ONLY opacity changes
-  function fadeOut(el, onDone) {
-    el.style.transition = 'opacity 0.5s ease-in-out';
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      el.style.opacity = '0';
-    }));
-    setTimeout(onDone, 560);
-  }
-
-  // --- Initial word ---
-  const firstWord = buildWord(words[0]);
-  track.appendChild(firstWord);
-  console.log('Rotator v8: fixed-dimensions, opacity-only, zero layout shift');
-  fadeIn(firstWord, 0.5);
-
-  // --- Rotation: ONLY opacity changes, dimensions are permanently frozen ---
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % words.length;
-    const outWord = track.querySelector('.rotate-word');
-    if (!outWord) return;
-
-    const inWord = buildWord(words[currentIndex]);
-    track.appendChild(inWord); // already at correct position (absolute top:50%)
-
-    fadeOut(outWord, () => outWord.remove());
-    fadeIn(inWord, 0.1);
-
-  }, ROTATION_INTERVAL);
-
-})();
 </script>
