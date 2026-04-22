@@ -258,41 +258,45 @@
   white-space: nowrap;
 }
 
+/* ---- Text Rotator ---- */
+/*
+  ARCHITECTURE:
+  - .rotate-wrapper  = inline-block, fixed height, only WIDTH changes (horizontal)
+  - .rotate-track    = fills wrapper, position: relative
+  - .rotate-word     = position: absolute, top:50%, translateY(-50%)
+                       → ALWAYS vertically centered, NEVER moves vertically
+                       → ONLY opacity changes (fade in/out)
+*/
 .rotate-wrapper {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: visible;
-  vertical-align: middle;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: width;
-  min-width: 20px;
+  display: inline-block;
   position: relative;
+  vertical-align: middle;
+  /* Height matches the font line-height of the headline */
+  height: 1.15em;
+  overflow: visible;
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 10px;
 }
 
 .rotate-track {
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  height: 1.3em;
+  position: absolute;
+  inset: 0;
 }
 
 .rotate-word {
-  /* NOT absolute — stays in flow so it's always vertically aligned */
+  /* ALWAYS at vertical center — never moves vertically */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  /* Horizontal only */
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   color: var(--accent);
-  white-space: nowrap;
-  line-height: 1;
   letter-spacing: 0.02em;
-  /* Outgoing word is stacked via absolute when exiting */
-}
-
-.rotate-word.is-exiting {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
+  line-height: 1;
+  /* Only opacity is animated by JS — no transform animation */
 }
 
 /* ---- Subheadline ---- */
@@ -477,65 +481,52 @@
     const span = document.createElement('span');
     span.className = 'rotate-word';
     span.textContent = text;
+    // Start invisible — CSS keeps it at top:50% translateY(-50%) always
+    span.style.opacity = '0';
     return span;
   }
 
-  function animateIn(wordEl, delay0 = 0) {
-    // Set invisible but in-flow BEFORE appending so it takes up correct space
-    wordEl.style.opacity = '0';
-    wordEl.style.transition = `opacity 0.7s ease-in-out ${delay0}s`;
+  function fadeIn(el, delayS = 0) {
+    el.style.transition = `opacity 0.6s ease-in-out ${delayS}s`;
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      wordEl.style.opacity = '1';
+      el.style.opacity = '1';
     }));
   }
 
-  function animateOut(wordEl, onDone) {
-    // Move to absolute so it doesn't affect layout when new word appears
-    wordEl.classList.add('is-exiting');
-    wordEl.style.transition = 'opacity 0.5s ease-in-out';
+  function fadeOut(el, onDone) {
+    el.style.transition = 'opacity 0.5s ease-in-out';
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      wordEl.style.opacity = '0';
+      el.style.opacity = '0';
     }));
-    setTimeout(onDone, 600);
+    setTimeout(onDone, 550);
   }
 
   // --- Initial render ---
-  const firstWordText = words[0];
-  const firstWord = buildWord(firstWordText);
-  updateWrapperWidth(firstWordText);
+  const firstWord = buildWord(words[0]);
+  updateWrapperWidth(words[0]);
   track.appendChild(firstWord);
-  console.log('Rotator v6: pure-fade, no vertical movement');
-  animateIn(firstWord, 0.5);
+  console.log('Rotator v7: absolute-center, opacity-only, no vertical movement');
+  fadeIn(firstWord, 0.6);
 
   // --- Rotation loop ---
   setInterval(() => {
-    const nextIndex = (currentIndex + 1) % words.length;
-    const nextWordText = words[nextIndex];
-    const outWord = track.querySelector('.rotate-word:not(.is-exiting)');
+    currentIndex = (currentIndex + 1) % words.length;
+    const nextText = words[currentIndex];
+    const outWord  = track.querySelector('.rotate-word');
     if (!outWord) return;
 
-    const inWord = buildWord(nextWordText);
+    const inWord = buildWord(nextText);
 
-    // Update wrapper width for new word
-    updateWrapperWidth(nextWordText);
-
-    // NEW word: set opacity 0 BEFORE adding to DOM
-    inWord.style.opacity = '0';
-    inWord.style.transition = 'none'; // prevent flash
+    // Add new word FIRST (invisible, at correct absolute position)
     track.appendChild(inWord);
 
-    // Fade out old, remove after transition
-    animateOut(outWord, () => outWord.remove());
+    // Update wrapper width — horizontal animation only
+    updateWrapperWidth(nextText);
 
-    // Fade in new word after a tiny delay so it's in-flow at correct position
-    requestAnimationFrame(() => {
-      inWord.style.transition = 'opacity 0.7s ease-in-out 0.15s';
-      requestAnimationFrame(() => {
-        inWord.style.opacity = '1';
-      });
-    });
+    // Crossfade simultaneously: out fades away, in fades in
+    fadeOut(outWord, () => outWord.remove());
+    fadeIn(inWord, 0.1);
 
-    currentIndex = nextIndex;
   }, ROTATION_INTERVAL);
 
 })();
