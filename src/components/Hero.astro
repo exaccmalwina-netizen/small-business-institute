@@ -251,9 +251,11 @@
 }
 @media (min-width: 768px) {
   .headline-row {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.28em;
+    flex-wrap: nowrap;
   }
 }
 .inline-text { 
@@ -280,9 +282,11 @@
     line-height: 80px !important;
   }
   /* Faster glide for 'to become' to open space for the new word */
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
   contain: layout paint;
+  /* Safari/Firefox stability */
+  min-width: 10px;
 }
 
 .rotate-track {
@@ -472,12 +476,16 @@
   measurementSpan.style.position = 'absolute';
   measurementSpan.style.whiteSpace = 'nowrap';
   measurementSpan.style.pointerEvents = 'none';
-  // Ensure it inherits the exact font styles from the headline
-  measurementSpan.style.font = 'inherit';
-  measurementSpan.style.letterSpacing = 'inherit';
-  measurementSpan.style.textTransform = 'inherit';
-  
   measurementSpan.className = 'rotate-word'; 
+  
+  // Cross-browser style cloning for accurate measurement
+  const headlineStyles = window.getComputedStyle(track.parentElement.closest('.hero-headline'));
+  measurementSpan.style.fontFamily     = headlineStyles.fontFamily;
+  measurementSpan.style.fontWeight     = headlineStyles.fontWeight;
+  measurementSpan.style.fontSize       = headlineStyles.fontSize;
+  measurementSpan.style.letterSpacing  = headlineStyles.letterSpacing;
+  measurementSpan.style.textTransform  = headlineStyles.textTransform;
+
   track.parentElement.appendChild(measurementSpan);
 
   function updateWrapperWidth(text) {
@@ -485,7 +493,9 @@
     // Use getBoundingClientRect for sub-pixel precision
     const width = measurementSpan.getBoundingClientRect().width;
     const wrapper = track.parentElement;
-    wrapper.style.width = `${width}px`;
+    
+    // Add a 8px buffer to prevent emoji clipping in Safari/Firefox
+    wrapper.style.width = `${Math.ceil(width) + 8}px`;
   }
 
   // Create simple word container (no more character splitting)
