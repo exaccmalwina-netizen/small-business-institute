@@ -53,3 +53,4 @@ A basic follow-up process:
 - call if there's no response after that
 
 **Cash flow is what keeps your business running day to day. Profit is important — but cash is what pays your bills.**
+

@@ -70,33 +70,30 @@ A company gives you more protection and structure — but also comes with more r
 
 ## Trust — More Flexibility, But More Complex
 
-A trust is a different way of structuring a business. Instead of the business income going directly to one person or company, it is held and then distributed to people (called beneficiaries).
+A trust is a different way of structuring a business.
 
-In simple terms — the income doesn't have to go to just one person. It can be shared.
+Instead of income going directly to one person or a company, it is distributed to beneficiaries. This allows flexibility in how profits are allocated, which can be useful for tax planning, particularly in family situations.
 
-This is where trusts become useful. They allow more flexibility in how profits are allocated — which can be helpful for tax planning, especially in family situations.
+A trust also comes with more formal responsibilities. A trustee (either an individual or a company) is legally responsible for managing the trust. The trust must have its own TFN, lodge annual tax returns, and use an ABN for business activities. If turnover exceeds $75,000, it must also be registered for GST.
 
-But this flexibility comes with more complexity. A trust requires:
-- a proper setup
-- ongoing administration
-- clear documentation and record keeping
-
-It's also not something most people set up on their own. In most cases, a trust should be set up with professional advice to make sure it's done correctly.
+How tax is handled depends on how income is distributed and the terms of the trust deed. This is where things become more technical.
 
 Trusts are more commonly used when:
 - the business is generating higher income
-- there are multiple people involved
-- there is a need for more structured long-term planning
+- multiple people are involved
+- there is a need for structured, long-term planning
 
-**A simple way to think about it:**
-- A company is about separating the business from you.
-- A trust is about having more control over how income is shared.
+This is why trust structures are usually set up with professional advice.
 
 ## How to Think About Your Choice
 
-You don't need to get this "perfect" from day one. Most businesses change structure as they grow.
+You don't need to get this perfect from day one. Most businesses change structure as they grow.
 
 A simple way to approach it:
 - starting small → sole trader is often enough
 - growing and taking on more risk → a company may make sense
 - building something more structured → a trust may be worth exploring
+
+The right structure depends on how your business operates today — and how you expect it to grow.
+
+Choosing a simple structure at the start is common. What matters is understanding when it needs to change.

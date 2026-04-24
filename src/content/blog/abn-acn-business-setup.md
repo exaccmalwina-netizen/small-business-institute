@@ -1,6 +1,6 @@
 ---
 title: "ABN, ACN and Business Setup – What You Actually Need"
-excerpt: "Once you've decided on your business structure, the next step is to register it properly. Here's what each number means and when you need it."
+excerpt: "Once you've decided on your business structure, the next step is to register it properly. Here's what each number means, when you need it, and how to keep it updated."
 category: "compliance"
 categoryName: "Compliance"
 date: 2026-04-14
@@ -40,6 +40,18 @@ What you need depends on how your business is set up.
 
 - **Sole trader** — you will typically only need an ABN.
 - **Company** — you will have both an ACN and an ABN.
+
+## Business Name Registration
+
+Once you have your ABN, you may also need to register a business name — unless you are operating under your own personal name as a sole trader.
+
+Check that your chosen name is available before registering. It is also worth checking whether the matching domain name is available if you plan to have an online presence.
+
+## Keeping Your Details Updated
+
+Once registered, it is important to keep your ABN details current with the Australian Business Register (ABR).
+
+This includes updating any changes to your business structure, address, or activities. Outdated details can cause issues with the ATO and with clients who verify your ABN online.
 
 ## What Comes Next
 
