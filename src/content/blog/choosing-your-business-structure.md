@@ -1,5 +1,5 @@
 ---
-title: "Choosing Your Business Structure: Sole Trader vs Company vs Trust"
+title: "Choosing your business structure: sole trader vs company vs trust"
 excerpt: "Before you register anything, there's one decision that shapes everything else — are you operating as the business, or is the business separate from you?"
 category: "business-management"
 categoryName: "Business Management"
@@ -25,7 +25,7 @@ Each structure works differently and comes with its own implications. They influ
 
 Each one operates in a different way — so it's worth looking at them one by one.
 
-## Sole Trader — The Simplest Way to Start
+## Sole trader — the simplest way to start
 
 This is the most straightforward structure. You operate the business in your own name (or under a registered business name), and there's no real separation between you and the business.
 
@@ -46,7 +46,7 @@ Costs are low, and the setup is simple, which is why this structure is commonly 
 
 It works well at the beginning — but as the business grows, it can become limiting.
 
-## Company — A More Structured Approach
+## Company — a more structured approach
 
 A company separates you from your business. In simple terms — the business becomes its own thing, not just an extension of you.
 
@@ -68,7 +68,7 @@ A company is commonly used when:
 
 A company gives you more protection and structure — but also comes with more responsibility.
 
-## Trust — More Flexibility, But More Complex
+## Trust — more flexibility, but more complex
 
 A trust is a different way of structuring a business.
 
@@ -85,7 +85,7 @@ Trusts are more commonly used when:
 
 This is why trust structures are usually set up with professional advice.
 
-## How to Think About Your Choice
+## How to think about your choice
 
 You don't need to get this perfect from day one. Most businesses change structure as they grow.
 

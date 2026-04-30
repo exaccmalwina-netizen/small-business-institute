@@ -1,5 +1,5 @@
 ---
-title: "Record Keeping – What the ATO Actually Expects"
+title: "Record keeping – what the ATO actually expects"
 excerpt: "Every invoice you send, every expense you pay — it all needs to be tracked. Because at some point, you'll need to report it to the ATO."
 category: "compliance"
 categoryName: "Compliance"
@@ -13,7 +13,7 @@ Once your business is up and running, record keeping becomes part of your day-to
 
 Every invoice you send, every expense you pay — it all needs to be tracked. Because at some point, you'll need to report it to the ATO.
 
-## What Record Keeping Actually Means
+## What record keeping actually means
 
 Record keeping is simply keeping clear and accurate records of your business activity. This includes:
 - invoices
@@ -24,11 +24,11 @@ Record keeping is simply keeping clear and accurate records of your business act
 
 If it affects your income or tax — it should be recorded.
 
-## How Long You Need to Keep Records
+## How long you need to keep records
 
 You are required to keep records for **at least 5 years**.
 
-## What Your Records Need to Show
+## What your records need to show
 
 Your records should clearly explain:
 - how much income you earned
@@ -38,7 +38,7 @@ Your records should clearly explain:
 
 It is not just about numbers — it's more about being able to explain them.
 
-## The Simplest Way to Stay on Track
+## The simplest way to stay on track
 
 Start with:
 - a **separate business bank account**

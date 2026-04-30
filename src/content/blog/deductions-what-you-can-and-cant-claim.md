@@ -1,5 +1,5 @@
 ---
-title: "Deductions – What You Can and Can't Claim"
+title: "Deductions – what you can and can't claim"
 excerpt: "Before looking at what you can claim, it's important to understand the core rule: an expense is deductible if it is directly related to earning your income."
 category: "compliance"
 categoryName: "Compliance"
@@ -11,7 +11,7 @@ seriesOrder: 6
 
 Before looking at what you can claim, it's important to understand the rule behind it.
 
-## The Core Rule of Tax Deductions
+## The core rule of tax deductions
 
 An expense is deductible if it is **directly related to earning your income**. And:
 - it is not private
@@ -21,7 +21,7 @@ A simple question helps: *"Did this expense help me run or grow my business?"*
 - If yes → it may be deductible
 - If not → it usually isn't
 
-## Common Deductions
+## Common deductions
 
 For most small businesses, typical expenses include:
 - equipment and tools
@@ -30,13 +30,13 @@ For most small businesses, typical expenses include:
 - work-related travel
 - phone and internet (business portion)
 
-## Mixed-Use Expenses
+## Mixed-use expenses
 
 Some costs are partly business and partly personal. In that case, you can only claim the business portion.
 
 **Example:** a phone used 50% for business → claim 50%.
 
-## GST and Deductions
+## GST and deductions
 
 If you're registered for GST:
 - you claim GST credits on expenses
@@ -45,13 +45,13 @@ If you're registered for GST:
 If you're not registered:
 - you claim the full amount
 
-## Common Mistakes Made by New Business Owners
+## Common mistakes made by new business owners
 
 - claiming personal expenses as business
 - not splitting mixed-use costs correctly
 - missing receipts
 - overclaiming without understanding the rules
 
-## Final Thought
+## Final thought
 
 Remember — deductions are not about claiming as much as possible, but about **claiming correctly**.

@@ -1,6 +1,6 @@
 ---
-title: "Cash Flow – How to Manage Your Money Early On"
-excerpt: "Once your business starts generating income, the next challenge is not tax. It's managing your money properly. Cash flow is what keeps your business running day to day."
+title: "Cash flow basics: what it is and why it matters"
+excerpt: "More businesses fail from poor cash flow management than from a bad product. You can be turning a profit on paper and still go bankrupt because the money isn't in your bank when your bill is due."
 category: "business-management"
 categoryName: "Business Management"
 date: 2026-04-14
@@ -9,63 +9,42 @@ series: "Starting a Business in Australia"
 seriesOrder: 7
 ---
 
-Once your business starts generating income, the next challenge is not tax.
+More businesses fail from poor cash flow management than from a bad product. You can be turning a profit on paper and still go bankrupt because the money isn't in your bank when your bill is due.
 
-It's managing your money properly.
+Once your business starts generating income, the next challenge isn't tax. It's managing your money properly — from day one.
 
-## Do You Need a Business Bank Account?
+## What is cash flow?
 
-Technically, a business bank account is not always required. But in practice — you should always have a separate business account.
+Cash flow is the movement of money into and out of your business. Simply: money coming in vs money going out. Positive cash flow means more is coming in than going out. Negative cash flow means the opposite — and it's a silent killer. Even a profitable business can run out of cash if timing is off. As a business owner, you should always know: what's coming in, what's going out, and what's sitting in your account right now.
 
-This helps you:
-- clearly track income and expenses
-- avoid mixing personal and business transactions
-- simplify reporting to the ATO
-- stay organised
+## Do you need a separate business bank account?
 
-Having a separate business account helps you avoid:
-- using one account for everything
-- paying personal expenses from business funds
-- unclear transfers between accounts
+Technically not always required — but in practice, always yes.
 
-If your records are unclear, everything becomes harder: tax, reporting, decisions.
+- Clearly track income and expenses
+- Avoid mixing personal and business transactions
+- Simplify your reporting to the ATO
+- Stay organised from day one
 
-## What Is Cash Flow?
+The most common mistake: using your business account as personal spending money. Keep them completely separate. If your records are unclear, everything becomes harder — tax, reporting, and every business decision you make.
 
-**Cash flow = money coming in vs money going out**
+## Common cash flow problems
 
-Even if your business is profitable, late payments, high expenses, and poor tracking can still create cash issues.
+Most early-stage businesses don't fail because of a bad product. They fail because of these:
 
-As a business owner, you should focus on:
-- tracking all income and expenses
-- knowing what's due (tax, super, bills)
-- understanding your available balance
+- Invoices not sent on time
+- Clients paying late with no follow-up
+- No tracking of upcoming expenses
+- Spending money before income is received
+- Nothing set aside for tax or super
 
-This gives you visibility — which is key.
+Small issues — but they add up fast.
 
-## What About Payment Terms?
+## The simple habits that help
 
-When you invoice clients, set clear terms:
-- 7 days
-- 14 days
-- or agreed upfront
+- Invoice promptly — as soon as work is done
+- Follow up unpaid invoices — don't wait
+- Set aside money for tax before you spend it
+- Check your numbers regularly — make it a weekly habit
 
-Unclear or long terms = slower cash flow.
-
-## Common Cash Flow Issues
-
-- invoices not sent on time
-- clients paying late
-- no tracking of upcoming expenses
-- spending before income is received
-
-These are small issues — but they add up quickly.
-
-## The Simple Approach We Recommend
-
-- **Invoice promptly** — as soon as work is done
-- **Follow up unpaid invoices** — don't wait
-- **Set aside money for tax** — before you spend it
-- **Review your numbers regularly** — make it a habit
-
-Cash flow is what keeps your business running day to day. Profit is important, but cash is what pays your bills.
+Cash flow is what keeps your business running day to day. Profit is important — but cash is what actually pays your bills.

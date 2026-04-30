@@ -1,5 +1,5 @@
 ---
-title: "Preparing Yourself for Tax Return – What Your Accountant Needs From You"
+title: "Preparing yourself for tax return – what your accountant needs from you"
 excerpt: "If you're running a business, your accountant will rely on the information you provide. The more complete and organised it is, the smoother the process will be."
 category: "compliance"
 categoryName: "Compliance"
@@ -11,7 +11,7 @@ seriesOrder: 4
 
 If you're running a business, your accountant will rely on the information you provide.
 
-## The Basics
+## The basics
 
 Before your appointment, make sure you have:
 - photo ID
@@ -20,7 +20,7 @@ Before your appointment, make sure you have:
 
 If you're using accounting software, ensure your data is up to date.
 
-## Income and Expenses
+## Income and expenses
 
 Your accountant needs a clear picture of how your business is performing.
 
@@ -28,7 +28,7 @@ This means having a summary of your total income and your business expenses. It 
 
 You can prepare this using accounting software (what we recommend), a spreadsheet, or a simple list — as long as everything is included and clearly organised.
 
-## Other Income
+## Other income
 
 Make sure all sources of business income are included.
 
@@ -36,7 +36,7 @@ This often gets missed when income comes from different places — for example, 
 
 Even if the amounts are small, they should still be recorded.
 
-## Business Expenses
+## Business expenses
 
 Expenses should relate directly to running your business.
 
@@ -44,13 +44,13 @@ This includes things like tools, subscriptions, travel between work locations, a
 
 It's better to include more detail at this stage — your accountant can help determine what can be claimed.
 
-## Assets and Larger Purchases
+## Assets and larger purchases
 
 If you've purchased equipment or other higher-value items, make sure these are clearly listed.
 
 Include the purchase date, cost, and how the item is used in your business. These are often treated differently from regular expenses, so they need to be identified early.
 
-## Record Keeping
+## Record keeping
 
 You don't need to bring every receipt to the meeting, but you do need to have them stored properly.
 
@@ -69,7 +69,7 @@ This may include accounting, invoicing, communication, or task management tools 
 
 Keeping a record of these subscriptions throughout the year makes it easier to include them in your tax return.
 
-## Final Note
+## Final note
 
 Your accountant works from your data.
 

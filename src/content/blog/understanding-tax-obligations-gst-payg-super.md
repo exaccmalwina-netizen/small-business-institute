@@ -1,5 +1,5 @@
 ---
-title: "Understanding Your Tax Obligations: GST, PAYG and Super"
+title: "Understanding your tax obligations: GST, PAYG and super"
 excerpt: "Once your business is set up, you need to understand your tax obligations. Not because it's complicated — but because no one clearly explains what applies to you and when."
 category: "compliance"
 categoryName: "Compliance"
@@ -18,13 +18,13 @@ You don't need to register for everything straight away. But you do need to unde
 - when it becomes relevant
 - and what triggers it
 
-## GST — When Do You Need to Register?
+## GST — when do you need to register?
 
 GST (Goods and Services Tax) is a 10% tax added to most goods and services in Australia.
 
 You are required to register for GST if your business turnover reaches **$75,000 or more per year**. Once you reach this threshold, you must register within 21 days.
 
-### Should You Register Before Reaching $75,000?
+### Should you register before reaching $75,000?
 
 Sometimes — but not always. Registering for GST early can make sense if:
 - you mainly work with other businesses (for example, you invoice companies rather than individual clients) — those businesses can usually claim GST back from the ATO, so adding GST to your price is generally not an extra cost for them
@@ -32,7 +32,7 @@ Sometimes — but not always. Registering for GST early can make sense if:
 
 In simple terms — if your clients are businesses, GST usually doesn't affect them. If your clients are individuals, it usually increases your price.
 
-## PAYG — What You Need to Know If You Hire Employees
+## PAYG — what you need to know if you hire employees
 
 PAYG stands for Pay As You Go. In practice, this is about withholding tax from employee wages and sending it to the ATO.
 
@@ -50,7 +50,7 @@ PAYG withholding applies when you:
 
 You must register for PAYG withholding, calculate the correct tax, and report and pay it to the ATO.
 
-### What About PAYG Instalments?
+### What about PAYG instalments?
 
 There is another type called PAYG instalments. This is different. It applies to your own business income, not your employees'.
 
@@ -60,7 +60,7 @@ As your business grows, the ATO may require you to start paying your income tax 
 - PAYG withholding → tax for your employees
 - PAYG instalments → tax for your own business income
 
-## Superannuation — Your Responsibility as an Employer
+## Superannuation — your responsibility as an employer
 
 If you have employees, you must also pay superannuation. This is money contributed towards your employees' retirement. It is a legal requirement — not optional.
 
@@ -73,27 +73,27 @@ Late payments can result in penalties and additional charges.
 
 If you're a sole trader, you are generally not required to pay super for yourself — however, many business owners choose to contribute voluntarily.
 
-## What You Need to Report
+## What you need to report
 
 Once you're registered for GST or PAYG, reporting becomes part of running your business.
 
-### BAS — Business Activity Statement
+### BAS — business activity statement
 
 BAS is how you report GST and PAYG withholding. You will usually lodge BAS quarterly or monthly, depending on your situation. This is where you report what you owe and make payments to the ATO.
 
-### STP — Single Touch Payroll
+### STP — single touch payroll
 
 If you have employees, you must report payroll information to the ATO through STP every time you process payroll. Your payroll or accounting software usually handles this automatically.
 
-### Super Payments
+### Super payments
 
 Super must be paid at least quarterly and on time. Late payments can lead to additional charges and penalties.
 
-### Annual Tax Return
+### Annual tax return
 
 At the end of each financial year, your business must lodge a tax return — this is where your total income, expenses, and final tax position are calculated.
 
-## How It All Fits Together
+## How it all fits together
 
 A simple timeline:
 - **Each payroll** → STP reporting

@@ -1,5 +1,5 @@
 ---
-title: "Fringe Benefits Tax – What to Check Before FBT Lodgement"
+title: "Fringe benefits tax – what to check before FBT lodgement"
 excerpt: "FBT applies when you provide benefits to employees outside of salary. Before lodging, the key step is identifying whether any employee-related expenses create an FBT obligation."
 category: "employment"
 categoryName: "Employment"
@@ -13,12 +13,12 @@ FBT (Fringe Benefits Tax) applies when you provide benefits to employees outside
 
 Before lodging, the key step is to identify whether any employee-related expenses create an FBT obligation.
 
-## FBT Lodgement Deadlines
+## FBT lodgement deadlines
 
 - **21 May 2026** — paper lodgement
 - **25 June 2026** — electronic lodgement
 
-## Step 1 — Start With Your Expenses
+## Step 1 — start with your expenses
 
 Review expenses that may relate to employees. Focus on areas where FBT most commonly applies:
 - vehicles available for private use
@@ -33,7 +33,7 @@ For each item, confirm:
 
 This is where FBT exposure is identified.
 
-## Step 2 — Confirm Your Position
+## Step 2 — confirm your position
 
 After reviewing your expenses, make a clear decision:
 - **An FBT liability applies** → you must register and lodge
@@ -41,7 +41,7 @@ After reviewing your expenses, make a clear decision:
 
 Even if nothing stands out, this step should still be completed each year.
 
-## Where Businesses Get It Wrong
+## Where businesses get it wrong
 
 Most issues come from not reviewing FBT at all. Common situations include:
 - assuming expenses are "business only" when they include private use
@@ -49,7 +49,7 @@ Most issues come from not reviewing FBT at all. Common situations include:
 - not linking expenses to specific employees
 - skipping the review entirely if no FBT was identified in previous years
 
-## Final Note
+## Final note
 
 FBT is not about the volume of transactions. It's about identifying the right ones.
 

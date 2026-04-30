@@ -1,5 +1,5 @@
 ---
-title: "Business Plan – Do You Actually Need One and How to Create It?"
+title: "Business plan – do you actually need one and how to create it?"
 excerpt: "You don't need a formal 20-page plan to get started. But you do need to understand how your business will make money, who your customers are, and what your costs will be."
 category: "business-management"
 categoryName: "Business Management"
@@ -15,7 +15,7 @@ In practice, most small businesses don't need a 20-page document — but they do
 
 A well-structured plan, even in a simple form, helps you make better decisions from the beginning and avoid common mistakes that are difficult to fix later.
 
-## Do You Actually Need a Business Plan?
+## Do you actually need a business plan?
 
 A formal business plan is not always required at the start.
 
@@ -27,11 +27,11 @@ However, every business owner should have a clear understanding of:
 
 Without this, decisions around pricing, structure, and cash flow are often reactive rather than planned.
 
-## How to Create a Simple Business Plan
+## How to create a simple business plan
 
 A business plan at this stage should be practical and focused. The following areas form a solid foundation:
 
-### 1. Your Product or Service
+### 1. Your product or service
 
 Define what you offer and why it matters.
 - What problem are you solving?
@@ -39,7 +39,7 @@ Define what you offer and why it matters.
 
 Clarity here directly impacts pricing and positioning.
 
-### 2. Your Target Customer
+### 2. Your target customer
 
 Identify who you are selling to.
 - individuals or businesses
@@ -48,7 +48,7 @@ Identify who you are selling to.
 
 Understanding your customer influences pricing, GST considerations, and marketing approach.
 
-### 3. Revenue Model and Pricing
+### 3. Revenue model and pricing
 
 Consider how the business will generate income.
 - how you price your services or products
@@ -57,7 +57,7 @@ Consider how the business will generate income.
 
 This is where many businesses underestimate the gap between expected and actual revenue.
 
-### 4. Cost Structure
+### 4. Cost structure
 
 List and understand your key costs.
 - software, tools, equipment
@@ -66,7 +66,7 @@ List and understand your key costs.
 
 This allows you to determine your break-even point and assess sustainability.
 
-### 5. Client Acquisition Strategy
+### 5. Client acquisition strategy
 
 Be realistic about how you will generate business.
 - referrals and existing networks
@@ -75,7 +75,7 @@ Be realistic about how you will generate business.
 
 Without a clear acquisition approach, even well-structured businesses struggle.
 
-### 6. Cash Flow Management
+### 6. Cash flow management
 
 Cash flow is one of the most critical areas early on. Consider:
 - timing of incoming payments
@@ -89,4 +89,3 @@ Even profitable businesses can face pressure if cash flow is not managed properl
 A business plan does not need to be complex.
 
 A simple, structured approach at the beginning provides clarity, reduces risk, and supports more sustainable growth.
-

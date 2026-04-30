@@ -1,5 +1,5 @@
 ---
-title: "Superannuation – What You Must Pay and When"
+title: "Superannuation – what you must pay and when"
 excerpt: "Super is a legal requirement for employers — not optional. Here's what you must pay, when you must pay it, and where businesses commonly get it wrong."
 category: "employment"
 categoryName: "Employment"
@@ -15,13 +15,13 @@ As an employer, you are required to contribute a percentage of your employee's e
 
 **Superannuation is not included in wages — it is paid on top.**
 
-## What Do You Actually Have to Pay?
+## What do you actually have to pay?
 
 You must pay super on eligible earnings (Ordinary Time Earnings).
 
 The rate is currently increasing to **12%**. This is calculated on top of wages — not taken from them.
 
-## When Super Must Be Paid
+## When super must be paid
 
 Super is currently paid at least quarterly, with strict deadlines.
 
@@ -29,7 +29,7 @@ From **1 July 2026**, this changes. Super will need to be paid at the same time 
 
 More detail is covered in the article on Payday Super and the upcoming changes.
 
-## What Do You Need From Your Employee?
+## What do you need from your employee?
 
 Before you can pay super, you need:
 - their **chosen super fund**
@@ -37,7 +37,7 @@ Before you can pay super, you need:
 
 If an employee does not choose a fund, you must use a default fund that meets legal requirements.
 
-## Where Businesses Get It Wrong
+## Where businesses get it wrong
 
 Most issues come down to timing and accuracy. Common problems include:
 - paying super late
@@ -46,7 +46,7 @@ Most issues come down to timing and accuracy. Common problems include:
 
 In practice, super is not considered paid when you send it — only when it **reaches the employee's fund**. This is where many businesses get caught.
 
-## What Happens If You Get It Wrong?
+## What happens if you get it wrong?
 
 If super is not paid correctly or on time, additional obligations apply. You may be required to pay the **Superannuation Guarantee Charge (SGC)**, which includes:
 - unpaid super
@@ -55,6 +55,6 @@ If super is not paid correctly or on time, additional obligations apply. You may
 
 This can also affect the tax treatment of the original payment.
 
-## Final Note
+## Final note
 
 With changes coming from 1 July 2026, how and when you pay super will become part of your payroll process. Understanding these obligations now helps you prepare early.

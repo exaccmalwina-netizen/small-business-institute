@@ -1,5 +1,5 @@
 ---
-title: "Daily Tools Your Business Needs to Run Efficiently"
+title: "Daily tools your business needs to run efficiently"
 excerpt: "Running a business involves more than just accounting. Most of the work happens across communication, task tracking, and document management. Here's what to set up."
 category: "technology"
 categoryName: "Technology"
@@ -21,7 +21,7 @@ This can be email or simple messaging tools such as Slack or Microsoft Teams.
 
 The key is not the tool — it's keeping communication in one place to avoid miscommunication.
 
-## Task and Work Tracking
+## Task and work tracking
 
 At the beginning, tasks are often managed informally.
 
@@ -29,13 +29,13 @@ Once workload increases, you need a simple way to track what needs to be done. T
 
 The goal is visibility — knowing what is in progress and what is outstanding.
 
-## File and Document Storage
+## File and document storage
 
 Documents need to be stored in a structured way.
 
 Tools such as Google Drive or Dropbox are commonly used. Without structure, files get lost and are difficult to access when needed.
 
-## Financial Tools
+## Financial tools
 
 Even at an early stage, you need:
 - invoicing
@@ -45,7 +45,7 @@ Even at an early stage, you need:
 
 This is where accounting software comes in, such as [Exacc.au](https://exacc.au) or MYOB.
 
-## Final Note
+## Final note
 
 Tools don't run your business. But they shape how your business operates day to day.
 

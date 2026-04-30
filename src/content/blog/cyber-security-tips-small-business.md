@@ -1,5 +1,5 @@
 ---
-title: "Cyber Security Tips for Small Businesses"
+title: "Cyber security tips for small businesses"
 excerpt: "Cyber security is not just a technical issue — it's a business risk. If your data is lost or stolen, recovery can be costly and damaging. Here's how to protect yourself."
 category: "technology"
 categoryName: "Technology"
@@ -13,7 +13,7 @@ Cyber security is not just a technical issue — it's a business risk.
 
 If your business data is lost, stolen, or compromised, recovery can be costly, time-consuming, and damaging to your reputation.
 
-## 1. Use Strong and Secure Passphrases
+## 1. Use strong and secure passphrases
 
 Instead of passwords, use passphrases — four or more random words that are easy to remember but hard to guess.
 
@@ -22,13 +22,13 @@ Best practices:
 - don't share them with others
 - check if your passphrases have been compromised and change them immediately if they have
 
-## 2. Use Multi-Factor Authentication (MFA)
+## 2. Use multi-factor authentication (MFA)
 
 Multi-factor authentication adds an extra layer of protection. Even if someone gets your passphrase, MFA requires another verification step — like a code sent to your phone or email.
 
 Enable MFA on all business-critical accounts.
 
-## 3. Manage Employee Access
+## 3. Manage employee access
 
 Implement access controls to limit what your staff can access. This includes restricting access to sensitive systems, programs, and files.
 
@@ -37,7 +37,7 @@ Benefits:
 - limits exposure to sensitive data
 - helps prevent internal data breaches
 
-## 4. Remove Access for Past Employees
+## 4. Remove access for past employees
 
 One of the most common cyber security oversights is former employees who still have access to business systems.
 
@@ -46,7 +46,7 @@ When an employee leaves or changes roles:
 - update shared account login details
 - review what systems they had access to
 
-## 5. Back Up Your Data Regularly
+## 5. Back up your data regularly
 
 Regular backups are essential. Use either:
 - a physical backup (external hard drive)
@@ -54,15 +54,15 @@ Regular backups are essential. Use either:
 
 This protects you if data is lost, stolen, or affected by ransomware.
 
-## 6. Avoid Unknown USBs or External Drives
+## 6. Avoid unknown USBs or external drives
 
 USBs and external hard drives can contain malware. Only use devices from trusted sources.
 
-## 7. Only Download Software From Trusted Sources
+## 7. Only download software from trusted sources
 
 Avoid downloading unknown programs or opening suspicious email attachments. Malicious files can install ransomware or steal sensitive business information.
 
-## 8. Secure Your Wireless Network
+## 8. Secure your wireless network
 
 Avoid using public Wi-Fi for business transactions — not all networks are secure.
 

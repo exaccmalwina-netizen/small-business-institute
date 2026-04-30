@@ -1,5 +1,5 @@
 ---
-title: "Invoicing and Getting Paid – How to Make Sure You Actually Get Paid"
+title: "Invoicing and getting paid – how to make sure you actually get paid"
 excerpt: "Send the invoice on time, track what's unpaid, and follow up. Most late payments are solved with a simple follow-up — but only if you know they're overdue."
 category: "business-management"
 categoryName: "Business Management"
@@ -11,7 +11,7 @@ seriesOrder: 8
 
 Once you've done the work, the next step is making sure you actually get paid.
 
-## What Should Be Included on an Invoice?
+## What should be included on an invoice?
 
 To avoid delays or issues, every invoice should include:
 - business name
@@ -23,7 +23,7 @@ To avoid delays or issues, every invoice should include:
 
 Make sure all of this is clear before you send it.
 
-## Send Invoices on Time
+## Send invoices on time
 
 **Delayed invoice = delayed payment.**
 
@@ -33,7 +33,7 @@ Make it a habit to invoice:
 
 The sooner you invoice, the sooner you get paid.
 
-## Track What's Unpaid
+## Track what's unpaid
 
 You should always know:
 - which invoices are unpaid
@@ -41,7 +41,7 @@ You should always know:
 
 If you don't track this, payments can slip through without you noticing.
 
-## Follow Up
+## Follow up
 
 If a client hasn't paid — follow up.
 
@@ -53,4 +53,3 @@ A basic follow-up process:
 - call if there's no response after that
 
 **Cash flow is what keeps your business running day to day. Profit is important — but cash is what pays your bills.**
-

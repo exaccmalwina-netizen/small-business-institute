@@ -1,5 +1,5 @@
 ---
-title: "When to Get Help: Accountants and Software for Small Business"
+title: "When to get help: accountants and software for small business"
 excerpt: "At the beginning, many business owners try to manage everything themselves. But as your business grows, things become more complex — and this is usually the point where support becomes valuable."
 category: "business-management"
 categoryName: "Business Management"
@@ -15,7 +15,7 @@ That's completely normal.
 
 But as your business grows, things become more complex — and this is usually the point where support becomes valuable and needed.
 
-## When Should You Consider Getting Help?
+## When should you consider getting help?
 
 You may need support when:
 - you register for GST
@@ -26,7 +26,7 @@ You may need support when:
 
 These are signs your business is moving to the next stage.
 
-## Software vs Accountant — What's the Difference?
+## Software vs accountant — what's the difference?
 
 They play very different roles.
 
@@ -44,7 +44,7 @@ An accountant helps you:
 
 **One supports the process — making it faster so you can focus on client relationships and growing the business. The other supports decisions.**
 
-## What to Look For in an Accountant
+## What to look for in an accountant
 
 When choosing support, focus on:
 - clear and practical communication
@@ -52,7 +52,7 @@ When choosing support, focus on:
 - availability when you need help
 - guidance, not just lodgements
 
-## What to Look For in Software
+## What to look for in software
 
 The right software should:
 - support GST, BAS, STP and super

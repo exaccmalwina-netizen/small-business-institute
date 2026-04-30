@@ -1,5 +1,5 @@
 ---
-title: "Employee vs Contractor – Where Businesses Go Wrong"
+title: "Employee vs contractor – where businesses go wrong"
 excerpt: "You cannot decide whether someone is an employee or a contractor based on what you call them. The classification depends on how the working relationship operates in practice."
 category: "employment"
 categoryName: "Employment"
@@ -13,7 +13,7 @@ You cannot decide whether someone is an employee or a contractor based on what y
 
 The classification depends on how the working relationship operates in practice.
 
-## The Key Distinction
+## The key distinction
 
 **Likely an employee** if the person:
 - works under your direction
@@ -25,7 +25,7 @@ The classification depends on how the working relationship operates in practice.
 - is engaged to deliver a specific outcome
 - operates independently
 
-## Where Businesses Get It Wrong
+## Where businesses get it wrong
 
 Most issues come from how the arrangement is set up in practice. Common situations include:
 - engaging contractors for ongoing, core business activities
@@ -35,7 +35,7 @@ Most issues come from how the arrangement is set up in practice. Common situatio
 
 In these cases, the arrangement may be treated as employment.
 
-## What It Leads To
+## What it leads to
 
 If a working arrangement is reclassified as employment, the business may be required to:
 - pay superannuation
@@ -49,11 +49,11 @@ Penalties may also apply. For example:
 - long-term contractor arrangements may lead to liability for back pay and entitlements
 - treating contractors like employees can also result in legal costs and reputational impact
 
-## Areas Often Misunderstood
+## Areas often misunderstood
 
 Even where someone is treated as a contractor, superannuation may still be payable — particularly where they are engaged primarily for their labour. This is often overlooked.
 
-## Practical Approach
+## Practical approach
 
 Before engaging a contractor, consider:
 - Is the role ongoing or project-based?
@@ -62,6 +62,6 @@ Before engaging a contractor, consider:
 
 If the arrangement does not clearly reflect a contractor relationship, it should be reviewed before proceeding.
 
-## Final Thought
+## Final thought
 
 This is a structural decision. It should be assessed based on how the work is performed — not on labels or payment method.

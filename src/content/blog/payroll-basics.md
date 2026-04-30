@@ -1,5 +1,5 @@
 ---
-title: "Payroll Basics – What Happens Every Time You Pay an Employee"
+title: "Payroll basics – what happens every time you pay an employee"
 excerpt: "Once you hire an employee, paying them is not just a bank transfer. Each pay run involves tax, superannuation, and reporting to the ATO."
 category: "employment"
 categoryName: "Employment"
@@ -13,7 +13,7 @@ Once you hire an employee, paying them is not just a bank transfer.
 
 Each pay run also involves tax, superannuation, and reporting to the ATO.
 
-## What Happens Every Pay Run
+## What happens every pay run
 
 Every time you process payroll, you need to:
 - calculate wages
@@ -31,14 +31,14 @@ The pay run is also reported to the ATO through **Single Touch Payroll (STP)**. 
 
 This reporting happens automatically through your payroll system.
 
-## Before Your First Pay Run
+## Before your first pay run
 
 Before you can process payroll, you need:
 - employee TFN details
 - super fund information
 - agreed pay terms
 
-## Common Mistakes
+## Common mistakes
 
 Most mistakes happen at the start. Common issues include:
 - incorrect tax withheld
@@ -47,7 +47,7 @@ Most mistakes happen at the start. Common issues include:
 
 These issues usually come from poor setup, not complexity.
 
-## Why Software Matters
+## Why software matters
 
 Using a payroll system makes this process significantly easier. Payroll software:
 - handles calculations automatically
@@ -56,7 +56,7 @@ Using a payroll system makes this process significantly easier. Payroll software
 
 The choice of system affects how payroll is managed in practice day to day.
 
-## Final Note
+## Final note
 
 Payroll is a repeating process.
 

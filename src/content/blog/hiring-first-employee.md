@@ -1,5 +1,5 @@
 ---
-title: "Hiring Your First Employee – What You Need to Get Right"
+title: "Hiring your first employee – what you need to get right"
 excerpt: "Hiring without a clear plan often creates more problems than it solves. Before you post the job ad, make sure your business can actually support an employee."
 category: "employment"
 categoryName: "Employment"
@@ -15,7 +15,7 @@ For many small business owners, it feels like the natural next move: more work �
 
 But hiring without a clear plan often creates more problems than it solves.
 
-## 1. Can Your Business Actually Support an Employee?
+## 1. Can your business actually support an employee?
 
 The first question is not "do I need help?" It's whether your business can afford to hire.
 
@@ -29,7 +29,7 @@ These costs don't adjust if your revenue slows down.
 
 If your business can only cover the salary — or one slower month creates stress — it's not ready to hire yet.
 
-## 2. "I Need Help" Is Not a Role
+## 2. "I need help" is not a role
 
 Hiring without a defined role creates problems immediately.
 
@@ -38,7 +38,7 @@ Before hiring, you should be clear on:
 - what the role is responsible for
 - what a good outcome looks like
 
-## 3. Don't Expect Employees to Run Your Business
+## 3. Don't expect employees to run your business
 
 One of the most common mistakes is expecting employees to think and act like business owners.
 
@@ -50,7 +50,7 @@ Employees are there to perform within the structure you create — not to define
 
 Clear responsibilities, defined processes, and regular communication are what drive performance — not expecting someone to operate like an owner.
 
-## 4. Hiring Can Unlock Growth — If Done Properly
+## 4. Hiring can unlock growth — if done properly
 
 The right hire should do more than just take tasks off your plate.
 
@@ -60,7 +60,7 @@ Over time, the right person can improve how work is done, bring a different pers
 
 But this only happens when the role is clearly defined and managed properly from the start.
 
-## Final Thought
+## Final thought
 
 Hiring is not about getting help. It's about building a business that can operate beyond you.
 
