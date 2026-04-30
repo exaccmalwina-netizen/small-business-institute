@@ -1,38 +1,35 @@
-name: Budowa i Wdrożenie Astro na Hostinger
+name: Build and Push to Hostinger
+
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Pobieranie Kodu (Checkout)
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Instalacja Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: Instalacja Zależności
-        run: npm ci
+      - name: Install dependencies
+        run: npm install
 
-      - name: Budowa Projektu Astro
+      - name: Build Astro project
         run: npm run build
 
-      - name: Wysłanie na serwer (Sync-FTP)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Push dist to hostinger-deploy branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./dist/
-          server-dir: /public_html/
-          dangerous-clean-slate: true
-          timeout: 600000
-          state-name: .ftp-deploy-sync-state.json
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: hostinger-deploy
+          force_orphan: true
+          commit_message: "Automated build for Hostinger deployment"
